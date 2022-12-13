@@ -1,6 +1,6 @@
 import '@/assets/styles/Style.css'
 
-export default function Home() {
+export default function Watchlist() {
     return (
         <div>
             <h3 className='text-white'>Hello World! This is the Watchlist Page</h3>
