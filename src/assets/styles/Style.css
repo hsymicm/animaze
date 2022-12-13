@@ -1,0 +1,18 @@
+body {
+    margin: 0;
+    background-color: #121212;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+.text-white {
+    color: #e5e5e5
+}
+
+.text-red {
+    color: #AD1B35;
+}
+
+.pointer {
+    cursor: pointer;
+}
