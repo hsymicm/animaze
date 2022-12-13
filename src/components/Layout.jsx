@@ -1,7 +1,6 @@
 import '@/assets/styles/Style.css'
 import '@/assets/styles/Layout.css'
 import Button from '@/components/Button'
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 export default function Layout() {
