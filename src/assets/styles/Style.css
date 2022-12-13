@@ -5,6 +5,11 @@ body {
     box-sizing: border-box;
 }
 
+.container {
+    padding: 0 18%;
+    min-height: calc(100vh - 86px);
+}
+
 .text-white {
     color: #e5e5e5
 }
