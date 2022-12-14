@@ -5,9 +5,20 @@ body {
     box-sizing: border-box;
 }
 
-.container {
+.glb-container {
     padding: 0 18%;
     min-height: calc(100vh - 86px);
+}
+
+main {
+    margin-top: 32px;
+    margin-bottom: 128px;
+}
+
+.split-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .text-white {

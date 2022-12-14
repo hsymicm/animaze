@@ -5,8 +5,8 @@ footer {
 
 .spacer {
     width: 1px;
-    height: 56px;
-    margin: 0 56px;
+    height: 48px;
+    margin: 0 32px;
     background-color: #e5e5e5;
 }
 
@@ -32,7 +32,7 @@ footer {
 }
 
 .footer-li .link {
-    margin-right: 56px;
+    margin-right: 32px;
     font-size: 16px;
     font-weight: normal;
     cursor: pointer;
