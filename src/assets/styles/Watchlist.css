@@ -1,5 +1,6 @@
 .aside {
     width: 200px;
+    min-width: 200px;
     margin-top: 32px;
     margin-right: 48px;
     background-color: #000;
