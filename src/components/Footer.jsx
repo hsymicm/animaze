@@ -32,7 +32,7 @@ export default function Footer() {
                                 return "link text-white " + ( isActive ? "link-active" : "")
                             }}
                         >
-                            WatchList
+                            Watchlist
                         </NavLink>
                     </ul>                    
                 </div>

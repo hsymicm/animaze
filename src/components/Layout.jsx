@@ -31,7 +31,7 @@ export default function Layout() {
                             return "link text-white " + ( isActive ? "link-active" : "")
                         }}
                     >
-                        WatchList
+                        Watchlist
                     </NavLink>
                     <Button className="btn btn-primary" label="Browse Anime"/>
                 </ul>
