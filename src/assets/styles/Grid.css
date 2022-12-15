@@ -1,0 +1,68 @@
+.grid-show {
+    position: relative;
+    display: flex;
+    flex-flow: wrap;
+    flex-direction: row;
+    width: 100%;
+    
+}
+
+.card {
+    position: relative;
+    margin-right: 24px;
+    margin-bottom: 32px;
+    border-radius: 8px;
+}
+
+.card:hover {
+    box-shadow: 0 4px 10px #1f1f1f;
+}
+
+.card .edit {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    top: 8px;
+    right: 8px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #AD1B35;
+    box-shadow: 0 2px 10px rgba(173, 27, 53, 0.25);
+    cursor: pointer;
+}
+
+.card .edit img {
+    width: 6px;
+    height: 48px;
+    object-fit: contain;
+}
+
+.card .info {
+    position: absolute;
+    bottom: 0;
+    width: 160px;
+    padding: 8px;
+    background-color: rgb(0, 0, 0, 0.5);
+    border-radius: 0 0 8px 8px;
+}
+
+.card .details {
+    font-weight: 500;
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+    margin-top: 4px;
+}
+
+.card .cover {
+    line-height: 40%;
+}
+
+.card .cover img {
+    width: 176px;
+    height: 264px;
+    object-fit: cover;
+    border-radius: 8px;
+}
