@@ -3,9 +3,13 @@ import '@/assets/styles/Watchlist.css'
 import grid from '@/assets/svgs/grip-solid.svg'
 import list from '@/assets/svgs/list-solid.svg'
 import TableShow from '@/components/TableShow'
+import GridShow from '@/components/GridShow'
+import { useState } from 'react'
 
 export default function Watchlist() {
     // MOCK DATA
+    const [isList, setIsList] = useState(true)
+
     const data = {
         "Watching": [
             {
@@ -68,14 +72,29 @@ export default function Watchlist() {
             <div id='aside' className='aside'></div>
             <div id='content' className='content'>
                 <div className='view-mode'>
-                    <div className='view active'>
+                    <div
+                    onClick={() => setIsList(true)}
+                    className={isList ? 'view active' : 'view'}
+                    >
                         <img src={list} width={'20px'} alt="" />
                     </div>
-                    <div className='view'>
+                    <div
+                    onClick={() => setIsList(false)}
+                    className={!isList ? 'view active' : 'view'}
+                    >
                         <img src={grid} width={'20px'} alt="" />
                     </div>
                 </div>
-                {Object.keys(data).map(key => <div key={key} className='table-container'><TableShow title={key} shows={data[key]} /></div>)}
+                {!isList && Object.keys(data).map(key => (
+                    <div key={key} className='table-container'>
+                        <GridShow title={key} shows={data[key]} />
+                    </div>
+                ))}
+                {isList && Object.keys(data).map(key => (
+                    <div key={key} className='table-container'>
+                        <TableShow title={key} shows={data[key]} />
+                    </div>
+                ))}
             </div>
         </main>
     )
