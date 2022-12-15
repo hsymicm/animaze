@@ -49,7 +49,7 @@
     object-fit: contain;
 }
 
-.table-show td > img{
+.table-show td .cover > img{
     width: 48px;
     height: 48px;
     object-fit: cover;

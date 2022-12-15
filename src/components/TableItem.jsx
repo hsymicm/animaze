@@ -1,26 +1,25 @@
 import { useState } from 'react'
 import edit from '@/assets/svgs/ellipsis-vertical-solid.svg'
+import '@/assets/styles/Table.css'
 
 export default function TableItem(
-    {item:{id, title, cover, score, progress, type}}) {
+    { item: { id, title, cover, score, progress, type } }) {
     const [isHover, setIsHover] = useState(false)
     return (
-        <tr 
-        onMouseEnter={() => setIsHover(true)}
-        onMouseLeave={() => setIsHover(false)}
-        className="item" key={id}
+        <tr
+            onMouseEnter={() => setIsHover(true)}
+            onMouseLeave={() => setIsHover(false)}
+            className="item" key={id}
         >
             <td className="table-img">
-                { isHover && <>
-                <div className="edit">
-                    <img src={edit} alt="" />
-                </div>
+                {isHover && 
                 <div className='pop-out'>
                     <img className="pop" src={cover} alt="" />
                     <div className="arrow-right"></div>
-                </div> 
-                </>}
-                { !isHover && <img src={cover} alt="" />}
+                </div>}
+                <div className={isHover ? "edit" : "cover"}>
+                    <img src={isHover ? edit : cover} alt="" />
+                </div>
             </td>
             <td className="table-title">{title}</td>
             <td>{score}</td>

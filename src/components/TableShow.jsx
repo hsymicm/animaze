@@ -17,7 +17,7 @@ export default function TableShow({ title, shows }) {
                     </tr>
                 </thead>
                 <tbody>
-                    { shows.map((item) => <TableItem key={item.id} item={item} />) }
+                    {shows.map((item) => <TableItem key={item.id} item={item} />)}
                 </tbody>
             </table>
         </>
