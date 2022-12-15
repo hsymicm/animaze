@@ -8,7 +8,6 @@ nav {
     z-index: 999;
 }
 
-
 .nav-row {
     padding: 0 18%;
     display: flex;
@@ -29,7 +28,7 @@ nav {
     padding: 12px 0;
     font-size: 16px;
     font-weight: bold;
-    transition: all 0.15s;
+    transition: all 0.3s;
     cursor: pointer;
     text-decoration: none;
     border-bottom: 3px solid rgba(173, 27, 53, 0);
@@ -41,4 +40,5 @@ nav {
 
 .nav-li .link:hover {
     border-bottom: 3px solid #AD1B35;
+
 }

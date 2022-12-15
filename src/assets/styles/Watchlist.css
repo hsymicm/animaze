@@ -25,6 +25,7 @@
     height: 42px;
     width: 42px;
     background-color: #1f1f1f;
+    transition: all 0.1s ease-in;
     cursor: pointer;
 }
 
@@ -37,6 +38,16 @@
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
 }
+
+.view-mode > .view:hover {
+    background-color: #d12343;
+    box-shadow: 0 2px 10px rgba(173, 27, 53, 0.25);
+}
+
+.view-mode > .view:active {
+    background-color: #95142b;
+}
+
 .view-mode .active {
     background-color: #AD1B35;
     box-shadow: 0 2px 10px rgba(173, 27, 53, 0.25);
