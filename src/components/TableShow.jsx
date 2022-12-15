@@ -2,7 +2,6 @@ import TableItem from '@/components/TableItem'
 import '@/assets/styles/Table.css'
 
 export default function TableShow({ title, shows }) {
-    // const caption = title.charAt(0).toUpperCase + title.slice(1)
     return (
         <>
             <h3>{title}</h3>

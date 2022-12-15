@@ -1,13 +1,17 @@
 import '@/assets/styles/Style.css'
 import '@/assets/styles/Footer.css'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 export default function Footer() {
+    const navigate = useNavigate()
     return (
         <footer>
             <div className='footer-row'>
                 <div className='footer-li'>
-                    <h3 className='text-white'>AniWatch</h3>
+                    <h3 
+                    onClick={() => navigate("/")}
+                    className='text-white pointer'
+                    >AniWatch</h3>
                     <div className="spacer"></div>
                     <ul className="footer-ul text-white">
                         <NavLink 
