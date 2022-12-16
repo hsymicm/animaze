@@ -21,13 +21,13 @@ nav {
     flex-direction: row;
     list-style: none;
     align-items: center;
+    margin: 0;
 }
 
 .nav-li .link {
     margin-right: 56px;
     padding: 12px 0;
     font-size: 16px;
-    font-weight: bold;
     transition: all 0.3s;
     cursor: pointer;
     text-decoration: none;
@@ -36,6 +36,7 @@ nav {
 
 .nav-li .link-active {
     border-bottom: 3px solid #AD1B35;
+    font-weight: bold;
 }
 
 .nav-li .link:hover {
