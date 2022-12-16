@@ -16,7 +16,7 @@ export default function GridItem(
                 <img src={edit} alt="" />
             </div>}
             <div className="info">
-                <div className="title">{title}</div>
+                <div>{title}</div>
                 <div className="details">
                     <div>{progress}</div>
                     <div>{score}</div>

@@ -4,12 +4,47 @@ import grid from '@/assets/svgs/grip-solid.svg'
 import list from '@/assets/svgs/list-solid.svg'
 import TableShow from '@/components/TableShow'
 import GridShow from '@/components/GridShow'
+import SearchBox from '@/components/SearchBox'
+import Filters from '@/components/Filters'
+import Lists from '@/components/Lists'
 import { useState } from 'react'
 
 export default function Watchlist() {
-    // MOCK DATA
     const [isList, setIsList] = useState(true)
 
+    const optionsFilter = [
+        {
+            filter : "Format",
+            option : ["TV", "Movie", "OVA"]
+        },
+        {
+            filter : "Genre",
+            option : ["Ecchi", "Fan Service", "Haram"]
+        }
+    ]
+
+    const optionsList = [
+        {
+            option: "All",
+            isSelected: true,
+        },
+        {
+            option: "Watching",
+            isSelected: false,
+        },
+        {
+            option: "Completed",
+            isSelected: false,
+        },
+        {
+            option: "Planning",
+            isSelected: false,
+        },
+    ]
+    
+    // const [options, setOptions] = useState(OPTIONS)
+
+    // MOCK DATA
     const data = {
         "Watching": [
             {
@@ -69,7 +104,11 @@ export default function Watchlist() {
 
     return (
         <main className='glb-container split-container text-white'>
-            <div id='aside' className='aside'></div>
+            <div id='aside' className='aside'>
+                <SearchBox text='Filter'/>
+                <Lists onOptionChange={(e) => console.log(e)} options={optionsList} />
+                <Filters text="Filters" filter={optionsFilter} />
+            </div>
             <div id='content' className='content'>
                 <div className='view-mode'>
                     <div
