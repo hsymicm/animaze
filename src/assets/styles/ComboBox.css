@@ -1,0 +1,63 @@
+.combo-box {
+    position: relative;
+    display: inline-flex;
+    justify-content: space-between;
+    padding: 8px 16px;
+    background-color: #1f1f1f;
+    border-radius: 8px;
+    width: 100%;
+    cursor: default;
+}
+
+.combo-box > img {
+    width: 16px;
+    transition: all 0.3s ease;
+}
+.combo {
+    position: absolute;
+    width: 100%;
+    top: calc(100% + 8px);
+    left: 0;
+    z-index: 1;
+}
+.combo ul {
+    padding: 0;
+    margin: 0;
+    border-radius: 8px;
+    list-style: none;
+}
+
+.combo ul li {
+    margin: 0;
+    padding: 8px 16px;
+    background-color: #e5e5e5;
+    color: #121212;
+    cursor: default;
+}
+
+/* .combo ul li:not(:last-child){
+    border-bottom: 1px solid #a5a5a5;
+} */
+
+.combo ul li:first-child {
+    border-radius: 8px 8px 0 0;
+}
+
+.combo ul li:last-child {
+    border-radius: 0 0 8px 8px;
+}
+
+.combo ul li:hover {
+    background-color: #AD1B35;
+    color: #e5e5e5;
+    font-weight: 500;
+}
+
+.arrow-top {
+    margin: 0 auto;
+    width: 0; 
+    height: 0; 
+    border-bottom: 8px solid #e5e5e5;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+}
