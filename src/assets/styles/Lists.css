@@ -12,7 +12,7 @@
     padding: 6px 16px;
     list-style: none;
     border-radius: 8px;
-    cursor: default;
+    cursor: pointer;
 }
 
 .list > li:hover {

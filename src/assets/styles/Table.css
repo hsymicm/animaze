@@ -63,7 +63,7 @@
 }
 
 .table-show .table-detail {
-    width: 96px;
+    width: 108px;
 }
 
 .table-show .item {
@@ -82,6 +82,7 @@
     display: inline-flex;
     align-items: center;
     z-index: 1;
+    pointer-events: none;
 }
 
 .table-show td .pop-out > img {

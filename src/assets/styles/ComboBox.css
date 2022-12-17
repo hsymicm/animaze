@@ -6,7 +6,7 @@
     background-color: #1f1f1f;
     border-radius: 8px;
     width: 100%;
-    cursor: default;
+    cursor: pointer;
 }
 
 .combo-box > img {
@@ -32,7 +32,7 @@
     padding: 8px 16px;
     background-color: #e5e5e5;
     color: #121212;
-    cursor: default;
+    cursor: pointer;
 }
 
 /* .combo ul li:not(:last-child){

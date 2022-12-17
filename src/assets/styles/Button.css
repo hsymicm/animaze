@@ -22,10 +22,8 @@
 
 .btn-primary:hover {
     background-color: #d12343;
-    scale: 1.03;
 }
 
 .btn-primary:active {
     background-color: #95142b;
-    scale: 0.97;
 }
