@@ -22,29 +22,7 @@ export default function Watchlist() {
             option : ["Ecchi", "Fan Service", "Haram"]
         }
     ]
-
-    const optionsList = [
-        {
-            option: "All",
-            isSelected: true,
-        },
-        {
-            option: "Watching",
-            isSelected: false,
-        },
-        {
-            option: "Completed",
-            isSelected: false,
-        },
-        {
-            option: "Planning",
-            isSelected: false,
-        },
-    ]
     
-    // const [options, setOptions] = useState(OPTIONS)
-
-    // MOCK DATA
     const data = {
         "Watching": [
             {
@@ -102,11 +80,59 @@ export default function Watchlist() {
         ]
     }
 
+    const OPTIONS_LIST = {
+        all : {
+            option: "All",
+            isSelected: true,
+        },
+        watching : {
+            option: "Watching",
+            isSelected: false,
+        },
+        completed : {
+            option: "Completed",
+            isSelected: false,
+        },
+        planning : {
+            option: "Planning",
+            isSelected: false,
+        },
+    }
+
+    const updateOptions = (select, options) => {
+        const obj = { ...options }
+        Object.keys(obj).forEach(key => obj[key].isSelected = false)
+        obj[select].isSelected = true
+        return obj
+    }
+    
+    const handleOptionListChange = (select, options, data) => {
+        if(select === 'all') {
+            setShows(data)
+        } else {
+            const obj = {}
+            const opt = options[select].option
+            obj[opt] = data[opt]
+            setShows(obj)
+        }
+        return updateOptions(select, options)
+    }
+    
+    const [shows, setShows] = useState(data)
+    const [optionsList, setOptionsList] = useState(updateOptions('all', OPTIONS_LIST))
+
+    // MOCK DATA
+
     return (
         <main className='glb-container split-container text-white'>
             <div id='aside' className='aside'>
                 <SearchBox text='Filter'/>
-                <Lists onOptionChange={(e) => console.log(e)} options={optionsList} />
+                <Lists
+                onOptionChange={(e) => {
+                    setOptionsList(handleOptionListChange(e, OPTIONS_LIST, data))
+                }} 
+                options={optionsList}
+                />
                 <Filters text="Filters" filter={optionsFilter} />
             </div>
             <div id='content' className='content'>
@@ -124,12 +150,12 @@ export default function Watchlist() {
                         <img src={grid} width={'20px'} alt="" />
                     </div>
                 </div>
-                {!isList && Object.keys(data).map(key => (
+                {!isList && Object.keys(shows).map(key => (
                     <div key={key} className='table-container'>
                         <GridShow title={key} shows={data[key]} />
                     </div>
                 ))}
-                {isList && Object.keys(data).map(key => (
+                {isList && Object.keys(shows).map(key => (
                     <div key={key} className='table-container'>
                         <TableShow title={key} shows={data[key]} />
                     </div>
