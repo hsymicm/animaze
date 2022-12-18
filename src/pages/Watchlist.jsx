@@ -21,11 +21,8 @@ import { useState, useEffect } from 'react'
 import { filterBySearch, filterByStatus } from '@/modules/FILTER_BY'
 
 export default function Watchlist() {
-    const showStatus = Object.keys(Data)
-
     const [isList, setIsList] = useState(true)
     const [shows, setShows] = useState(Data)
-    
     const [FILTER, SET_FILTER] = useState({
         query : '',
         status : 'All',
@@ -49,7 +46,7 @@ export default function Watchlist() {
                 <Lists
                 setLists={(val) => SET_FILTER({...FILTER, 'status' : val})}
                 setShows={setShows}
-                showStatus={showStatus}
+                showStatus={Object.keys(Data)}
                 />
                 <Filters/>
             </div>
