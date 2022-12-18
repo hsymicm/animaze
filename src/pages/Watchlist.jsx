@@ -1,139 +1,57 @@
+// CSS IMPORT
 import '@/assets/styles/Style.css'
 import '@/assets/styles/Watchlist.css'
+
+// SVG IMPORT
 import grid from '@/assets/svgs/grip-solid.svg'
 import list from '@/assets/svgs/list-solid.svg'
+
+// COMPONENT IMPORT
 import TableShow from '@/components/TableShow'
 import GridShow from '@/components/GridShow'
 import SearchBox from '@/components/SearchBox'
 import Filters from '@/components/Filters'
 import Lists from '@/components/Lists'
-import { useState } from 'react'
+
+// DATA IMPORT
+import Data from '@/assets/data/Data'
+
+// MODULE IMPORT
+import { useState, useEffect } from 'react'
+import { filterBySearch, filterByStatus } from '@/modules/FILTER_BY'
 
 export default function Watchlist() {
+    const showStatus = Object.keys(Data)
+
     const [isList, setIsList] = useState(true)
-
-    const optionsFilter = [
-        {
-            filter : "Format",
-            option : ["TV", "Movie", "OVA"]
-        },
-        {
-            filter : "Genre",
-            option : ["Ecchi", "Fan Service", "Haram"]
-        }
-    ]
+    const [shows, setShows] = useState(Data)
     
-    const data = {
-        "Watching": [
-            {
-                id: 1,
-                title: "BOCCHI THE ROCK!",
-                cover: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx130003-5Y8rYzg982sq.png",
-                score: 90,
-                progress: "10/12",
-                type: "TV",
-            },
-            {
-                id: 2,
-                title: "Kaguya-sama: Love is War -Ultra Romantic-",
-                cover: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx125367-bl5vGalMH2cC.png",
-                score: 84,
-                progress: "5/12",
-                type: "TV",
-            },
-        ],
-        "Completed": [
-            {
-                id: 1,
-                title: "One Piece Film: Red",
-                cover: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx141902-fTyoTk8F8qOl.jpg",
-                score: 65,
-                progress: undefined,
-                type: "Movie",
-            },
-            {
-                id: 2,
-                title: "BOFURI: I Don't Want to Get Hurt, so I'll Max Out My Defense.",
-                cover: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx106479-JmPk1F5ubMtm.png",
-                score: 80,
-                progress: undefined,
-                type: "TV",
-            },
-            {
-                id: 3,
-                title: "Death Note",
-                cover: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx1535-lawCwhzhi96X.jpg",
-                score: 88,
-                progress: undefined,
-                type: "TV",
-            }
-        ],
-        "Planning": [
-            {
-                id: 1,
-                title: "Chainsaw Man",
-                cover: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx127230-FlochcFsyoF4.png",
-                score: undefined,
-                progress: undefined,
-                type: "TV",
-            }
-        ]
-    }
+    const [FILTER, SET_FILTER] = useState({
+        query : '',
+        status : 'All',
+        format : '',
+        genre : '',
+    })
 
-    const OPTIONS_LIST = {
-        all : {
-            option: "All",
-            isSelected: true,
-        },
-        watching : {
-            option: "Watching",
-            isSelected: false,
-        },
-        completed : {
-            option: "Completed",
-            isSelected: false,
-        },
-        planning : {
-            option: "Planning",
-            isSelected: false,
-        },
-    }
-
-    const updateOptions = (select, options) => {
-        const obj = { ...options }
-        Object.keys(obj).forEach(key => obj[key].isSelected = false)
-        obj[select].isSelected = true
-        return obj
-    }
-    
-    const handleOptionListChange = (select, options, data) => {
-        if(select === 'all') {
-            setShows(data)
-        } else {
-            const obj = {}
-            const opt = options[select].option
-            obj[opt] = data[opt]
-            setShows(obj)
-        }
-        return updateOptions(select, options)
-    }
-    
-    const [shows, setShows] = useState(data)
-    const [optionsList, setOptionsList] = useState(updateOptions('all', OPTIONS_LIST))
-
-    // MOCK DATA
+    useEffect(() => {
+        let result = Data
+        result = filterByStatus(result, FILTER.status)
+        result = filterBySearch(result, FILTER.query)
+        setShows(result)
+    }, [FILTER])
 
     return (
         <main className='glb-container split-container text-white'>
             <div id='aside' className='aside'>
-                <SearchBox text='Filter'/>
-                <Lists
-                onOptionChange={(e) => {
-                    setOptionsList(handleOptionListChange(e, OPTIONS_LIST, data))
-                }} 
-                options={optionsList}
+                <SearchBox 
+                searchShows={(val) => SET_FILTER({...FILTER, 'query' : val})}
                 />
-                <Filters text="Filters" filter={optionsFilter} />
+                <Lists
+                setLists={(val) => SET_FILTER({...FILTER, 'status' : val})}
+                setShows={setShows}
+                showStatus={showStatus}
+                />
+                <Filters/>
             </div>
             <div id='content' className='content'>
                 <div className='view-mode'>
@@ -151,14 +69,14 @@ export default function Watchlist() {
                     </div>
                 </div>
                 {!isList && Object.keys(shows).map(key => (
-                    <div key={key} className='table-container'>
-                        <GridShow title={key} shows={data[key]} />
-                    </div>
+                    shows[key].length !== 0 ? <div key={key} className='table-container'>
+                        <GridShow title={key} shows={shows[key]} />
+                    </div> : undefined
                 ))}
                 {isList && Object.keys(shows).map(key => (
-                    <div key={key} className='table-container'>
-                        <TableShow title={key} shows={data[key]} />
-                    </div>
+                    shows[key].length !== 0 ? <div key={key} className='table-container'>
+                        <TableShow title={key} shows={shows[key]} />
+                    </div> : undefined
                 ))}
             </div>
         </main>
