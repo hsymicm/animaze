@@ -15,11 +15,13 @@ export default function ComboBox({filter, options}) {
             {isOpen && 
             <div className="combo">
                 <div className="arrow-top"></div>
-                <ul>
-                    {options.map((option, key) => (
-                        <li key={key}>{option}</li>
-                    ))}
-                </ul>
+                <div className='overflow-box '>
+                    <ul className='scroll-bar'>
+                        {options.map((option, key) => (
+                            <li key={key}>{option}</li>
+                        ))}
+                    </ul>
+                </div>
             </div>}
         </div>
     )

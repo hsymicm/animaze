@@ -5,8 +5,32 @@
     padding: 8px 16px;
     background-color: #1f1f1f;
     border-radius: 8px;
-    width: 100%;
     cursor: pointer;
+    width: 100%;
+}
+
+.overflow-box {
+    background-color: #e5e5e5;
+    border-radius: 8px;
+    padding: 12px 8px;
+}
+
+.scroll-bar::-webkit-scrollbar {
+    background-color: #e5e5e5;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    width: 8px;
+    cursor: pointer;
+}
+
+.scroll-bar::-webkit-scrollbar-track {
+    background-color: #c5c5c5;
+    border-radius: 8px;
+}
+
+.scroll-bar::-webkit-scrollbar-thumb {
+    background-color: #ad1b35;
+    border-radius: 8px;
 }
 
 .combo-box > img {
@@ -23,40 +47,30 @@
 .combo ul {
     padding: 0;
     margin: 0;
-    border-radius: 8px;
     list-style: none;
+    max-height: 200px;
+    overflow: auto;
 }
 
 .combo ul li {
     margin: 0;
     padding: 8px 16px;
-    background-color: #e5e5e5;
+    margin-right: 8px;
     color: #121212;
-    cursor: pointer;
-}
-
-/* .combo ul li:not(:last-child){
-    border-bottom: 1px solid #a5a5a5;
-} */
-
-.combo ul li:first-child {
-    border-radius: 8px 8px 0 0;
-}
-
-.combo ul li:last-child {
-    border-radius: 0 0 8px 8px;
+    /* cursor: pointer; */
+    border-radius: 8px;
 }
 
 .combo ul li:hover {
-    background-color: #AD1B35;
+    background-color: #ad1b35;
     color: #e5e5e5;
     font-weight: 500;
 }
 
 .arrow-top {
     margin: 0 auto;
-    width: 0; 
-    height: 0; 
+    width: 0;
+    height: 0;
     border-bottom: 8px solid #e5e5e5;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
