@@ -1,16 +1,23 @@
+import {useState} from 'react'
 import '@/assets/styles/Lists.css'
+import Data from '@/assets/data/Data'
 
-export default function Lists({options, onOptionChange}) {
+export default function Lists({setLists, setShows, showStatus}) {
+    const [status, setStatus] = useState('All')
+    showStatus.unshift('All')
     return (
         <>
         <h4 className='title'>Lists</h4>
         <ul className='list'>
-            {Object.keys(options).map((option, key) => (
+            {showStatus.map((val, id) => (
                 <li 
-                key={key} 
-                className={options[option].isSelected ? 'active' : ''} 
-                onClick={() => onOptionChange(option)}>
-                    {options[option].option}
+                key={id} 
+                className={status === val ? 'active' : ''} 
+                onClick={() => {
+                    setStatus(val)
+                    setLists(val)
+                }}>
+                    {val}
                 </li>
             ))}
         </ul>
