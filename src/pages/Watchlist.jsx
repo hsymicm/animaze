@@ -65,14 +65,16 @@ export default function Watchlist() {
                         <img src={grid} width={'20px'} alt="" />
                     </div>
                 </div>
-                {!isList && Object.keys(shows).map(key => (
-                    shows[key].length !== 0 ? <div key={key} className='table-container'>
-                        <GridShow title={key} shows={shows[key]} />
+                { // GRID VIEW
+                !isList && Object.entries(shows).map(([key, value]) => (
+                    value.length !== 0 ? <div key={key} className='table-container'>
+                        <GridShow title={key} shows={value} />
                     </div> : undefined
                 ))}
-                {isList && Object.keys(shows).map(key => (
-                    shows[key].length !== 0 ? <div key={key} className='table-container'>
-                        <TableShow title={key} shows={shows[key]} />
+                { // LIST VIEW
+                isList && Object.entries(shows).map(([key, value]) => (
+                    value.length !== 0 ? <div key={key} className='table-container'>
+                        <TableShow title={key} shows={value} />
                     </div> : undefined
                 ))}
             </div>

@@ -37,7 +37,7 @@ export default function Layout() {
                     >
                         Watchlist
                     </NavLink>
-                    <Button className="btn btn-primary" label="Browse Anime"/>
+                    <Button className="btn btn-primary" label="Add Anime"/>
                 </ul>
             </div>
         </nav>

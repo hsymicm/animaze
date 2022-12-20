@@ -1,13 +1,12 @@
 import {useState} from 'react'
 import '@/assets/styles/Lists.css'
-import Data from '@/assets/data/Data'
 
-export default function Lists({setLists, setShows, showStatus}) {
+export default function Lists({setLists, showStatus}) {
     const [status, setStatus] = useState('All')
     showStatus.unshift('All')
     return (
         <>
-        <h4 className='title'>Lists</h4>
+        <h4 className='title'>Status</h4>
         <ul className='list'>
             {showStatus.map((val, id) => (
                 <li 
