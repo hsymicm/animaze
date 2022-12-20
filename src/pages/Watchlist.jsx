@@ -12,6 +12,7 @@ import GridShow from '@/components/GridShow'
 import SearchBox from '@/components/SearchBox'
 import Filters from '@/components/Filters'
 import Lists from '@/components/Lists'
+import Modal from '@/components/Modals/Modal'
 
 // DATA IMPORT
 import Data from '@/assets/data/Data'
@@ -21,6 +22,7 @@ import { useState, useEffect } from 'react'
 import { filterBySearch, filterByStatus } from '@/modules/FILTER_BY'
 
 export default function Watchlist() {
+    const [isModalOpen, setIsModalOpen] = useState(true)
     const [isList, setIsList] = useState(true)
     const [shows, setShows] = useState(Data)
     const [FILTER, SET_FILTER] = useState({
@@ -30,6 +32,8 @@ export default function Watchlist() {
         genre : '',
     })
 
+    if(isModalOpen) document.body.style.overflow = 'hidden'
+
     useEffect(() => {
         let result = Data
         result = filterByStatus(result, FILTER.status)
@@ -38,6 +42,8 @@ export default function Watchlist() {
     }, [FILTER])
 
     return (
+        <>
+        <Modal />
         <main className='glb-container split-container text-white'>
             <div id='aside' className='aside'>
                 <SearchBox 
@@ -79,5 +85,6 @@ export default function Watchlist() {
                 ))}
             </div>
         </main>
+        </>
     )
 }

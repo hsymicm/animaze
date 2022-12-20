@@ -27,3 +27,11 @@
 .btn-primary:active {
     background-color: #95142b;
 }
+
+.btn-secondary:hover {
+    background-color: #282828;
+}
+
+.btn-secondary:active {
+    background-color: #202020;
+}

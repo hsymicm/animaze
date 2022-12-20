@@ -1,13 +1,15 @@
 import '@/assets/styles/ComboBox.css'
+import '@/assets/styles/Style.css'
 import arrow from '@/assets/svgs/angle-down-solid.svg'
 import { useState } from 'react'
 
-export default function ComboBox({filter, options}) {
+export default function ComboBox({filter, options, width}) {
     const [isOpen, setIsOpen] = useState(false)
 
     return (
         <div
         onClick={() => setIsOpen(!isOpen)} 
+        style={{width : width}}
         className="combo-box"
         >
             {filter}
