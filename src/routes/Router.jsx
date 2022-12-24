@@ -1,13 +1,13 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import ScrollToTop from '@/modules/ScrollToTop'
+import SCROLL_TOP from '@/modules/SCROLL_TOP'
 import Home from '@/pages/Home'
 import Watchlist from '@/pages/Watchlist'
 
 export default function Router({onEmit}) {
     return (
         <>
-        <ScrollToTop />
+        <SCROLL_TOP />
         <Routes>
             <Route
                 index
