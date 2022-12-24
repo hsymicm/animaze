@@ -7,7 +7,6 @@ import Plus from '@/assets/svgs/plus-solid.svg'
 
 // IMPORT COMPONENTS
 import SearchBox from '@/components/SearchBox'
-import Button from '@/components/Button'
 
 // IMPORT MODULES
 import { useState, useEffect } from 'react'

@@ -3,12 +3,12 @@ import '@/assets/styles/Add.css'
 import '@/assets/styles/Style.css'
 import '@/assets/styles/Modal.css'
 import XMark from '@/assets/svgs/xmark-solid.svg'
-import Trash from '@/assets/svgs/trash-solid.svg'
 
 // IMPORT COMPONENTS
 import ComboBox from '@/components/ComboBox'
 import Button from '@/components/Button'
 import Incremental from '@/components/Incremental'
+import TextArea from '@/components/TextArea'
 
 // IMPORT MODULE
 import { truncate } from '@/modules/STRING'
@@ -115,10 +115,11 @@ export default function Add({ handleClose, data, index, status, isUpdate }) {
                     </div>
                 </div>
                 <div className="modal-item">
-                <h4>Notes</h4>
-                <textarea onKeyDown={(e) => {
-                    if(e.key === 'enter' && e.target.value !== '') setDetail({...detail, 'notes' : e.target.value})
-                }} className='text-area'/>
+                <TextArea
+                    label="Notes"
+                    getText={(val) => setDetail({...detail, 'notes' : val})}
+                    defaultVal={data?.notes}
+                />
                 </div>
                 <div style={{justifyContent : isUpdate ? 'space-between' : 'end'}} className='modal-btn'>
                     {isUpdate &&

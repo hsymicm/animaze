@@ -79,22 +79,3 @@
 .right-btn > .btn {
     margin-left: 24px;
 }
-
-.text-area {
-    width: 100%;
-    padding: 12px 16px;
-    width: 100%;
-    min-height: 80px;
-    max-height: 240px;
-    font-family: inherit;
-    font-size: inherit;
-    background-color: #1f1f1f;
-    border-radius: 8px;
-    color: #e5e5e5;
-    border: none;
-    resize: vertical;
-}
-
-.text-area:focus {
-    outline: none;
-}

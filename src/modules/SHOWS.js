@@ -1,4 +1,4 @@
-const template = {
+export const template = {
     "Watching" : [],
     "Completed" : [],
     "Planning" : []

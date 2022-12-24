@@ -5,7 +5,6 @@ import Points from '@/assets/data/Points'
 import { useNavigate } from 'react-router-dom'
 import ActionLine from '@/assets/img/ActionLine.gif'
 
-console.log(Points)
 export default function Home({onEmit}) {
     const navigate = useNavigate()
     return (

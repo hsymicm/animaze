@@ -14,13 +14,10 @@ import Filters from '@/components/Filters'
 import Lists from '@/components/Lists'
 import Modal from '@/components/Modals/Modal'
 
-// DATA IMPORT
-import Data from '@/assets/data/Data'
-
 // MODULE IMPORT
 import { useState, useEffect } from 'react'
 import { filterBySearch, filterByStatus, filterByType, filterByGenre } from '@/modules/FILTER_BY'
-import { getWatchlist } from '@/modules/SHOWS'
+import { getWatchlist, template } from '@/modules/SHOWS'
 
 export default function Watchlist() {
     const [isList, setIsList] = useState(true)
@@ -86,7 +83,7 @@ export default function Watchlist() {
                 <Lists
                     setLists={(val) => SET_FILTER({...FILTER, 'status' : val})}
                     setShows={setShows}
-                    showStatus={Object.keys(Data)}
+                    showStatus={Object.keys(template)}
                 />
                 <Filters
                     setFilters={(key, val) => SET_FILTER({...FILTER, [key] : val})}
