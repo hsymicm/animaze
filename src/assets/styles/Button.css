@@ -35,3 +35,20 @@
 .btn-secondary:active {
     background-color: #202020;
 }
+
+.btn-border {
+    background-color: transparent;
+    color: #e5e5e5;
+    box-shadow: inset 0 0 0 2px #e5e5e5;
+}
+
+.btn-border:hover {
+    background-color: #e5e5e5;
+    color: #1f1f1f;
+    box-shadow: inset 0 0 2px #e5e5e5;
+}
+
+.btn-border:active {
+    box-shadow: inset 0 0 0 2px #b5b5b5;
+    background-color: #b5b5b5;
+}

@@ -19,42 +19,78 @@ import Data from '@/assets/data/Data'
 
 // MODULE IMPORT
 import { useState, useEffect } from 'react'
-import { filterBySearch, filterByStatus } from '@/modules/FILTER_BY'
+import { filterBySearch, filterByStatus, filterByType, filterByGenre } from '@/modules/FILTER_BY'
+import { getWatchlist } from '@/modules/SHOWS'
 
 export default function Watchlist() {
-    const [isModalOpen, setIsModalOpen] = useState(true)
     const [isList, setIsList] = useState(true)
-    const [shows, setShows] = useState(Data)
+    const [isOpen, setIsOpen] = useState(false)
+    const [objUpdate, setObjUpdate] = useState(null)
+    const [shows, setShows] = useState(getWatchlist())
     const [FILTER, SET_FILTER] = useState({
         query : '',
         status : 'All',
-        format : '',
+        type : '',
         genre : '',
     })
 
-    if(isModalOpen) document.body.style.overflow = 'hidden'
+    const handleEdit = (status, index, obj) => {
+        setObjUpdate({
+            status : status,
+            index : index,
+            obj : obj,
+        })
+        setIsOpen(true)
+    }
 
-    useEffect(() => {
-        let result = Data
+    const handleShows = () => {
+        let result = getWatchlist()
         result = filterByStatus(result, FILTER.status)
+        result = filterByType(result, FILTER.type)
+        result = filterByGenre(result, FILTER.genre)
         result = filterBySearch(result, FILTER.query)
-        setShows(result)
+        return result
+    }
+
+    // ON MOUNTED
+    useEffect(() => {
+        const handler = () => {
+            setShows(handleShows)
+        }
+        window.addEventListener("storage", handler)
+        return () => {
+            window.removeEventListener("storage", handler)
+        }
+    })
+
+    // ON FILTER CHANGE
+    useEffect(() => {
+        setShows(handleShows)
     }, [FILTER])
 
     return (
         <>
-        <Modal />
+        {isOpen && <Modal
+            objUpdate={objUpdate}
+            index={objUpdate.index}
+            scrollPos={window.scrollY}
+            handleClose={() => setIsOpen(false)}
+        />}
         <main className='glb-container split-container text-white'>
             <div id='aside' className='aside'>
                 <SearchBox 
-                searchShows={(val) => SET_FILTER({...FILTER, 'query' : val})}
+                    placeholder='Filter'
+                    search={(val) => SET_FILTER({...FILTER, 'query' : val})}
+                    liveSearch={true}
                 />
                 <Lists
-                setLists={(val) => SET_FILTER({...FILTER, 'status' : val})}
-                setShows={setShows}
-                showStatus={Object.keys(Data)}
+                    setLists={(val) => SET_FILTER({...FILTER, 'status' : val})}
+                    setShows={setShows}
+                    showStatus={Object.keys(Data)}
                 />
-                <Filters/>
+                <Filters
+                    setFilters={(key, val) => SET_FILTER({...FILTER, [key] : val})}
+                />
             </div>
             <div id='content' className='content'>
                 <div className='view-mode'>
@@ -74,13 +110,24 @@ export default function Watchlist() {
                 { // GRID VIEW
                 !isList && Object.entries(shows).map(([key, value]) => (
                     value.length !== 0 ? <div key={key} className='table-container'>
-                        <GridShow title={key} shows={value} />
+                        <GridShow
+                            status={key}
+                            shows={value}
+                            handleEdit={(status, index, obj) => {
+                                handleEdit(status, index, obj)
+                            }}
+                        />
                     </div> : undefined
                 ))}
                 { // LIST VIEW
                 isList && Object.entries(shows).map(([key, value]) => (
                     value.length !== 0 ? <div key={key} className='table-container'>
-                        <TableShow title={key} shows={value} />
+                        <TableShow
+                            status={key}
+                            shows={value}
+                            handleEdit={(status, index, obj) => {
+                                handleEdit(status, index, obj)
+                            }}/>
                     </div> : undefined
                 ))}
             </div>

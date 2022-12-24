@@ -1,12 +1,18 @@
 import GridItem from '@/components/GridItem'
 import '@/assets/styles/Grid.css'
 
-export default function GridShow({title, shows}) {
+export default function GridShow({ status, shows, handleEdit}) {
     return (
         <>
-        <h3>{title}</h3>
+        <h3>{status}</h3>
         <div className="grid-show">
-            {shows.map((item) => <GridItem key={item.id} item={item} />)}
+            {Object.entries(shows).map(([key, item]) => <GridItem 
+                key={key} 
+                id={key}
+                handleEdit={handleEdit}
+                status={status}
+                item={item} 
+            />)}
         </div>
         </>
     )

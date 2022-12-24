@@ -1,4 +1,4 @@
-const Format = [
+const Type = [
     'TV',
     'TV Short',
     'Movie',
@@ -8,4 +8,4 @@ const Format = [
     'Music'
 ]
 
-export default Format
+export default Type

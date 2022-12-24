@@ -1,10 +1,10 @@
 import TableItem from '@/components/TableItem'
 import '@/assets/styles/Table.css'
 
-export default function TableShow({ title, shows }) {
+export default function TableShow({ status, shows, handleEdit }) {
     return (
         <>
-            <h3>{title}</h3>
+            <h3>{status}</h3>
             <table className='table-show'>
                 <thead>
                     <tr>
@@ -16,7 +16,13 @@ export default function TableShow({ title, shows }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {shows.map((item) => <TableItem key={item.id} item={item} />)}
+                    {Object.entries(shows).map(([key, item]) => <TableItem 
+                        key={key}
+                        id={key}
+                        handleEdit={handleEdit}
+                        status={status} 
+                        item={item} 
+                    />)}
                 </tbody>
             </table>
         </>

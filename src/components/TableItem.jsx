@@ -1,30 +1,39 @@
 import { useState } from 'react'
 import edit from '@/assets/svgs/ellipsis-vertical-solid.svg'
 import '@/assets/styles/Table.css'
+import { getColor } from '@/modules/HEX_CONVERT'
 
-export default function TableItem(
-    { item: { id, title, cover, score, progress, type } }) {
+export default function TableItem({ id, item, status, handleEdit }) {
     const [isHover, setIsHover] = useState(false)
     return (
         <tr
             onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}
-            className="item" key={id}
+            className="item"
+            key={id}
         >
             <td className="table-img">
                 {isHover && 
                 <div className='pop-out'>
-                    <img className="pop" src={cover} alt="" />
+                    <img style={{
+                            boxShadow : `0 4px 16px ${getColor(item.cover?.color, 0.2)}`
+                        }} 
+                        className="pop" 
+                        src={item.cover?.url}
+                    />
                     <div className="arrow-right"></div>
                 </div>}
-                <div className={isHover ? "edit" : "cover"}>
-                    <img src={isHover ? edit : cover} alt="" />
+                <div
+                    onClick={() => handleEdit(status, id, item)}
+                    className={isHover ? "edit" : "cover"}
+                >
+                    <img src={isHover ? edit : item.cover?.url} alt="" />
                 </div>
             </td>
-            <td className="table-title">{title}</td>
-            <td>{score}</td>
-            <td>{progress}</td>
-            <td>{type}</td>
+            <td className="table-title">{item.title.english ? item.title.english : item.title.romaji}</td>
+            <td>{item.score}</td>
+            <td>{item.progress ?`${item.progress} ${item.episodes ? '/' + item.episodes : ''}` : undefined}</td>
+            <td>{item.type}</td>
         </tr>
     )
 }

@@ -1,9 +1,9 @@
 import '@/assets/styles/Incremental.css'
 import Caret from '@/assets/svgs/caret-solid.svg'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-export default function Incremental({width, limit, increase}) {
-    const [value, setValue] = useState(0)
+export default function Incremental({width, limit, increase, getValue, defaultVal}) {
+    const [value, setValue] = useState(defaultVal ? defaultVal : 0)
     const handleValueChange = (num, limit=0, button=true) => {
         let temp
         if(!num) num = 0
@@ -15,13 +15,17 @@ export default function Incremental({width, limit, increase}) {
                 return
             }
         } else {
-            // (value - (value % num)) + num
             temp = (value - ((value % num) + num) % num) + num
         }
         if(temp > limit) setValue(limit)
         else if(temp < 0) setValue(0)
         else setValue(temp)
     }
+
+    useEffect(() => {
+        getValue(value ? value : null)
+    }, [value])
+
     return (
         <div
         style={{width : width}}

@@ -9,13 +9,15 @@ export default function Footer() {
             <div className='footer-row'>
                 <div className='footer-li'>
                     <h3 
-                    onClick={() => navigate("/")}
+                    onClick={() => {
+                        navigate(`${import.meta.env.BASE_URL}`)
+                    }}
                     className='text-white pointer'
                     >AniWatch</h3>
                     <div className="spacer"></div>
                     <ul className="footer-ul text-white">
                         <NavLink 
-                            to="/"
+                            to={`${import.meta.env.BASE_URL}`}
                             className={ ({isActive}) => {
                                 return "link text-white " + ( isActive ? "link-active" : "")
                             }}
@@ -23,15 +25,7 @@ export default function Footer() {
                             Home
                         </NavLink>
                         <NavLink
-                            to="/about"
-                            className={ ({isActive}) => {
-                                return "link text-white " + ( isActive ? "link-active" : "")
-                            }}
-                        >
-                            About
-                        </NavLink>
-                        <NavLink
-                            to="/watchlist"
+                            to={`${import.meta.env.BASE_URL}watchlist`}
                             className={ ({isActive}) => {
                                 return "link text-white " + ( isActive ? "link-active" : "")
                             }}

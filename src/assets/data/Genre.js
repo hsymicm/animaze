@@ -3,7 +3,6 @@ const Genre = [
     "Adventure",
     "Comedy",
     "Drama",
-    "Ecchi",
     "Fantasy",
     "Horror",
     "Mahou Shoujo",

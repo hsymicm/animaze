@@ -1,18 +1,24 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import ScrollToTop from '../modules/ScrollToTop'
+import ScrollToTop from '@/modules/ScrollToTop'
 import Home from '@/pages/Home'
-import About from '@/pages/About'
 import Watchlist from '@/pages/Watchlist'
 
-export default function Router() {
+export default function Router({onEmit}) {
     return (
         <>
         <ScrollToTop />
         <Routes>
-            <Route exact path="/" element={ <Home /> } />
-            <Route path="/about" element={ <About /> } />
-            <Route path="/watchlist" element={ <Watchlist /> } />
+            <Route
+                index
+                exact
+                path={`${import.meta.env.BASE_URL}`}
+                element={ <Home onEmit={onEmit} /> }
+            />
+            <Route
+                path={`${import.meta.env.BASE_URL}watchlist`}
+                element={ <Watchlist /> }
+            />
         </Routes>
         </>
     )
