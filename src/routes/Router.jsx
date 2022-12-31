@@ -12,14 +12,15 @@ export default function Router({onEmit}) {
             <Route
                 index
                 exact
-                path={`${import.meta.env.BASE_URL}`}
+                path="/"
                 element={ <Home onEmit={onEmit} /> }
             />
             <Route
-                path={`${import.meta.env.BASE_URL}watchlist`}
+                path="/watchlist"
                 element={ <Watchlist /> }
             />
         </Routes>
         </>
     )
 }
+
