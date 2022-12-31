@@ -16,13 +16,14 @@ export default function TableShow({ status, shows, handleEdit }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {Object.entries(shows).map(([key, item]) => <TableItem 
+                    {Object.entries(shows).map(([key, item]) => (
+                    <TableItem 
                         key={key}
                         id={key}
                         handleEdit={handleEdit}
                         status={status} 
                         item={item} 
-                    />)}
+                    />))}
                 </tbody>
             </table>
         </>
