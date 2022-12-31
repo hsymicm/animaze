@@ -114,7 +114,7 @@ export default function Watchlist() {
                                 handleEdit(status, index, obj)
                             }}
                         />
-                    </div> : undefined
+                    </div> : null
                 ))}
                 { // LIST VIEW
                 isList && Object.entries(shows).map(([key, value]) => (
@@ -125,7 +125,7 @@ export default function Watchlist() {
                             handleEdit={(status, index, obj) => {
                                 handleEdit(status, index, obj)
                             }}/>
-                    </div> : undefined
+                    </div> : null
                 ))}
             </div>
         </main>
