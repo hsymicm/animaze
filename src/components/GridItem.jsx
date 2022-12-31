@@ -10,7 +10,7 @@ export default function GridItem({ id, item, status, handleEdit }) {
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
         className="card"
-        style={{boxShadow: isHover ? `0 4px 16px ${getColor(item.cover?.color, 0.2)}` : ''}}
+        style={{boxShadow: isHover ? `0 4px 16px ${item.cover.color ? getColor(item.cover.color, 0.2) : 'rgba(255, 255, 255, 0.1)'}` : ''}}
         key={id}
         >
             {isHover && 

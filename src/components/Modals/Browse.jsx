@@ -39,10 +39,7 @@ export default function Browse({ getData }) {
                 <SearchBox
                     style={{borderRadius: '8px 0 0 8px'}}
                     placeholder="Search anime that you want to add"
-                    search={(val) => {
-                        console.log(val)
-                        setQuery(val)
-                    }}
+                    search={(val) => setQuery(val)}
                     autoFocus={true}
                     withButton={true}
                 />
@@ -70,7 +67,7 @@ export default function Browse({ getData }) {
                             <p>{res.title.english ? res.title.english : res.title.romaji}</p>
                         </div>
                         <img src={Plus} width="18px"/>
-                    </div> : undefined
+                    </div> : null
                 ))}
             </div>}
         </div>
