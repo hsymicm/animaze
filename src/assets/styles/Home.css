@@ -8,14 +8,16 @@
     align-items: center;
     height: calc(100vh - 72px);
     background-image: url('../img/header1.jpg');
-    object-position: center;
-    object-fit: cover;
+    background-position: center;
+    background-size: cover;
 }
 
 .header-full img {
     width: 100%;
     position: absolute;
     height: inherit;
+    object-position: center;
+    object-fit: cover;
     opacity: 0.1;
 }
 
