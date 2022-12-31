@@ -87,6 +87,8 @@
 
 .table-show td .pop-out > img {
     width: 160px;
+    aspect-ratio: 1/1.409;
+    object-fit: cover;
     border-radius: 8px;
 }
 
