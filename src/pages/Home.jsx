@@ -27,7 +27,7 @@ export default function Home({onEmit}) {
                             className="btn btn-border"
                             width="160px"
                             onClick={() => {
-                                navigate(`${import.meta.env.BASE_URL}watchlist`)
+                                navigate("/watchlist")
                             }}
                         />
                     </div>
@@ -36,7 +36,7 @@ export default function Home({onEmit}) {
             </header>
             <div className="points glb-padding">
                 {Object.entries(Points).map(([key, value]) => (
-                    <div className="point text-white">
+                    <div key={key} className="point text-white">
                         <div className="point-number">{+key+1}</div>
                         <h3 className="point-title">{value.point}</h3>
                         <p className="point-context">{value.context}</p>

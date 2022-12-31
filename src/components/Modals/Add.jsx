@@ -35,7 +35,7 @@ export default function Add({ handleClose, data, index, status, isUpdate }) {
         if(!Status) return
         addWatchlist(details, Status)
         handleClose()
-        navigate(`${import.meta.env.BASE_URL}watchlist`)
+        navigate("/watchlist")
     }
 
     const handleDelete = (index, status) => {
@@ -65,7 +65,7 @@ export default function Add({ handleClose, data, index, status, isUpdate }) {
             >
                 <div className='modal-title'>
                     <img
-                        style={{boxShadow : `0 4px 10px ${getColor(data?.cover?.color, 0.2)}`}}
+                        style={{boxShadow : `0 4px 10px ${data.cover.color ? getColor(data.cover.color, 0.2) : 'rgba(255, 255, 255, 0.1)'}`}}
                         className='cover' 
                         src={data?.cover?.url}
                     />

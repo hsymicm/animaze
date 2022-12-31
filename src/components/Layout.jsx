@@ -9,12 +9,12 @@ export default function Layout({onEmit}) {
         <nav>
             <div className="nav-row">
                 <h2
-                onClick={() => navigate(`${import.meta.env.BASE_URL}`)}
+                onClick={() => navigate("/")}
                 className="pointer text-white"
                 >Ani<span className="text-red">Watch</span></h2>
                 <ul className="nav-li text-white">
                     <NavLink 
-                        to={`${import.meta.env.BASE_URL}`}
+                        to="/"
                         className={ ({isActive}) => {
                             return "link text-white " + ( isActive ? "link-active" : "")
                         }}
@@ -22,7 +22,7 @@ export default function Layout({onEmit}) {
                         Home
                     </NavLink>
                     <NavLink
-                        to={`${import.meta.env.BASE_URL}watchlist`}
+                        to="/watchlist"
                         className={ ({isActive}) => {
                             return "link text-white " + ( isActive ? "link-active" : "")
                         }}
