@@ -65,6 +65,11 @@ export default function Watchlist() {
         setShows(handleShows)
     }, [FILTER])
 
+    // ON MODAL OPEN
+    useEffect(() => {
+        document.body.style.overflow = isOpen ? 'hidden' : ''
+    }, [isOpen])
+    
     return (
         <>
         {isOpen && <Modal
