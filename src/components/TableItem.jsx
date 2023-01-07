@@ -16,7 +16,7 @@ export default function TableItem({ id, item, status, handleEdit }) {
                 {isHover && 
                 <div className='pop-out'>
                     <img style={{
-                            boxShadow : `0 4px 16px ${item.cover.color ? getColor(item.cover.color, 0.2) : 'rgba(255, 255, 255, 0.1)'}`
+                            boxShadow : `0 4px 16px ${getColor(item.cover.color, 0.2)}`
                         }}
                         src={item.cover?.url}
                     />

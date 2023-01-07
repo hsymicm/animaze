@@ -1,6 +1,6 @@
 export const getColor = (hex, alpha=1) => {
     // IF UNDEFINED RETURN WHITE
-    if(!hex) return '#fff'
+    if(!hex) return `hsla(0, 100%, 100%, ${alpha/2})`
 
     // HEX TO DECIMAL
     let rgb = parseInt(hex.substring(1) , 16)
@@ -19,7 +19,7 @@ export const getColor = (hex, alpha=1) => {
         // ACHROMATIC
         h = 0
     }else{
-        let d = max - min;
+        let d = max - min
         switch(max){
             case r: h = (g - b) / d + (g < b ? 6 : 0); break
             case g: h = (b - r) / d + 2; break
