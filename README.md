@@ -1,17 +1,23 @@
 # ⛩️ AniWatch ⛩️
 Development build for an anime watchlist with CRUD feature and made with ReactJS.
 
-## :computer: Recommended IDE Setup
+## 🌐 Website Demo
+![Home Page](https://i.imgur.com/xuiX8aH.png)
+![Watchlist Table View](https://i.imgur.com/TX2cMxk.png)
+![Watchlist Grid View](https://i.imgur.com/uRppXZl.png)
+![Details Window](https://i.imgur.com/mz0EsUq.png)
+
+## 💻 Recommended IDE Setup
 
 - [VSCode](https://code.visualstudio.com/)
 
 
-## :gear: Customize configuration
+## ⚙️ Customize configuration
 
 See [Vite Configuration Reference](https://vitejs.dev/config/).
 
 
-## :wrench: Project Setup
+## 🛠️ Project Setup
 
 ### Install Dependecies
 ```sh
