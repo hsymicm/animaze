@@ -1,11 +1,11 @@
 import '@/assets/styles/Modal.css'
 
-export default function Backdrop({ children, onClick, scrollPos }) {
+export default function Backdrop({ children, onClick, scrollPos, blur=true }) {
     return (
         <div 
             onClick={onClick}
-            style={{top: `${scrollPos}px`}}
-            className='backdrop'
+            style={{zIndex : blur ? 999 : 101}}
+            className={blur ? 'backdrop backdrop-bg' : 'backdrop'}
         >
             {children}
         </div>

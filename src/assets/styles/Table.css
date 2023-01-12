@@ -25,6 +25,7 @@
 
 .table-show .table-title {
     text-align: left;
+    padding-right: 18px;
 }
 
 .table-show td .img{
@@ -50,8 +51,6 @@
 }
 
 .table-show td .cover > img{
-    width: 48px;
-    height: 48px;
     object-fit: cover;
     border-radius: 8px;
 }
@@ -72,6 +71,7 @@
 
 .table-show .item:hover {
     background-color: #AD1B35;
+    cursor: pointer;
 }
 
 .table-show td .pop-out {
@@ -99,4 +99,10 @@
     border-top: 12px solid transparent;
     border-bottom: 12px solid transparent;
     border-left: 12px solid #AD1B35;
+}
+
+@media screen and (max-width: 960px) {
+    .table-show td .pop-out {
+        display: none;
+    }
 }

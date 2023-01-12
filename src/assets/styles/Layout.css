@@ -65,3 +65,69 @@ nav {
     border-radius: 4px 4px 0 0;
     box-shadow: 0 2px 10px rgba(173, 27, 53, 0.25);
 }
+
+.nav-drop {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: -10px;
+    z-index: 109;
+    height: 72px;
+}
+
+.menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #AD1B35;
+    height: 100vh;
+    gap: 16px;
+    max-width: 50%;
+    width: 240px;
+    z-index: 108;
+    transition: right 0.5s ease;
+}
+
+.menu-active {
+    right: 0;
+}
+
+.menu-link {
+    cursor: pointer;
+    text-decoration: none;
+    padding: 12px;
+    font-size: 16px;
+}
+
+.menu-link-active {
+    font-weight: bold;
+}
+
+@media screen and (max-width: 1366px) {
+    .nav-row {
+        padding: 0 12%;
+    }
+}
+
+@media screen and (max-width: 960px) {
+    .nav-row {
+        padding: 0 6%;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .nav-li {
+        display: none;
+    }
+    .nav-drop {
+        display: flex;
+        align-items: center;
+    }
+    .menu {
+        display: flex;
+    }
+}

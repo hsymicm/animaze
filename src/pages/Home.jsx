@@ -9,21 +9,19 @@ export default function Home({onEmit}) {
     const navigate = useNavigate()
     return (
         <>
-            <header className="header-full glb-padding">
+            <header className="header-full glb-container">
                 <div className="header-title text-white">
                     <h1>The Next-Generation Anime Platform</h1>
                     <p>Discover and track your favorite anime shows with AniWatch!</p>
                     <div className='header-btn'>
                         <Button
                             label="Add Anime"
-                            style={{marginRight: '24px', fontSize: '1.1rem'}}
                             className="btn btn-primary"
                             width="160px"
                             onClick={onEmit}
                         />
                         <Button
                             label="Watchlist"
-                            style={{fontSize: '1.1rem'}}
                             className="btn btn-border"
                             width="160px"
                             onClick={() => {
@@ -34,7 +32,7 @@ export default function Home({onEmit}) {
                 </div>
                 <img src={ActionLine}/>
             </header>
-            <div className="points glb-padding">
+            <div className="points glb-container">
                 {Object.entries(Points).map(([key, value]) => (
                     <div key={key} className="point text-white">
                         <div className="point-number">{+key+1}</div>

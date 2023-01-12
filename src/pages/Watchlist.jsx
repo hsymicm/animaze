@@ -24,6 +24,7 @@ export default function Watchlist() {
     const [isOpen, setIsOpen] = useState(false)
     const [objUpdate, setObjUpdate] = useState(null)
     const [shows, setShows] = useState(getWatchlist())
+    const [width, setWindowWidth] = useState(0)
     const [FILTER, SET_FILTER] = useState({
         query : '',
         status : 'All',
@@ -49,6 +50,11 @@ export default function Watchlist() {
         return result
     }
 
+    const updateDimensions = () => {
+        const width = window.innerWidth
+        setWindowWidth(width)
+    }
+    
     // ON MOUNTED
     useEffect(() => {
         const handler = () => {
@@ -59,6 +65,13 @@ export default function Watchlist() {
             window.removeEventListener("storage", handler)
         }
     })
+
+    useEffect(() => { 
+        updateDimensions();
+        window.addEventListener("resize", updateDimensions)
+        return () => 
+            window.removeEventListener("resize", updateDimensions)
+    }, [])
 
     // ON FILTER CHANGE
     useEffect(() => {
@@ -79,7 +92,7 @@ export default function Watchlist() {
             handleClose={() => setIsOpen(false)}
         />}
         <main className='glb-container split-container text-white'>
-            <div id='aside' className='aside'>
+            {width > 960 && <div id='aside' className='aside'>
                 <SearchBox 
                     placeholder='Filter'
                     search={(val) => SET_FILTER({...FILTER, 'query' : val})}
@@ -93,7 +106,7 @@ export default function Watchlist() {
                 <Filters
                     setFilters={(key, val) => SET_FILTER({...FILTER, [key] : val})}
                 />
-            </div>
+            </div>}
             <div id='content' className='content'>
                 <div className='view-mode'>
                     <div
@@ -127,6 +140,7 @@ export default function Watchlist() {
                         <TableShow
                             status={key}
                             shows={value}
+                            windowWidth={width}
                             handleEdit={(status, index, obj) => {
                                 handleEdit(status, index, obj)
                             }}/>

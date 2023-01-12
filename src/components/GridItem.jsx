@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { getColor } from '@/modules/HEX_CONVERT'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 import edit from '@/assets/svgs/ellipsis-vertical-solid.svg'
 import '@/assets/styles/Grid.css'
 
@@ -9,8 +10,12 @@ export default function GridItem({ id, item, status, handleEdit }) {
         <div
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
+        onClick={() => handleEdit(status, id, item)}
         className="card"
-        style={{boxShadow: isHover ? `0 4px 16px ${getColor(item.cover.color, 0.2)}` : ''}}
+        style={{
+            boxShadow: isHover ? `0 4px 16px ${getColor(item.cover.color, 0.2)}` : '',
+            backgroundColor : getColor(item.cover.color, 0.25)
+        }}
         key={id}
         >
             {isHover && 
@@ -28,7 +33,7 @@ export default function GridItem({ id, item, status, handleEdit }) {
                 </div>
             </div>
             <div className="cover">
-                <img src={item.cover?.url} alt="" />
+                <LazyLoadImage src={item.cover?.url} width={176} height={264} alt="" />
             </div>
         </div>
     )

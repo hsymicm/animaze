@@ -12,12 +12,12 @@ body {
 
 .glb-container {
     padding: 0 18%;
-    min-height: calc(100vh - 80px);
 }
 
 main {
     margin-top: 32px;
     margin-bottom: 128px;
+    min-height: calc(100vh - 80px);
 }
 
 .split-container {
@@ -36,4 +36,16 @@ main {
 
 .pointer {
     cursor: pointer;
+}
+
+@media screen and (max-width: 1366px) {
+    .glb-container {
+        padding: 0 12%;
+    }
+}
+
+@media screen and (max-width: 960px) {
+    .glb-container {
+        padding: 0 6%;
+    }
 }

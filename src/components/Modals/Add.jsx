@@ -83,7 +83,6 @@ export default function Add({ handleClose, data, index, status, isUpdate }) {
                         <h4>Status</h4>
                         <ComboBox
                             getSelected={(val) => setStatus(val)}
-                            width='224px' 
                             filter='Status' 
                             options={STATUS_OPTIONS}
                             defaultVal={status}
@@ -95,7 +94,6 @@ export default function Add({ handleClose, data, index, status, isUpdate }) {
                             getValue={(val) => {
                                 setDetail({...detail, 'score' : val})
                             }}
-                            width='auto' 
                             increase={5} 
                             limit={100}
                             defaultVal={data?.score}
@@ -107,7 +105,6 @@ export default function Add({ handleClose, data, index, status, isUpdate }) {
                             getValue={(val) => {
                                 setDetail({...detail, 'progress' : val})
                             }} 
-                            width='auto' 
                             increase={1} 
                             limit={data.episodes ? data.episodes : 0}
                             defaultVal={data?.progress}
@@ -125,14 +122,12 @@ export default function Add({ handleClose, data, index, status, isUpdate }) {
                     {isUpdate &&
                     <Button 
                         onClick={() => handleDelete(index, status)}
-                        width='120px'
                         className='btn btn-secondary'
                         label='Delete'
                     />}
                     <div className='right-btn'>
                         <Button
                             onClick={handleClose}
-                            width='120px'
                             className='btn btn-secondary' 
                             label='Cancel'
                         />
@@ -140,7 +135,6 @@ export default function Add({ handleClose, data, index, status, isUpdate }) {
                             onClick={() => {
                                 isUpdate ? handleUpdate(index, status, Status, detail) : handleSave(detail, Status)
                             }}
-                            width='120px'
                             className='btn btn-primary'
                             label='Save'
                         />

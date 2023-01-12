@@ -3,15 +3,18 @@
     display: flex;
     flex-flow: wrap;
     flex-direction: row;
+    row-gap: 32px;
+    column-gap: 24px;
     width: 100%;
-    
 }
 
 .card {
     position: relative;
-    margin-right: 24px;
-    margin-bottom: 32px;
     border-radius: 8px;
+}
+
+.card:hover {
+    cursor: pointer;
 }
 
 .card .edit {
@@ -57,8 +60,6 @@
 }
 
 .card .cover img {
-    width: 176px;
-    height: 264px;
     object-fit: cover;
     border-radius: 8px;
 }
