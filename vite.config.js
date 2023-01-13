@@ -1,6 +1,16 @@
 import { defineConfig } from 'vite';
 import { fileURLToPath, URL } from "url";
+import { dependencies } from './package.json';
 import react from '@vitejs/plugin-react';
+
+function renderChunks(deps) {
+  let chunks = {};
+  Object.keys(deps).forEach((key) => {
+    if (['react', 'react-router-dom', 'react-dom'].includes(key)) return;
+    chunks[key] = [key];
+  });
+  return chunks;
+}
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -16,6 +26,7 @@ export default defineConfig({
   },
   build : {
     emptyOutDir: true,
+    sourcemap: false,
     rollupOptions: {
       output: {
         assetFileNames: (assetInfo) => {
@@ -29,6 +40,10 @@ export default defineConfig({
         },
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',
+        manualChunks: {
+          vendor: ['react', 'react-router-dom', 'react-dom'],
+          ...renderChunks(dependencies),
+        },
       },
     },
   }
