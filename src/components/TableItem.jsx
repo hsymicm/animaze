@@ -17,8 +17,10 @@ export default function TableItem({ id, item, status, handleEdit, windowWidth })
             <td className="table-img">
                 {isHover && 
                 <div className='pop-out'>
-                    <img style={{
-                            boxShadow : `0 4px 16px ${getColor(item.cover.color, 0.2)}`
+                    <img
+                        style={{
+                            boxShadow : `0 4px 16px ${getColor(item.cover.color, 0.2)}`,
+                            backgroundColor : getColor(item.cover.color, 0.25)
                         }}
                         src={item.cover?.url}
                     />

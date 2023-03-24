@@ -33,7 +33,7 @@ export default function GridItem({ id, item, status, handleEdit }) {
                 </div>
             </div>
             <div className="cover">
-                <LazyLoadImage src={item.cover?.url} width={176} height={264} alt="" />
+                <LazyLoadImage src={item.cover?.url} alt="" />
             </div>
         </div>
     )

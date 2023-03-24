@@ -25,7 +25,7 @@ export const getWatchlist = () => {
 
 export const addWatchlist = (show, status) => {
     const shows = getWatchlist()
-    shows[status].push(show)
+    shows[status].unshift(show)
     setStorage('watchlist', shows)
 }
 
@@ -41,7 +41,7 @@ export const updateWatchlist = (index, status, updatedStatus, show) => {
     if(status === updatedStatus) {
         shows[updatedStatus].splice(index, 0, show)
     } else {
-        shows[updatedStatus].push(show)
+        shows[updatedStatus].unshift(show)
     }
     setStorage('watchlist', shows)
 }

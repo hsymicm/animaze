@@ -1,7 +1,18 @@
 import TableItem from '@/components/TableItem'
 import '@/assets/styles/Table.css'
+import { useState } from 'react'
 
 export default function TableShow({ status, shows, handleEdit, windowWidth }) {
+    const [expand, setExpand] = useState(false)
+
+    const limit = 5
+
+    const handleExpand = (obj) => {
+        const arr = Object.entries(obj)
+        if (expand) return arr
+        return arr.splice(0, limit)
+    }
+
     return (
         <>
             <h3>{status}</h3>
@@ -20,7 +31,7 @@ export default function TableShow({ status, shows, handleEdit, windowWidth }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {Object.entries(shows).map(([key, item]) => (
+                    {handleExpand(shows).map(([key, item]) => (
                     <TableItem 
                         key={key}
                         id={key}
@@ -29,6 +40,14 @@ export default function TableShow({ status, shows, handleEdit, windowWidth }) {
                         item={item} 
                         windowWidth={windowWidth}
                     />))}
+                    {shows.length > limit && 
+                    <tr 
+                    onClick={() => setExpand(!expand)}>
+                        <td
+                        className='expand item'
+                        colSpan={5}>{expand ? 'Show Less' : 'Show More'}
+                        </td>
+                    </tr>}
                 </tbody>
             </table>
         </>

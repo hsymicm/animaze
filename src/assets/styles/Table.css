@@ -1,4 +1,5 @@
 .table-show {
+    position: relative;
     background-color: #1f1f1f;
     border-radius: 8px;
     width: 100%;
@@ -92,6 +93,10 @@
     border-radius: 8px;
 }
 
+.expand {
+    padding: 14px;
+    font-weight: bold;
+}
 
 .arrow-right {
     width: 0; 
