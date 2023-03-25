@@ -1,35 +1,19 @@
 import GridItem from '@/components/GridItem'
 import '@/assets/styles/Grid.css'
 import Button from '@/components/Button'
+import { debounce, handleExpand } from '@/modules/EXTRAS'
 import { useState, useEffect } from 'react'
 
 export default function GridShow({ status, shows, handleEdit}) {
     const [expand, setExpand] = useState(false)
-    
+
     const limit = 5
-    
-    const handleExpand = (obj) => {
-        const arr = Object.entries(obj)
-        if (expand) return arr
-        return arr.splice(0, limit)
-    }
     
     const getColumns = () => {
         return Math.floor(document.getElementById("content").clientWidth / 180)
     }
 
     const [columns, setColums] = useState(getColumns)
-
-    const debounce = (fn, ms) => {
-        let timer
-        return _ => {
-            clearTimeout(timer)
-            timer = setTimeout(_ => {
-            timer = null
-            fn.apply(this, arguments)
-            }, ms)
-        }
-    }
 
     useEffect(() => { 
         const updateColums = debounce(function handleUpdate() {
@@ -47,7 +31,7 @@ export default function GridShow({ status, shows, handleEdit}) {
             style={{gridTemplateColumns : `repeat(${columns}, 1fr)`}}
             className="grid-show"
         >
-            {handleExpand(shows).map(([key, item]) => <GridItem 
+            {handleExpand(shows, limit, expand).map(([key, item]) => <GridItem 
                 key={key} 
                 id={key}
                 handleEdit={handleEdit}
