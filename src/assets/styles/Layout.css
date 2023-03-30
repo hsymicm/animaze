@@ -1,133 +1,127 @@
 nav {
-    position: sticky;
-    position: -webkit-sticky;
-    top: 0;
-    width: 100%;
-    background-color: #121212;
-    border-bottom: 1px solid #1f1f1f;
-    z-index: 99;
-    height: 72px;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  width: 100%;
+  background-color: #11171b;
+  border-bottom: 2px solid #1c242b;
+  z-index: 99;
+  height: 72px;
 }
 
 .nav-row {
-    padding: 0 18%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  padding: 0 18%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .nav-li {
-    display: flex;
-    flex-direction: row;
-    list-style: none;
-    align-items: center;
-    margin: 0;
-    padding: 0;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  align-items: center;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-li .link {
-    display: flex;
-    align-items: center;
-    position: relative;
-    margin-right: 48px;
-    height: 72px;
-    transition: all 0.3s;
-    cursor: pointer;
-    text-decoration: none;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-right: 48px;
+  height: 68px;
+  transition: all 0.3s;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .nav-li .link::before {
-    transition: all 0.15s;
-    content: "";
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 4px;
-    background-color: transparent;
-    border-radius: 4px 4px 0 0;
-    box-shadow: 0 0 5px transparent;
+  transition: all 0.15s;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 4px;
+  background-color: transparent;
+  border-radius: 4px 4px 0 0;
+  box-shadow: 0 0 5px transparent;
 }
 
 .nav-li .link:hover::before {
-    height: 4px;
-    background-color: #AD1B35;
-    box-shadow: 0 2px 10px rgba(173, 27, 53, 0.25);
+  height: 4px;
+  background-color: #b21a23;
+  box-shadow: 0 2px 10px rgba(173, 27, 53, 0.25);
 }
 
 .nav-li .link-active::before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 4px;
-    background-color: #AD1B35;
-    border-radius: 4px 4px 0 0;
-    box-shadow: 0 2px 10px rgba(173, 27, 53, 0.25);
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 4px;
+  background-color: #b21a23;
+  border-radius: 4px 4px 0 0;
+  box-shadow: 0 2px 10px rgba(173, 27, 53, 0.25);
 }
 
 .nav-drop {
-    display: none;
-    position: fixed;
-    top: 0;
-    right: -10px;
-    z-index: 109;
-    height: 72px;
+  display: none;
+  position: fixed;
+  top: 0;
+  right: -10px;
+  z-index: 109;
+  height: 72px;
 }
 
 .menu {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #AD1B35;
-    height: 100vh;
-    gap: 16px;
-    max-width: 50%;
-    width: 240px;
-    z-index: 108;
-    transition: right 0.5s ease;
+  position: fixed;
+  top: 0;
+  right: -100%;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #b21a23;
+  height: 100vh;
+  gap: 16px;
+  max-width: 50%;
+  width: 240px;
+  z-index: 108;
+  transition: right 0.5s ease;
 }
 
 .menu-active {
-    right: 0;
+  right: 0;
 }
 
 .menu-link {
-    cursor: pointer;
-    text-decoration: none;
-    padding: 12px;
-    font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 12px;
+  font-size: 16px;
 }
 
 .menu-link-active {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 @media screen and (max-width: 1366px) {
-    .nav-row {
-        padding: 0 12%;
-    }
+  .nav-row {
+    padding: 0 6%;
+  }
 }
 
-@media screen and (max-width: 960px) {
-    .nav-row {
-        padding: 0 6%;
-    }
-}
-
-@media screen and (max-width: 640px) {
-    .nav-li {
-        display: none;
-    }
-    .nav-drop {
-        display: flex;
-        align-items: center;
-    }
-    .menu {
-        display: flex;
-    }
+@media screen and (max-width: 653px) {
+  .nav-li {
+    display: none;
+  }
+  .nav-drop {
+    display: flex;
+    align-items: center;
+  }
+  .menu {
+    display: flex;
+  }
 }

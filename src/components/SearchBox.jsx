@@ -1,42 +1,73 @@
-import '@/assets/styles/SearchBox.css'
-import '@/assets/styles/Style.css'
-import magnifyingGlass from '@/assets/svgs/magnifying-glass-solid.svg'
-import { useState } from 'react'
-import Button from'@/components/Button'
+import "@/assets/styles/SearchBox.css"
+import "@/assets/styles/Style.css"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faMagnifyingGlass, faXmark } from "@fortawesome/free-solid-svg-icons"
+import { useState } from "react"
+import Button from "@/components/Button"
 
-function SearchBox({ search, placeholder, autoFocus, liveSearch, withButton }) {
-    const [value, setValue] = useState('')
+export default function SearchBox({
+  search,
+  placeholder,
+  defaultVal,
+  autoFocus,
+  style,
+  liveSearch,
+  withButton,
+}) {
+  const [value, setValue] = useState(defaultVal ? defaultVal : "")
 
-    const handlePress = (e) => {
-        if(e.key === 'Enter') {
+  const handlePress = (e) => {
+    if (e.key === "Enter") {
+      search(value)
+      setValue("")
+    }
+  }
+
+  const handleChange = (e) => {
+    const val = e.target.value
+    setValue(val)
+    if (liveSearch) search(val)
+  }
+  
+  return (
+    <div style={{ display: "flex", width: "100%" }}>
+      <div style={style} className="search-box">
+        {!value.length > 0 && (
+          <FontAwesomeIcon icon={faMagnifyingGlass} width={18} />
+        )}
+        <input
+          autoFocus={autoFocus}
+          value={value}
+          onChange={handleChange}
+          onKeyPress={handlePress}
+          type="text"
+          style={{ paddingRight: value.length > 0 ? "26px" : 0 }}
+          placeholder={placeholder}
+        />
+        {value.length > 0 && (
+          <div
+            className="clear"
+            onClick={() => {
+              setValue("")
+              search("")
+            }}
+          >
+            <FontAwesomeIcon icon={faXmark} />
+          </div>
+        )}
+      </div>
+      {withButton && (
+        <Button
+          onClick={() => {
             search(value)
-            setValue('')
-        }
-    }
-
-    const handleChange = (e) => {
-        const val = e.target.value
-        setValue(val)
-        if(liveSearch) search(val)
-    }
-    return (
-        <div style={{display: 'flex', width: '100%'}}>
-            <div style={{borderRadius: withButton ? '8px 0 0 8px' : ''}} className='search-box'>
-                <img src={magnifyingGlass} />
-                <input autoFocus={autoFocus} value={value} onChange={handleChange} onKeyPress={handlePress} type="text" placeholder={placeholder} className="search-box" />
-            </div>
-            {withButton && <Button
-                onClick={() => {
-                    search(value)
-                    setValue('')
-                }}
-                style={{borderRadius: '0 8px 8px 0'}}
-                label="Search"
-                width="140px"
-                className="btn btn-primary"
-            />}
-        </div>
-    )
+            setValue("")
+          }}
+          style={{ borderRadius: "0 8px 8px 0" }}
+          label="Search"
+          width="140px"
+          className="btn btn-primary"
+        />
+      )}
+    </div>
+  )
 }
-
-export default SearchBox
