@@ -39,6 +39,14 @@ main {
   cursor: pointer;
 }
 
+.tooltip {
+  background-color: #29323a;
+  color: #e5e5e5;
+  opacity: 1;
+  border-radius: 8px;
+  z-index: 1000;
+}
+
 @media screen and (max-width: 1366px) {
   .glb-container {
     padding: 0 6%;

@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom"
 import { getColor } from "@/modules/HEX_CONVERT"
 import { addWatchlist, delWatchlist, updateWatchlist } from "@/modules/SHOWS"
 import { motion } from "framer-motion"
+import { Tooltip } from "react-tooltip"
 
 const STATUS_OPTIONS = ["Watching", "Completed", "Planning"]
 const gradient = "linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3))"
@@ -89,11 +90,20 @@ export default function Add({ handleClose, data, id, status, isUpdate }) {
             )}
           </div>
         </div>
-        <FontAwesomeIcon
-          style={{ cursor: "pointer" }}
-          onClick={handleClose}
-          icon={faXmark}
-          size="xl"
+        <div
+          data-tooltip-id="add-close"
+          data-tooltip-content="Close Window"
+        >
+          <FontAwesomeIcon
+            style={{ cursor: "pointer" }}
+            onClick={handleClose}
+            icon={faXmark}
+            size="xl"
+          />
+        </div>
+        <Tooltip
+          id="add-close"
+          className="tooltip"
         />
       </div>
       <div className="modal-padding modal-content">

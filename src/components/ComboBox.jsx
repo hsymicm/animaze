@@ -7,6 +7,7 @@ import { faChevronDown, faXmark } from "@fortawesome/free-solid-svg-icons"
 
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { Tooltip } from "react-tooltip"
 
 export default function ComboBox({
   filter,
@@ -64,7 +65,6 @@ export default function ComboBox({
       ref={inputRef}
     >
       {getLabel()}
-      {selected && <FontAwesomeIcon icon={faXmark} size="lg" />}
       {!selected && (
         <FontAwesomeIcon
           style={{
@@ -72,8 +72,19 @@ export default function ComboBox({
             transform: isOpen ? "rotate(-180deg)" : "",
           }}
           icon={faChevronDown}
+          size="sm"
         />
       )}
+      {selected && <div
+        data-tooltip-id="clear-choice"
+        data-tooltip-content="Clear Current Choice"
+      >
+        <FontAwesomeIcon icon={faXmark} />
+      </div>}
+      <Tooltip
+        id="clear-choice"
+        className="tooltip"
+      />
       <AnimatePresence>
         {isOpen && (
           <motion.div

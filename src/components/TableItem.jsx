@@ -1,10 +1,11 @@
-import "@/assets/styles/Table.css";
-import { getColor } from "@/modules/HEX_CONVERT";
-import { useState } from "react";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import { motion, AnimatePresence } from "framer-motion";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen as editIcon } from "@fortawesome/free-solid-svg-icons";
+import "@/assets/styles/Table.css"
+import { getColor } from "@/modules/HEX_CONVERT"
+import { useState } from "react"
+import { LazyLoadImage } from "react-lazy-load-image-component"
+import { motion, AnimatePresence } from "framer-motion"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faPen as editIcon } from "@fortawesome/free-solid-svg-icons"
+import { Tooltip } from "react-tooltip"
 
 export default function TableItem({
   id,
@@ -13,7 +14,7 @@ export default function TableItem({
   handleEdit,
   windowWidth,
 }) {
-  const [isHover, setIsHover] = useState(false);
+  const [isHover, setIsHover] = useState(false)
 
   const popOut = {
     hidden: {
@@ -32,9 +33,10 @@ export default function TableItem({
       scale: 0.8,
       opacity: 0,
     },
-  };
+  }
 
   return (
+    <>
     <tr
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
@@ -67,8 +69,13 @@ export default function TableItem({
         <div
           onClick={() => handleEdit(status, id, item)}
           className="img-container"
+          data-tooltip-id={id}
+          data-tooltip-content="Edit Show"
         >
-          <div style={{ opacity: isHover ? 1 : 0 }} className="edit">
+          <div
+            style={{ opacity: isHover ? 1 : 0 }}
+            className="edit"
+          >
             <FontAwesomeIcon
               style={{ paddingBottom: "1px" }}
               icon={editIcon}
@@ -121,5 +128,10 @@ export default function TableItem({
         </>
       )}
     </tr>
-  );
+    <Tooltip
+      id={id}
+      className="tooltip"
+    />
+    </>
+  )
 }

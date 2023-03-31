@@ -28,6 +28,7 @@ import { getWatchlist, template } from "@/modules/SHOWS"
 import Order from "@/assets/data/Order"
 import FilterModal from "@/components/Modals/FilterModal"
 import { motion, AnimatePresence } from "framer-motion"
+import { Tooltip } from "react-tooltip"
 
 export default function Watchlist() {
   const [isList, setIsList] = useState(true)
@@ -135,6 +136,7 @@ export default function Watchlist() {
         <div id="content" className="content">
           <div className="quickaccess">
             {width <= 960 && (
+              <>
               <div className="filter-mode">
                 <SearchBox
                   placeholder="Filter"
@@ -144,6 +146,8 @@ export default function Watchlist() {
                   style={{ borderRadius: "8px 0 0 8px" }}
                 />
                 <div
+                  data-tooltip-id="filter-options"
+                  data-tooltip-content="Filter Options"
                   onClick={() => setFilterOpen(true)}
                   style={{ borderLeft: "2px solid #11171b" }}
                   className="view"
@@ -151,21 +155,35 @@ export default function Watchlist() {
                   <FontAwesomeIcon icon={faFilter} size="lg" />
                 </div>
               </div>
+              <Tooltip
+                id="filter-options"
+                className="tooltip"
+              />
+              </>
             )}
             <div className="view-mode">
               <div
+                data-tooltip-id="view"
+                data-tooltip-content="Table View"
                 onClick={() => setIsList(true)}
                 className={isList ? "view active" : "view"}
               >
                 <FontAwesomeIcon icon={faList} size="lg" fixedWidth />
               </div>
               <div
+                data-tooltip-id="view"
+                data-tooltip-content="Grid View"
                 onClick={() => setIsList(false)}
                 className={!isList ? "view active" : "view"}
               >
                 <FontAwesomeIcon icon={faGrip} size="xl" fixedWidth />
               </div>
             </div>
+            <Tooltip
+              id="view"
+              className="tooltip"
+              render={({ content }) => <span>{content}</span>}
+            />
           </div>
           {Object.entries(shows).map(([key, value]) =>
             value.length !== 0 ? (

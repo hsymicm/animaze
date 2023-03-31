@@ -3,6 +3,7 @@ import { getColor } from "@/modules/HEX_CONVERT"
 import { LazyLoadImage } from "react-lazy-load-image-component"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPen as editIcon } from "@fortawesome/free-solid-svg-icons"
+import { Tooltip } from "react-tooltip"
 import "@/assets/styles/Grid.css"
 
 export default function GridItem({ id, item, status, handleEdit }) {
@@ -25,6 +26,8 @@ export default function GridItem({ id, item, status, handleEdit }) {
       key={id}
     >
       <div
+        data-tooltip-id={id}
+        data-tooltip-content="Edit Show"
         onClick={() => handleEdit(status, id, item)}
         className="edit"
         style={{
@@ -38,6 +41,10 @@ export default function GridItem({ id, item, status, handleEdit }) {
           fixedWidth
         />
       </div>
+      <Tooltip
+        id={id}
+        className="tooltip"
+      />
       <div className="info">
         <div>{item.title.english ? item.title.english : item.title.romaji}</div>
         <div className="details">
