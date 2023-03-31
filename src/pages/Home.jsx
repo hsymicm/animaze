@@ -2,7 +2,7 @@ import "@/assets/styles/Style.css"
 import "@/assets/styles/Home.css"
 import Button from "@/components/Button"
 import Points from "@/assets/data/Points"
-import ActionLine from "@/assets/img/ActionLine.gif"
+import ActionLine from "@/assets/img/ActionLineCompressed.gif"
 import { useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
 
@@ -13,8 +13,6 @@ export default function Home({ onEmit }) {
     hidden: {},
     show: {
       transition: {
-        type: "tween",
-        // delayChildren: 0.3,
         staggerChildren: 0.15,
       },
     },

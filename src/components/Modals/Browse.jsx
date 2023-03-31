@@ -43,7 +43,7 @@ export default function Browse({ getData }) {
     >
       <div className="search-flex">
         <SearchBox
-          placeholder="Search anime that you want to add"
+          placeholder="Search anime"
           search={(val) => setQuery(val)}
           autoFocus={true}
           withButton={true}
