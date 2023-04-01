@@ -61,7 +61,7 @@ export default function ComboBox({
   return (
     <div
       className={`combo-box ${selected ? "option-selected" : ""}`}
-      onClick={selected ? unSelect : handleInput}
+      onClick={handleInput}
       ref={inputRef}
     >
       {getLabel()}
@@ -76,6 +76,11 @@ export default function ComboBox({
         />
       )}
       {selected && <div
+        className="clear"
+        onClick={(e) => {
+          e.stopPropagation()
+          unSelect()
+        }}
         data-tooltip-id="clear-choice"
         data-tooltip-content="Clear Current Choice"
       >

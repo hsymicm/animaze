@@ -10,6 +10,11 @@
   width: 100%;
 }
 
+.combo-box .clear {
+  padding: 0 4px;
+  margin-right: -4px;
+}
+
 .option-selected {
   transition: all 0.1s ease-in;
   background-color: #b21a23;
@@ -48,6 +53,8 @@
   padding: 8px 14px;
   color: #11171b;
   border-radius: 8px;
+  font-weight: normal;
+  transition: all 0.1s ease;
 }
 
 .combo ul li:hover {

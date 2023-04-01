@@ -14,6 +14,7 @@ import Empty from "@/components/Empty"
 import { useState, useEffect } from "react"
 import REQUEST from "@/modules/REQUEST"
 import { motion } from "framer-motion"
+import { Tooltip } from "react-tooltip"
 
 export default function Browse({ getData }) {
   const [query, setQuery] = useState("")
@@ -77,17 +78,26 @@ export default function Browse({ getData }) {
                     {res.title.english ? res.title.english : res.title.romaji}
                   </p>
                 </div>
-                <FontAwesomeIcon
-                  style={{ marginRight: "8px" }}
-                  icon={faPlus}
-                  size="lg"
+                <div
+                  data-tooltip-id={id+1}
+                  data-tooltip-content="Choose Anime"
+                >
+                  <FontAwesomeIcon
+                    style={{ marginRight: "8px" }}
+                    icon={faPlus}
+                    size="lg"
+                  />
+                </div>
+                <Tooltip
+                  id={id+1}
+                  className="tooltip"
                 />
               </div>
             ) : null
           )}
         </div>
       )}
-      {isLoaded && data.length === 0 && (
+      {isLoaded && !data.length && (
         <Empty label="Can't find any results" />
       )}
     </motion.div>
