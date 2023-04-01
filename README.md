@@ -1,5 +1,5 @@
 # ⛩️ AniWatch ⛩️
-Development build for an anime watchlist with CRUD feature and made with ReactJS.
+Anime watchlist with CRUD feature and made with ReactJS.
 
 
 ## 🌐 Website Demo
