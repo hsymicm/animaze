@@ -113,7 +113,7 @@ nav {
   }
 }
 
-@media screen and (max-width: 653px) {
+@media screen and (max-width: 640px) {
   .nav-li {
     display: none;
   }
