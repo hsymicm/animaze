@@ -1,3 +1,3 @@
-const Order = ["Ascending", "Descending"]
+const Order = ['Ascending', 'Descending'];
 
-export default Order
+export default Order;

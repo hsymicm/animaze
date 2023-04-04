@@ -1,16 +1,16 @@
 const Points = [
   {
-    point: "Quick & Fast",
-    context: "Browse and track anime fast.",
+    point: 'Quick & Fast',
+    context: 'Browse and track anime fast.',
   },
   {
-    point: "Multiple Filters",
-    context: "Track with multiple robust filters.",
+    point: 'Multiple Filters',
+    context: 'Track with multiple robust filters.',
   },
   {
-    point: "Easy to Edit",
-    context: "Edit or delete your list with ease.",
+    point: 'Easy to Edit',
+    context: 'Edit or delete your list with ease.',
   },
-]
+];
 
-export default Points
+export default Points;
