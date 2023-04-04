@@ -1,22 +1,18 @@
-import "@/assets/styles/Style.css"
-import Layout from "@/components/Layout"
-import Router from "@/routes/Router"
-import Footer from "@/components/Footer"
-import Modal from "@/components/Modals/Modal"
-import { useState } from "react"
-import { AnimatePresence } from "framer-motion"
+import '@/assets/styles/Style.css';
+import { useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import Layout from '@/components/Layout';
+import Router from '@/routes/Router';
+import Footer from '@/components/Footer';
+import Modal from '@/components/Modals/Modal';
 
 export default function App() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [menu, setMenu] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const [menu, setMenu] = useState(false);
 
   return (
     <>
-      <Layout
-        menu={menu}
-        setMenu={setMenu}
-        onEmit={() => setIsOpen(true)}
-      />
+      <Layout menu={menu} setMenu={setMenu} onEmit={() => setIsOpen(true)} />
       <AnimatePresence>
         {isOpen && (
           <Modal
@@ -28,5 +24,5 @@ export default function App() {
       <Router onEmit={() => setIsOpen(true)} />
       <Footer setMenu={setMenu} />
     </>
-  )
+  );
 }

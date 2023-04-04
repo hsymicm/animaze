@@ -1,13 +1,13 @@
-import { useState } from "react"
-import { getColor } from "@/modules/HEX_CONVERT"
-import { LazyLoadImage } from "react-lazy-load-image-component"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPen as editIcon } from "@fortawesome/free-solid-svg-icons"
-import { Tooltip } from "react-tooltip"
-import "@/assets/styles/Grid.css"
+import { useState } from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen as editIcon } from '@fortawesome/free-solid-svg-icons';
+import { Tooltip } from 'react-tooltip';
+import getColor from '@/modules/HEX_CONVERT';
+import '@/assets/styles/Grid.css';
 
 export default function GridItem({ id, item, status, handleEdit }) {
-  const [isHover, setIsHover] = useState(false)
+  const [isHover, setIsHover] = useState(false);
   return (
     <div
       onMouseEnter={() => setIsHover(true)}
@@ -17,10 +17,10 @@ export default function GridItem({ id, item, status, handleEdit }) {
       style={{
         boxShadow: isHover
           ? `0 4px 16px ${getColor(item.cover.color, 0.2)}`
-          : "",
+          : '',
         backgroundColor: getColor(item.cover.color, 0.25),
         border: `2px solid ${
-          isHover ? getColor(item.cover.color, 0.5) : "#1c242b"
+          isHover ? getColor(item.cover.color, 0.5) : '#1c242b'
         }`,
       }}
       key={id}
@@ -36,22 +36,19 @@ export default function GridItem({ id, item, status, handleEdit }) {
         }}
       >
         <FontAwesomeIcon
-          style={{ paddingLeft: "1px", paddingBottom: "1px" }}
+          style={{ paddingLeft: '1px', paddingBottom: '1px' }}
           icon={editIcon}
           fixedWidth
         />
       </div>
-      <Tooltip
-        id={id}
-        className="tooltip"
-      />
+      <Tooltip id={id} className="tooltip" />
       <div className="info">
         <div>{item.title.english ? item.title.english : item.title.romaji}</div>
         <div className="details">
           <div>
             {item.progress
-              ? `EP ${item.progress}${item.episodes ? "/" + item.episodes : ""}`
-              : ""}
+              ? `EP ${item.progress}${item.episodes ? `/${item.episodes}` : ''}`
+              : ''}
           </div>
           <div>{item.score}</div>
         </div>
@@ -60,5 +57,5 @@ export default function GridItem({ id, item, status, handleEdit }) {
         <LazyLoadImage src={item.cover?.url} alt="" />
       </div>
     </div>
-  )
+  );
 }

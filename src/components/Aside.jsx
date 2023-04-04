@@ -1,14 +1,14 @@
-import Filters from "@/components/Filters"
-import Lists from "@/components/Lists"
+import Filters from '@/components/Filters';
+import Lists from '@/components/Lists';
 
 export default function Aside({ SET_FILTER, FILTER, obj }) {
-  const { template, Order } = obj
+  const { template, Order } = obj;
 
   return (
     <>
       <Lists
         setLists={(val) => SET_FILTER({ ...FILTER, status: val })}
-        lists={["All", ...Object.keys(template)]}
+        lists={['All', ...Object.keys(template)]}
         defaultVal={FILTER.status}
         label="Status"
       />
@@ -17,13 +17,11 @@ export default function Aside({ SET_FILTER, FILTER, obj }) {
         setFilters={(key, val) => SET_FILTER({ ...FILTER, [key]: val })}
       />
       <Lists
-        setLists={(val) =>
-          SET_FILTER({ ...FILTER, asc: val === Order[0] ? true : false })
-        }
+        setLists={(val) => SET_FILTER({ ...FILTER, asc: val === Order[0] })}
         lists={Order}
         defaultVal={Order[FILTER.asc ? 0 : 1]}
         label="Order"
       />
     </>
-  )
+  );
 }

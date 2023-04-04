@@ -1,44 +1,44 @@
 // IMPORT ASSETS
-import "@/assets/styles/Modal.css"
-import "@/assets/styles/Style.css"
-import "@/assets/styles/Browse.css"
-import "@/assets/styles/Scrollbar.css"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPlus } from "@fortawesome/free-solid-svg-icons"
+import '@/assets/styles/Modal.css';
+import '@/assets/styles/Style.css';
+import '@/assets/styles/Browse.css';
+import '@/assets/styles/Scrollbar.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 // IMPORT COMPONENTS
-import SearchBox from "@/components/SearchBox"
-import Empty from "@/components/Empty"
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { Tooltip } from 'react-tooltip';
+import SearchBox from '@/components/SearchBox';
+import Empty from '@/components/Empty';
 
 // IMPORT MODULES
-import { useState, useEffect } from "react"
-import REQUEST from "@/modules/REQUEST"
-import { motion } from "framer-motion"
-import { Tooltip } from "react-tooltip"
+import REQUEST from '@/modules/REQUEST';
 
 export default function Browse({ getData }) {
-  const [query, setQuery] = useState("")
-  const [data, setData] = useState([])
-  const [isLoaded, setIsLoaded] = useState(false)
+  const [query, setQuery] = useState('');
+  const [data, setData] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    setIsLoaded(false)
+    setIsLoaded(false);
     if (!query) {
-      setData([])
-      return
+      setData([]);
+      return;
     }
     REQUEST(query)
       .then((res) => setData(res))
       .then(() => setIsLoaded(true))
-      .catch((e) => console.log(e))
-  }, [query])
+      .catch((e) => console.log(e));
+  }, [query]);
 
   return (
     <motion.div
       initial={{ scale: 0.9, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       exit={{ scale: 0.9, opacity: 0 }}
-      transition={{ duration: 0.25, ease: "easeInOut" }}
+      transition={{ duration: 0.25, ease: 'easeInOut' }}
       onClick={(e) => e.stopPropagation()}
       className="modal-box modal-padding text-white"
     >
@@ -46,60 +46,60 @@ export default function Browse({ getData }) {
         <SearchBox
           placeholder="Search anime"
           search={(val) => setQuery(val)}
-          autoFocus={true}
-          withButton={true}
+          autoFocus
+          withButton
         />
       </div>
       {query && !isLoaded && (
         <div className="search-result scroll-bar">
           {[...Array(2).keys()].map((e) => (
             <div className="search-item-skeleton" key={e}>
-              <div className="skeleton img-skeleton"></div>
-              <div className="skeleton title-skeleton"></div>
+              <div className="skeleton img-skeleton" />
+              <div className="skeleton title-skeleton" />
             </div>
           ))}
         </div>
       )}
       {isLoaded && data.length > 0 && (
         <div className="search-result scroll-bar">
-          {data.map((res, id) =>
+          {data.map((res) =>
             !res.isAdult ? (
               <div
                 onClick={() => getData(res)}
-                style={{ marginRight: data.length > 3 ? "8px" : "" }}
+                style={{ marginRight: data.length > 3 ? '8px' : '' }}
                 className="search-item"
-                key={id}
+                key={res.id}
               >
                 <div className="item-title">
                   <div className="item-image">
-                    <img src={res.cover.url} />
+                    <img
+                      src={res.cover.url}
+                      alt={`${
+                        res.title.english ? res.title.english : res.title.romaji
+                      } cover`}
+                    />
                   </div>
                   <p>
                     {res.title.english ? res.title.english : res.title.romaji}
                   </p>
                 </div>
                 <div
-                  data-tooltip-id={id+1}
+                  data-tooltip-id={res.id}
                   data-tooltip-content="Choose Anime"
                 >
                   <FontAwesomeIcon
-                    style={{ marginRight: "8px" }}
+                    style={{ marginRight: '8px' }}
                     icon={faPlus}
                     size="lg"
                   />
                 </div>
-                <Tooltip
-                  id={id+1}
-                  className="tooltip"
-                />
+                <Tooltip id={res.id} className="tooltip" />
               </div>
             ) : null
           )}
         </div>
       )}
-      {isLoaded && !data.length && (
-        <Empty label="Can't find any results" />
-      )}
+      {isLoaded && !data.length && <Empty label="Can't find any results" />}
     </motion.div>
-  )
+  );
 }

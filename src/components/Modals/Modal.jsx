@@ -1,17 +1,17 @@
-import "@/assets/styles/Modal.css"
-import Backdrop from "@/components/Modals/Backdrop"
-import Add from "@/components/Modals/Add"
-import Browse from "@/components/Modals/Browse"
-import { useState } from "react"
-import { AnimatePresence } from "framer-motion"
+import '@/assets/styles/Modal.css';
+import { useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import Backdrop from '@/components/Modals/Backdrop';
+import Add from '@/components/Modals/Add';
+import Browse from '@/components/Modals/Browse';
 
 export default function Modal({ handleClose, scrollPos, id, objUpdate }) {
-  const [data, setData] = useState(objUpdate ? objUpdate.obj : [])
-  const [isAdd, setIsAdd] = useState(objUpdate ? true : false)
+  const [data, setData] = useState(objUpdate ? objUpdate.obj : []);
+  const [isAdd, setIsAdd] = useState(!!objUpdate);
   const handleData = (result) => {
-    setData(result)
-    setIsAdd(true)
-  }
+    setData(result);
+    setIsAdd(true);
+  };
   return (
     <Backdrop scrollPos={scrollPos} onClick={handleClose}>
       <AnimatePresence>
@@ -22,10 +22,10 @@ export default function Modal({ handleClose, scrollPos, id, objUpdate }) {
             data={data}
             id={id}
             status={objUpdate?.status}
-            isUpdate={objUpdate ? true : false}
+            isUpdate={!!objUpdate}
           />
         )}
       </AnimatePresence>
     </Backdrop>
-  )
+  );
 }

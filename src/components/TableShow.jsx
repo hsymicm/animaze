@@ -1,12 +1,13 @@
-import TableItem from "@/components/TableItem"
-import "@/assets/styles/Table.css"
-import { useState } from "react"
-import { handleExpand } from "@/modules/EXTRAS"
+/* eslint-disable jsx-a11y/control-has-associated-label */
+import { useState } from 'react';
+import TableItem from '@/components/TableItem';
+import '@/assets/styles/Table.css';
+import handleExpand from '@/modules/EXTRAS';
 
 export default function TableShow({ status, shows, handleEdit, windowWidth }) {
-  const [expand, setExpand] = useState(false)
+  const [expand, setExpand] = useState(false);
 
-  const limit = 5
+  const limit = 5;
 
   return (
     <>
@@ -14,7 +15,7 @@ export default function TableShow({ status, shows, handleEdit, windowWidth }) {
       <table className="table-show">
         <thead>
           <tr>
-            <th></th>
+            <th />
             <th className="table-title">Title</th>
             {windowWidth > 640 && (
               <>
@@ -39,12 +40,12 @@ export default function TableShow({ status, shows, handleEdit, windowWidth }) {
           {shows.length > limit + 2 && (
             <tr onClick={() => setExpand(!expand)}>
               <td className="expand item" colSpan={5}>
-                {expand ? "Show Less" : "Show More"}
+                {expand ? 'Show Less' : 'Show More'}
               </td>
             </tr>
           )}
         </tbody>
       </table>
     </>
-  )
+  );
 }

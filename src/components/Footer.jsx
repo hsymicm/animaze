@@ -1,29 +1,29 @@
-import "@/assets/styles/Style.css"
-import "@/assets/styles/Footer.css"
-import { NavLink, useNavigate } from "react-router-dom"
+import '@/assets/styles/Style.css';
+import '@/assets/styles/Footer.css';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 export default function Footer({ setMenu }) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <footer>
       <div className="footer-row glb-container">
         <div className="footer-li">
           <h3
             onClick={() => {
-              navigate("/")
-              setMenu(false)
+              navigate('/');
+              setMenu(false);
             }}
             className="text-white pointer"
           >
             AniWatch
           </h3>
-          <div className="spacer"></div>
+          <div className="spacer" />
           <ul className="footer-ul text-white">
             <NavLink
               onClick={() => setMenu(false)}
-              to={"/"}
+              to="/"
               className={({ isActive }) => {
-                return "link text-white " + (isActive ? "link-active" : "")
+                return `link text-white ${isActive ? 'link-active' : ''}`;
               }}
             >
               Home
@@ -32,7 +32,7 @@ export default function Footer({ setMenu }) {
               onClick={() => setMenu(false)}
               to="/watchlist"
               className={({ isActive }) => {
-                return "link text-white " + (isActive ? "link-active" : "")
+                return `link text-white ${isActive ? 'link-active' : ''}`;
               }}
             >
               Watchlist
@@ -48,5 +48,5 @@ export default function Footer({ setMenu }) {
         </p>
       </div>
     </footer>
-  )
+  );
 }

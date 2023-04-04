@@ -1,7 +1,7 @@
-import suchEmpty from "@/assets/img/such_empty.png"
-import "@/assets/styles/Empty.css"
+import suchEmpty from '@/assets/img/such_empty.png';
+import '@/assets/styles/Empty.css';
 
-export default function Empty({ label = "No Data" }) {
+export default function Empty({ label = 'No Data' }) {
   return (
     <div className="empty-placeholder">
       <img src={suchEmpty} alt="no data" />
@@ -11,5 +11,5 @@ export default function Empty({ label = "No Data" }) {
         (╯°□°)╯︵ ┻━┻
       </h3>
     </div>
-  )
+  );
 }

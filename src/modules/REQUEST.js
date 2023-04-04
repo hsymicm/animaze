@@ -1,4 +1,4 @@
-import ANILIST from "@/modules/ANILIST"
+import ANILIST from '@/modules/ANILIST';
 
 const query = `
 query ($id: Int, $search: String, $page: Int, $perPage: Int, $sortType: [MediaSort], $genre: [String]) {
@@ -14,13 +14,13 @@ query ($id: Int, $search: String, $page: Int, $perPage: Int, $sortType: [MediaSo
       isAdult
     }
   }
-}`
+}`;
 
-export default async function (search) {
-  return await ANILIST(query, {
+export default async function REQUEST(search) {
+  return ANILIST(query, {
     perPage: 5,
     page: 1,
-    sortType: ["POPULARITY_DESC"],
-    search: search,
-  })
+    sortType: ['POPULARITY_DESC'],
+    search,
+  });
 }

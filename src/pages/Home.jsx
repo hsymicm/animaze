@@ -1,13 +1,13 @@
-import "@/assets/styles/Style.css"
-import "@/assets/styles/Home.css"
-import Button from "@/components/Button"
-import Points from "@/assets/data/Points"
-import ActionLine from "@/assets/img/ActionLineCompressed.gif"
-import { useNavigate } from "react-router-dom"
-import { motion } from "framer-motion"
+import '@/assets/styles/Style.css';
+import '@/assets/styles/Home.css';
+import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import Button from '@/components/Button';
+import Points from '@/assets/data/Points';
+import ActionLine from '@/assets/img/ActionLineCompressed.gif';
 
 export default function Home({ onEmit }) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const container = {
     hidden: {},
@@ -16,18 +16,18 @@ export default function Home({ onEmit }) {
         staggerChildren: 0.15,
       },
     },
-  }
+  };
 
   const item = {
     hidden: {
       opacity: 0,
-      translateY: "10vh",
+      translateY: '10vh',
     },
     show: {
       opacity: 1,
       translateY: 0,
     },
-  }
+  };
 
   return (
     <>
@@ -60,12 +60,12 @@ export default function Home({ onEmit }) {
               className="btn btn-border"
               width="160px"
               onClick={() => {
-                navigate("/watchlist")
+                navigate('/watchlist');
               }}
             />
           </motion.div>
         </motion.div>
-        <img src={ActionLine} />
+        <img src={ActionLine} alt="Action Line" />
       </motion.header>
       <div className="points glb-container">
         {Object.entries(Points).map(([key, value]) => (
@@ -77,5 +77,5 @@ export default function Home({ onEmit }) {
         ))}
       </div>
     </>
-  )
+  );
 }

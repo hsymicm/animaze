@@ -1,28 +1,30 @@
-import GridItem from "@/components/GridItem"
-import "@/assets/styles/Grid.css"
-import Button from "@/components/Button"
-import { handleExpand } from "@/modules/EXTRAS"
-import { useState, useEffect } from "react"
+import { useState, useEffect } from 'react';
+import handleExpand from '@/modules/EXTRAS';
+import GridItem from '@/components/GridItem';
+import '@/assets/styles/Grid.css';
+import Button from '@/components/Button';
 
 export default function GridShow({ status, shows, handleEdit }) {
-  const [expand, setExpand] = useState(false)
+  const [expand, setExpand] = useState(false);
 
   const getColumns = () => {
-    const col = Math.floor(document.getElementById("content").clientWidth / 192)
-    return col > 1 ? col : 1
-  }
+    const col = Math.floor(
+      document.getElementById('content').clientWidth / 192
+    );
+    return col > 1 ? col : 1;
+  };
 
-  const [columns, setColums] = useState(getColumns)
+  const [columns, setColums] = useState(getColumns);
 
-  const limit = columns * (columns < 2 ? 4 : 2)
+  const limit = columns * (columns < 2 ? 4 : 2);
 
   useEffect(() => {
     const updateColums = () => {
-      setColums(getColumns())
-    }
-    window.addEventListener("resize", updateColums)
-    return () => window.removeEventListener("resize", updateColums)
-  }, [])
+      setColums(getColumns());
+    };
+    window.addEventListener('resize', updateColums);
+    return () => window.removeEventListener('resize', updateColums);
+  }, []);
 
   return (
     <>
@@ -45,13 +47,13 @@ export default function GridShow({ status, shows, handleEdit }) {
         <Button
           onClick={() => setExpand(!expand)}
           style={{
-            marginBottom: "24px",
+            marginBottom: '24px',
           }}
           width="100%"
           className="btn btn-secondary btn-expand"
-          label={expand ? "Show Less" : "Show More"}
+          label={expand ? 'Show Less' : 'Show More'}
         />
       )}
     </>
-  )
+  );
 }

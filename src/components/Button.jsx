@@ -1,13 +1,14 @@
-import "@/assets/styles/Button.css"
+import '@/assets/styles/Button.css';
 
-export default function Button(props) {
+export default function Button({ onClick, width, className, label, style }) {
   return (
     <button
-      onClick={props.onClick}
-      style={{ ...props?.style, width: props?.width }}
-      className={props?.className}
+      type="button"
+      onClick={onClick}
+      style={{ ...style, width }}
+      className={className}
     >
-      {props?.label}
+      {label}
     </button>
-  )
+  );
 }

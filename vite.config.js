@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import { fileURLToPath, URL } from "url";
+import { fileURLToPath, URL } from 'url';
 import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
@@ -11,10 +11,10 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": fileURLToPath(new URL("./src", import.meta.url)),
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
-  build : {
+  build: {
     emptyOutDir: true,
     sourcemap: false,
     rollupOptions: {
@@ -24,9 +24,8 @@ export default defineConfig({
           if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
             extType = 'img';
             return `assets/${extType}/[hash][extname]`;
-          } else {
-            return `assets/${extType}/[name]-[hash][extname]`;
           }
+          return `assets/${extType}/[name]-[hash][extname]`;
         },
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',
@@ -35,5 +34,5 @@ export default defineConfig({
         },
       },
     },
-  }
-})
+  },
+});

@@ -1,7 +1,7 @@
 const handleExpand = (obj, limit, expand) => {
-  const arr = Object.entries(obj)
-  if (expand || obj.length <= limit + 2) return arr
-  return arr.splice(0, limit)
-}
+  const arr = Object.entries(obj);
+  if (expand || obj.length <= limit + 2) return arr;
+  return arr.splice(0, limit);
+};
 
-export { handleExpand }
+export default handleExpand;

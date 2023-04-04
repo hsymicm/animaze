@@ -1,7 +1,7 @@
-import "@/assets/styles/Incremental.css"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons"
-import { useEffect, useState } from "react"
+import '@/assets/styles/Incremental.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useState } from 'react';
 
 export default function Incremental({
   width,
@@ -10,25 +10,26 @@ export default function Incremental({
   getValue,
   defaultVal,
 }) {
-  const [value, setValue] = useState(defaultVal ? defaultVal : 0)
-  const handleValueChange = (num, limit = 0, button = true) => {
-    if (!num) num = 0
+  const [value, setValue] = useState(defaultVal || 0);
+  const handleValueChange = (val, limitValue = 0, button = true) => {
+    let num = val;
+    if (!num) num = 0;
     if (!button) {
-      num = /^\d+$/.test(num) ? Number(num) : value
+      num = /^\d+$/.test(num) ? Number(num) : value;
     } else {
-      num = value - (((value % num) + num) % num) + num
+      num = value - (((value % num) + num) % num) + num;
     }
-    if (num > limit) setValue(limit)
-    else if (num < 0) setValue(0)
-    else setValue(num)
-  }
+    if (num > limitValue) setValue(limitValue);
+    else if (num < 0) setValue(0);
+    else setValue(num);
+  };
 
   useEffect(() => {
-    getValue(value ? value : null)
-  }, [value])
+    getValue(value || null);
+  }, [value]);
 
   return (
-    <div style={{ width: width }} className="incremental-box">
+    <div style={{ width }} className="incremental-box">
       <input
         value={value}
         onChange={(e) => handleValueChange(e.target.value, limit, false)}
@@ -50,5 +51,5 @@ export default function Incremental({
         />
       </div>
     </div>
-  )
+  );
 }

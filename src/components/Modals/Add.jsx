@@ -1,32 +1,33 @@
 // IMPORT ASSETS
-import "@/assets/styles/Add.css"
-import "@/assets/styles/Style.css"
-import "@/assets/styles/Modal.css"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faXmark } from "@fortawesome/free-solid-svg-icons"
+import '@/assets/styles/Add.css';
+import '@/assets/styles/Style.css';
+import '@/assets/styles/Modal.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 // IMPORT COMPONENTS
-import ComboBox from "@/components/ComboBox"
-import Button from "@/components/Button"
-import Incremental from "@/components/Incremental"
-import TextArea from "@/components/TextArea"
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { Tooltip } from 'react-tooltip';
+import ComboBox from '@/components/ComboBox';
+import Button from '@/components/Button';
+import Incremental from '@/components/Incremental';
+import TextArea from '@/components/TextArea';
 
 // IMPORT MODULE
-import { truncate } from "@/modules/STRING"
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { getColor } from "@/modules/HEX_CONVERT"
-import { addWatchlist, delWatchlist, updateWatchlist } from "@/modules/SHOWS"
-import { motion } from "framer-motion"
-import { Tooltip } from "react-tooltip"
+import { truncate } from '@/modules/STRING';
+import getColor from '@/modules/HEX_CONVERT';
+import { addWatchlist, delWatchlist, updateWatchlist } from '@/modules/SHOWS';
 
-const STATUS_OPTIONS = ["Watching", "Completed", "Planning"]
-const gradient = "linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3))"
+const STATUS_OPTIONS = ['Watching', 'Completed', 'Planning'];
+const gradient =
+  'linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3))';
 
 export default function Add({ handleClose, data, id, status, isUpdate }) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const [Status, setStatus] = useState(status ? status : null)
+  const [Status, setStatus] = useState(status || null);
   const [detail, setDetail] = useState(
     isUpdate
       ? data
@@ -34,43 +35,43 @@ export default function Add({ handleClose, data, id, status, isUpdate }) {
           ...data,
           progress: null,
           score: null,
-          notes: "",
+          notes: '',
         }
-  )
+  );
 
-  const handleSave = (details, Status = null) => {
-    if (!Status) return
-    addWatchlist(details, Status)
-    handleClose()
-    navigate("/watchlist")
-  }
+  const handleSave = (details, saveStatus = null) => {
+    if (!saveStatus) return;
+    addWatchlist(details, saveStatus);
+    handleClose();
+    navigate('/watchlist');
+  };
 
-  const handleDelete = (id, status) => {
-    if (!id) return
-    delWatchlist(id, status)
-    handleClose()
-  }
+  const handleDelete = (deleteId, deleteStatus) => {
+    if (!deleteId) return;
+    delWatchlist(deleteId, deleteStatus);
+    handleClose();
+  };
 
-  const handleUpdate = (id, status, updatedStatus, show) => {
-    if (!id) return
-    updateWatchlist(id, status, updatedStatus, show)
-    handleClose()
-  }
+  const handleUpdate = (updateId, currentStatus, updatedStatus, show) => {
+    if (!updateId) return;
+    updateWatchlist(updateId, currentStatus, updatedStatus, show);
+    handleClose();
+  };
 
   return (
     <motion.div
       initial={isUpdate ? { scale: 0.9, opacity: 0 } : false}
       animate={{ scale: 1, opacity: 1 }}
       exit={{ scale: 0.9, opacity: 0 }}
-      transition={{ duration: 0.25, ease: "easeInOut" }}
+      transition={{ duration: 0.25, ease: 'easeInOut' }}
       onClick={(e) => e.stopPropagation()}
       className="modal-box text-white"
     >
       <div
         style={{
           background: `${gradient},url(${data?.banner})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
         }}
         className="modal-header modal-padding"
       >
@@ -82,6 +83,9 @@ export default function Add({ handleClose, data, id, status, isUpdate }) {
             }}
             className="cover"
             src={data?.cover?.url}
+            alt={`${
+              data.title.english ? data.title.english : data.title.romaji
+            } cover`}
           />
           <div className="title">
             {truncate(
@@ -90,21 +94,15 @@ export default function Add({ handleClose, data, id, status, isUpdate }) {
             )}
           </div>
         </div>
-        <div
-          data-tooltip-id="add-close"
-          data-tooltip-content="Close Window"
-        >
+        <div data-tooltip-id="add-close" data-tooltip-content="Close Window">
           <FontAwesomeIcon
-            style={{ cursor: "pointer" }}
+            style={{ cursor: 'pointer' }}
             onClick={handleClose}
             icon={faXmark}
             size="xl"
           />
         </div>
-        <Tooltip
-          id="add-close"
-          className="tooltip"
-        />
+        <Tooltip id="add-close" className="tooltip" />
       </div>
       <div className="modal-padding modal-content">
         <div className="modal-row">
@@ -121,7 +119,7 @@ export default function Add({ handleClose, data, id, status, isUpdate }) {
             <h4>Score</h4>
             <Incremental
               getValue={(val) => {
-                setDetail({ ...detail, score: val })
+                setDetail({ ...detail, score: val });
               }}
               increase={5}
               limit={100}
@@ -132,7 +130,7 @@ export default function Add({ handleClose, data, id, status, isUpdate }) {
             <h4>Episode</h4>
             <Incremental
               getValue={(val) => {
-                setDetail({ ...detail, progress: val })
+                setDetail({ ...detail, progress: val });
               }}
               increase={1}
               limit={data.episodes ? data.episodes : 0}
@@ -148,7 +146,7 @@ export default function Add({ handleClose, data, id, status, isUpdate }) {
           />
         </div>
         <div
-          style={{ justifyContent: isUpdate ? "space-between" : "end" }}
+          style={{ justifyContent: isUpdate ? 'space-between' : 'end' }}
           className="modal-btn"
         >
           {isUpdate && (
@@ -166,9 +164,8 @@ export default function Add({ handleClose, data, id, status, isUpdate }) {
             />
             <Button
               onClick={() => {
-                isUpdate
-                  ? handleUpdate(id, status, Status, detail)
-                  : handleSave(detail, Status)
+                if (isUpdate) handleUpdate(id, status, Status, detail);
+                else handleSave(detail, Status);
               }}
               className="btn btn-primary"
               label="Save"
@@ -177,5 +174,5 @@ export default function Add({ handleClose, data, id, status, isUpdate }) {
         </div>
       </div>
     </motion.div>
-  )
+  );
 }

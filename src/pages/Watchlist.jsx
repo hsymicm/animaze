@@ -1,21 +1,23 @@
 // CSS IMPORT
-import "@/assets/styles/Style.css"
-import "@/assets/styles/Watchlist.css"
+import '@/assets/styles/Style.css';
+import '@/assets/styles/Watchlist.css';
 
 // SVG IMPORT
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faList, faGrip, faFilter } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faList, faGrip, faFilter } from '@fortawesome/free-solid-svg-icons';
 
 // COMPONENT IMPORT
-import TableShow from "@/components/TableShow"
-import GridShow from "@/components/GridShow"
-import Modal from "@/components/Modals/Modal"
-import Empty from "@/components/Empty"
-import SearchBox from "@/components/SearchBox"
-import Aside from "@/components/Aside"
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Tooltip } from 'react-tooltip';
+import TableShow from '@/components/TableShow';
+import GridShow from '@/components/GridShow';
+import Modal from '@/components/Modals/Modal';
+import Empty from '@/components/Empty';
+import SearchBox from '@/components/SearchBox';
+import Aside from '@/components/Aside';
 
 // MODULE IMPORT
-import { useState, useEffect } from "react"
 import {
   filterBySearch,
   filterByStatus,
@@ -23,76 +25,74 @@ import {
   filterByGenre,
   sortBy,
   reverseObj,
-} from "@/modules/FILTER_BY"
-import { getWatchlist, template } from "@/modules/SHOWS"
-import Order from "@/assets/data/Order"
-import FilterModal from "@/components/Modals/FilterModal"
-import { motion, AnimatePresence } from "framer-motion"
-import { Tooltip } from "react-tooltip"
+} from '@/modules/FILTER_BY';
+import { getWatchlist, template } from '@/modules/SHOWS';
+import Order from '@/assets/data/Order';
+import FilterModal from '@/components/Modals/FilterModal';
 
 export default function Watchlist() {
-  const [isList, setIsList] = useState(true)
-  const [filterOpen, setFilterOpen] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
-  const [objUpdate, setObjUpdate] = useState(null)
-  const [shows, setShows] = useState(getWatchlist())
-  const [width, setWindowWidth] = useState(window.innerWidth)
+  const [isList, setIsList] = useState(true);
+  const [filterOpen, setFilterOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [objUpdate, setObjUpdate] = useState(null);
+  const [shows, setShows] = useState(getWatchlist());
+  const [width, setWindowWidth] = useState(window.innerWidth);
   const [FILTER, SET_FILTER] = useState({
-    query: "",
-    status: "All",
-    type: "",
-    genre: "",
-    sort_by: "",
+    query: '',
+    status: 'All',
+    type: '',
+    genre: '',
+    sort_by: '',
     asc: true,
-  })
+  });
 
   const handleEdit = (status, id, obj) => {
     setObjUpdate({
-      status: status,
-      id: id,
-      obj: obj,
-    })
-    setIsOpen(true)
-  }
+      status,
+      id,
+      obj,
+    });
+    setIsOpen(true);
+  };
 
   const handleShows = () => {
-    let result = getWatchlist()
-    result = filterByStatus(result, FILTER.status)
-    result = filterByType(result, FILTER.type)
-    result = filterByGenre(result, FILTER.genre)
-    result = filterBySearch(result, FILTER.query, true)
-    result = sortBy(result, FILTER.sort_by)
-    result = reverseObj(result, !FILTER.asc)
-    return result
-  }
+    let result = getWatchlist();
+    result = filterByStatus(result, FILTER.status);
+    result = filterByType(result, FILTER.type);
+    result = filterByGenre(result, FILTER.genre);
+    result = filterBySearch(result, FILTER.query, true);
+    result = sortBy(result, FILTER.sort_by);
+    result = reverseObj(result, !FILTER.asc);
+    return result;
+  };
 
   const updateDimensions = () => {
-    const width = window.innerWidth
-    setWindowWidth(width)
-  }
+    const windowWidth = window.innerWidth;
+    setWindowWidth(windowWidth);
+  };
 
   // ON MOUNTED
   useEffect(() => {
     const handler = () => {
-      setShows(handleShows)
-    }
-    window.addEventListener("storage", handler)
+      setShows(handleShows);
+    };
+    window.addEventListener('storage', handler);
     return () => {
-      window.removeEventListener("storage", handler)
-    }
-  })
+      window.removeEventListener('storage', handler);
+    };
+  });
 
   // ON WINDOW RESIZE
   useEffect(() => {
-    updateDimensions()
-    window.addEventListener("resize", updateDimensions)
-    return () => window.removeEventListener("resize", updateDimensions)
-  }, [])
+    updateDimensions();
+    window.addEventListener('resize', updateDimensions);
+    return () => window.removeEventListener('resize', updateDimensions);
+  }, []);
 
   // ON FILTER CHANGE
   useEffect(() => {
-    setShows(handleShows)
-  }, [FILTER])
+    setShows(handleShows);
+  }, [FILTER]);
 
   return (
     <>
@@ -124,7 +124,7 @@ export default function Watchlist() {
               placeholder="Filter"
               search={(val) => SET_FILTER({ ...FILTER, query: val })}
               defaultVal={FILTER.query}
-              liveSearch={true}
+              liveSearch
             />
             <Aside
               SET_FILTER={SET_FILTER}
@@ -137,28 +137,25 @@ export default function Watchlist() {
           <div className="quickaccess">
             {width <= 960 && (
               <>
-              <div className="filter-mode">
-                <SearchBox
-                  placeholder="Filter"
-                  search={(val) => SET_FILTER({ ...FILTER, query: val })}
-                  defaultVal={FILTER.query}
-                  liveSearch={true}
-                  style={{ borderRadius: "8px 0 0 8px" }}
-                />
-                <div
-                  data-tooltip-id="filter-options"
-                  data-tooltip-content="Filter Options"
-                  onClick={() => setFilterOpen(true)}
-                  style={{ borderLeft: "2px solid #11171b" }}
-                  className="view"
-                >
-                  <FontAwesomeIcon icon={faFilter} size="lg" />
+                <div className="filter-mode">
+                  <SearchBox
+                    placeholder="Filter"
+                    search={(val) => SET_FILTER({ ...FILTER, query: val })}
+                    defaultVal={FILTER.query}
+                    liveSearch
+                    style={{ borderRadius: '8px 0 0 8px' }}
+                  />
+                  <div
+                    data-tooltip-id="filter-options"
+                    data-tooltip-content="Filter Options"
+                    onClick={() => setFilterOpen(true)}
+                    style={{ borderLeft: '2px solid #11171b' }}
+                    className="view"
+                  >
+                    <FontAwesomeIcon icon={faFilter} size="lg" />
+                  </div>
                 </div>
-              </div>
-              <Tooltip
-                id="filter-options"
-                className="tooltip"
-              />
+                <Tooltip id="filter-options" className="tooltip" />
               </>
             )}
             <div className="view-mode">
@@ -166,7 +163,7 @@ export default function Watchlist() {
                 data-tooltip-id="view"
                 data-tooltip-content="Table View"
                 onClick={() => setIsList(true)}
-                className={isList ? "view active" : "view"}
+                className={isList ? 'view active' : 'view'}
               >
                 <FontAwesomeIcon icon={faList} size="lg" fixedWidth />
               </div>
@@ -174,7 +171,7 @@ export default function Watchlist() {
                 data-tooltip-id="view"
                 data-tooltip-content="Grid View"
                 onClick={() => setIsList(false)}
-                className={!isList ? "view active" : "view"}
+                className={!isList ? 'view active' : 'view'}
               >
                 <FontAwesomeIcon icon={faGrip} size="xl" fixedWidth />
               </div>
@@ -193,7 +190,7 @@ export default function Watchlist() {
                     status={key}
                     shows={value}
                     handleEdit={(status, index, obj) => {
-                      handleEdit(status, index, obj)
+                      handleEdit(status, index, obj);
                     }}
                   />
                 )}
@@ -203,7 +200,7 @@ export default function Watchlist() {
                     shows={value}
                     windowWidth={width}
                     handleEdit={(status, id, obj) => {
-                      handleEdit(status, id, obj)
+                      handleEdit(status, id, obj);
                     }}
                   />
                 )}
@@ -216,5 +213,5 @@ export default function Watchlist() {
         </div>
       </motion.main>
     </>
-  )
+  );
 }
