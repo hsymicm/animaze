@@ -4,19 +4,19 @@ Development build for an anime watchlist with CRUD feature and made with React.
 
 ## 🌐 Website Demo
 ### Home Page
-![Home Page](https://i.imgur.com/UrugRMP)
+![Home Page](https://i.imgur.com/UrugRMP.png)
 
 ### Watchlist Table Viewmode
-![Watchlist Table View](https://i.imgur.com/DUOUCaD)
+![Watchlist Table View](https://i.imgur.com/DUOUCaD.png)
 
 ### Watchlist Grid Viewmode
-![Watchlist Grid View](https://i.imgur.com/NPzDuRo)
+![Watchlist Grid View](https://i.imgur.com/NPzDuRo.png)
 
 ### Details Window
-![Details Window](https://i.imgur.com/urggTBs)
+![Details Window](https://i.imgur.com/urggTBs.png)
 
 ### Add Window
-![Add Window](https://i.imgur.com/LzzyPdb)
+![Add Window](https://i.imgur.com/LzzyPdb.png)
 
 
 ## 💻 Recommended IDE Setup
