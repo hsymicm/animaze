@@ -48,3 +48,8 @@ npm run dev
 npm run build
 ```
 
+### Check for Format and Style Problems
+
+```sh
+npm run lint
+```
