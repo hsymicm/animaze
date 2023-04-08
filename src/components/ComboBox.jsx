@@ -77,13 +77,13 @@ export default function ComboBox({ filter, options, getSelected, defaultVal }) {
             e.stopPropagation();
             unSelect();
           }}
-          data-tooltip-id="clear-choice"
+          data-tooltip-id={filter}
           data-tooltip-content="Clear Current Choice"
         >
           <FontAwesomeIcon icon={faXmark} />
         </div>
       )}
-      <Tooltip id="clear-choice" className="tooltip" />
+      <Tooltip id={filter} className="tooltip" />
       <AnimatePresence>
         {isOpen && (
           <motion.div

@@ -80,7 +80,7 @@ const sortTypes = () => {
 const sortBy = (obj, type) => {
   if (!(type || sortTypes().includes(type))) return obj;
   const temp = { ...obj };
-  const asArray = Object.entries(temp);
+  const asArray = Object.values(temp);
   asArray.forEach((value) => {
     value.sort(SORT_TEMPLATE[type]);
   });
