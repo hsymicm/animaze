@@ -1,19 +1,22 @@
 # ⛩️ AniWatch ⛩️
-Development build for an anime watchlist with CRUD feature and made with ReactJS.
+Development build for an anime watchlist with CRUD feature and made with React.
 
 
 ## 🌐 Website Demo
 ### Home Page
-![Home Page](https://i.imgur.com/xuiX8aH.png)
+![Home Page](https://i.imgur.com/UrugRMP.png)
 
 ### Watchlist Table Viewmode
-![Watchlist Table View](https://i.imgur.com/TX2cMxk.png)
+![Watchlist Table View](https://i.imgur.com/DUOUCaD.png)
 
 ### Watchlist Grid Viewmode
-![Watchlist Grid View](https://i.imgur.com/uRppXZl.png)
+![Watchlist Grid View](https://i.imgur.com/NPzDuRo.png)
 
 ### Details Window
-![Details Window](https://i.imgur.com/mz0EsUq.png)
+![Details Window](https://i.imgur.com/urggTBs.png)
+
+### Add Window
+![Add Window](https://i.imgur.com/LzzyPdb.png)
 
 
 ## 💻 Recommended IDE Setup
@@ -45,3 +48,8 @@ npm run dev
 npm run build
 ```
 
+### Check for Format and Style Problems
+
+```sh
+npm run lint
+```
