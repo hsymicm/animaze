@@ -1,0 +1,20 @@
+import { useEffect } from 'react';
+import nProgress from 'nprogress';
+import '@/assets/styles/ProgressBar.css';
+import '@/assets/styles/Style.css';
+
+export default function ProgressBar() {
+  useEffect(() => {
+    nProgress.configure({
+      parent: 'nav',
+      showSpinner: false,
+      minimum: 0.15,
+    });
+    nProgress.start();
+    return () => {
+      nProgress.done();
+    };
+  });
+
+  return null;
+}

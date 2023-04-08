@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import SCROLL_TOP from '@/modules/SCROLL_TOP';
+import ProgressBar from '@/components/ProgressBar';
 import '@/assets/styles/Style.css';
 
 const Home = lazy(() => import('@/pages/Home'));
@@ -10,7 +11,13 @@ export default function Router({ onEmit }) {
   return (
     <>
       <SCROLL_TOP />
-      <Suspense fallback={<main />}>
+      <Suspense
+        fallback={
+          <main>
+            <ProgressBar />
+          </main>
+        }
+      >
         <Routes>
           <Route index exact path="/" element={<Home onEmit={onEmit} />} />
           <Route path="/watchlist" element={<Watchlist />} />
