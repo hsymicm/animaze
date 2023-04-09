@@ -76,6 +76,7 @@ export default function ComboBox({ filter, options, getSelected, defaultVal }) {
           onClick={(e) => {
             e.stopPropagation();
             unSelect();
+            setIsOpen(false);
           }}
           data-tooltip-id={filter}
           data-tooltip-content="Clear Current Choice"
