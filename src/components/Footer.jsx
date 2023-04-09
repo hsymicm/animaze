@@ -39,13 +39,13 @@ export default function Footer({ setMenu }) {
             </NavLink>
           </ul>
         </div>
-        <p className="text-white footer-credit">
+        {/* <p className="text-white footer-credit">
           <span>Made By</span>
           <br />
           M Fadil Hisyam, M Rafli, Rizki Patria
           <br />
           3IA13 - Ujian PWEB
-        </p>
+        </p> */}
       </div>
     </footer>
   );
