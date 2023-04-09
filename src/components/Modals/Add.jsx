@@ -79,7 +79,7 @@ export default function Add({ handleClose, data, id, status, isUpdate }) {
           <img
             style={{
               boxShadow: `0 4px 16px ${getColor(data.cover.color, 0.2)}`,
-              backgroundColor: getColor(data.cover.color, 0.25),
+              backgroundColor: getColor(data.cover.color, 1, 0.25, 0.25),
             }}
             className="cover"
             src={data?.cover?.url}

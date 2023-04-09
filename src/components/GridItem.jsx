@@ -18,7 +18,7 @@ export default function GridItem({ id, item, status, handleEdit }) {
         boxShadow: isHover
           ? `0 4px 16px ${getColor(item.cover.color, 0.2)}`
           : '',
-        backgroundColor: getColor(item.cover.color, 0.25),
+        backgroundColor: getColor(item.cover.color, 1, 0.25, 0.25),
         border: `2px solid ${
           isHover ? getColor(item.cover.color, 0.5) : '#1c242b'
         }`,

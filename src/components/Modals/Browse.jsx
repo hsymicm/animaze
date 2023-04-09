@@ -15,6 +15,7 @@ import Empty from '@/components/Empty';
 
 // IMPORT MODULES
 import REQUEST from '@/modules/REQUEST';
+import getColor from '@/modules/HEX_CONVERT';
 
 export default function Browse({ getData }) {
   const [query, setQuery] = useState('');
@@ -73,6 +74,14 @@ export default function Browse({ getData }) {
                 <div className="item-title">
                   <div className="item-image">
                     <img
+                      style={{
+                        backgroundColor: getColor(
+                          res.cover.color,
+                          1,
+                          0.25,
+                          0.25
+                        ),
+                      }}
                       src={res.cover.url}
                       alt={`${
                         res.title.english ? res.title.english : res.title.romaji

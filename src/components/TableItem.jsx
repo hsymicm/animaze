@@ -58,7 +58,7 @@ export default function TableItem({
                 <img
                   style={{
                     boxShadow: `0 4px 16px ${getColor(item.cover.color, 0.2)}`,
-                    backgroundColor: getColor(item.cover.color, 0.25),
+                    backgroundColor: getColor(item.cover.color, 1, 0.25, 0.25),
                   }}
                   src={item.cover?.url}
                   alt={`${
