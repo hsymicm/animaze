@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen as editIcon } from '@fortawesome/free-solid-svg-icons';
 import { Tooltip } from 'react-tooltip';
 import getColor from '@/modules/HEX_CONVERT';
+import { truncate } from '@/modules/STRING';
 import '@/assets/styles/Grid.css';
 
 export default function GridItem({ id, item, status, handleEdit }) {
@@ -43,7 +44,12 @@ export default function GridItem({ id, item, status, handleEdit }) {
       </div>
       <Tooltip id={id} className="tooltip" />
       <div className="info">
-        <div>{item.title.english ? item.title.english : item.title.romaji}</div>
+        <div>
+          {truncate(
+            item.title.english ? item.title.english : item.title.romaji,
+            40
+          )}
+        </div>
         <div className="details">
           <div>
             {item.progress

@@ -1,5 +1,10 @@
 export const truncate = (str, n) => {
-  return str.length > n ? `${str.slice(0, n - 1)}...` : str;
+  if (str.length < n) return str;
+  const truncated = str.substr(0, n);
+  return `${truncated.substr(
+    0,
+    Math.min(truncated.length, truncated.lastIndexOf(' '))
+  )}...`;
 };
 
 export const caption = (str) => {
