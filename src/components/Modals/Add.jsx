@@ -16,7 +16,6 @@ import Incremental from '@/components/Incremental';
 import TextArea from '@/components/TextArea';
 
 // IMPORT MODULE
-import { truncate } from '@/modules/STRING';
 import getColor from '@/modules/HEX_CONVERT';
 import { addWatchlist, delWatchlist, updateWatchlist } from '@/modules/SHOWS';
 
@@ -88,10 +87,7 @@ export default function Add({ handleClose, data, id, status, isUpdate }) {
             } cover`}
           />
           <div className="title">
-            {truncate(
-              data.title.english ? data.title.english : data.title.romaji,
-              100
-            )}
+            {data.title.english ? data.title.english : data.title.romaji}
           </div>
         </div>
         <div data-tooltip-id="add-close" data-tooltip-content="Close Window">
