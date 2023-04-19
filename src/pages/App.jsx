@@ -11,37 +11,41 @@ export default function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [menu, setMenu] = useState(false);
 
+  const toastStyle = {
+    style: {
+      border: '2px solid #2f3b48',
+      backgroundColor: '#1c242b',
+      borderRadius: '8px',
+      color: '#e5e5e5',
+    },
+    success: {
+      style: {
+        border: '2px solid #19b33d',
+      },
+      iconTheme: {
+        primary: '#19b33d',
+        secondary: '#e5e5e5',
+      },
+    },
+    error: {
+      style: {
+        border: '2px solid #b31924',
+      },
+      iconTheme: {
+        primary: '#b31924',
+        secondary: '#e5e5e5',
+      },
+    },
+  };
+
   return (
     <>
       <div>
         <Toaster
-          position="bottom-right"
-          toastOptions={{
-            style: {
-              border: '2px solid #2f3b48',
-              backgroundColor: '#1c242b',
-              borderRadius: '8px',
-              color: '#e5e5e5',
-            },
-            success: {
-              style: {
-                border: '2px solid #19b33d',
-              },
-              iconTheme: {
-                primary: '#19b33d',
-                secondary: '#e5e5e5',
-              },
-            },
-            error: {
-              style: {
-                border: '2px solid #b31924',
-              },
-              iconTheme: {
-                primary: '#b31924',
-                secondary: '#e5e5e5',
-              },
-            },
+          containerStyle={{
+            top: 32,
           }}
+          toastOptions={toastStyle}
         />
       </div>
       <Layout menu={menu} setMenu={setMenu} onEmit={() => setIsOpen(true)} />
