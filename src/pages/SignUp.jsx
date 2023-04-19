@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { setDoc, doc } from 'firebase/firestore';
+import { getDoc, doc, writeBatch } from 'firebase/firestore';
 import toast from 'react-hot-toast';
 import { auth, db } from '@/modules/FIREBASE_CONFIG';
 import { caption } from '@/modules/STRING';
@@ -31,6 +31,18 @@ function SignUp() {
         toast.error('Invalid username', {
           id: statusSignUp,
         });
+        setLoading(false);
+        return;
+      }
+
+      const usernameCheckRef = doc(db, 'usernames', username);
+      const usernameDoc = await getDoc(usernameCheckRef);
+
+      if (usernameDoc.exists()) {
+        toast.error('Username is not available', {
+          id: statusSignUp,
+        });
+        setLoading(false);
         return;
       }
 
@@ -45,12 +57,19 @@ function SignUp() {
       const updatedAt = createdAt;
 
       // Add new user to USERS collection
-      await setDoc(doc(db, 'users', userCredential.user.uid), {
+      const userId = userCredential.user.uid;
+      const batch = writeBatch(db);
+      const usernameRef = doc(db, 'usernames', username);
+      const userRef = doc(db, 'users', userId);
+      batch.set(userRef, {
         username,
         email,
         createdAt,
         updatedAt,
       });
+      batch.set(usernameRef, { uid: userId });
+
+      await batch.commit();
 
       setUsername('');
       setEmail('');
@@ -63,7 +82,7 @@ function SignUp() {
       const code = err.code.split('/');
 
       if (code[0] !== 'auth') {
-        console.log(err.message);
+        console.log(err);
       } else {
         toast.error(caption(code[1].replaceAll('-', ' ')), {
           id: statusSignUp,
