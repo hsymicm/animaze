@@ -74,7 +74,7 @@
   border-radius: 6px;
 }
 
-@media screen and (max-width: 435px) {
+@media screen and (max-width: 372px) {
   .card .cover img,
   .card .cover {
     aspect-ratio: 1.4/1;

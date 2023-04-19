@@ -8,9 +8,8 @@ export default function GridShow({ status, shows, handleEdit }) {
   const [expand, setExpand] = useState(false);
 
   const getColumns = () => {
-    const col = Math.floor(
-      document.getElementById('content').clientWidth / 192
-    );
+    const width = document.getElementById('content').clientWidth;
+    const col = Math.floor(width / 164);
     return col > 1 ? col : 1;
   };
 

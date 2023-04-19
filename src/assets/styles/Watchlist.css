@@ -68,6 +68,7 @@
 .table-container {
   width: 100%;
 }
+
 .table-container:not(:last-child) {
   margin-bottom: 16px;
 }
