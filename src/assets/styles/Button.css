@@ -28,6 +28,11 @@
   background-color: #8e151d;
 }
 
+.btn-primary:disabled {
+  background-color: #c0474f;
+  cursor: not-allowed;
+}
+
 .btn-secondary:hover {
   background-color: #242f38;
 }

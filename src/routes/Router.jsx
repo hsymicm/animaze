@@ -6,6 +6,8 @@ import '@/assets/styles/Style.css';
 
 const Home = lazy(() => import('@/pages/Home'));
 const Watchlist = lazy(() => import('@/pages/Watchlist'));
+const SignUp = lazy(() => import('@/pages/SignUp'));
+const SignIn = lazy(() => import('@/pages/SignIn'));
 
 export default function Router({ onEmit }) {
   return (
@@ -21,6 +23,8 @@ export default function Router({ onEmit }) {
         <Routes>
           <Route index exact path="/" element={<Home onEmit={onEmit} />} />
           <Route path="/watchlist" element={<Watchlist />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={<SignIn />} />
         </Routes>
       </Suspense>
     </>

@@ -1,9 +1,18 @@
 import '@/assets/styles/Button.css';
 
-export default function Button({ onClick, width, className, label, style }) {
+export default function Button({
+  onClick,
+  disabled,
+  type,
+  width,
+  className,
+  label,
+  style,
+}) {
   return (
     <button
-      type="button"
+      disabled={disabled}
+      type={type || 'button'}
       onClick={onClick}
       style={{ ...style, width }}
       className={className}
