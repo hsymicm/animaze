@@ -23,6 +23,7 @@ nav {
   flex-direction: row;
   list-style: none;
   align-items: center;
+  gap: 48px;
   margin: 0;
   padding: 0;
 }
@@ -31,7 +32,6 @@ nav {
   display: flex;
   align-items: center;
   position: relative;
-  margin-right: 48px;
   height: 68px;
   transition: all 0.3s;
   cursor: pointer;
@@ -67,6 +67,15 @@ nav {
   box-shadow: 0 2px 10px rgba(173, 27, 53, 0.25);
 }
 
+.link-text {
+  display: block;
+}
+
+.link-icon {
+  display: none;
+  width: 24px;
+}
+
 .nav-drop {
   display: none;
   position: fixed;
@@ -79,37 +88,97 @@ nav {
 .menu {
   position: fixed;
   top: 0;
-  right: -100%;
+  right: 0;
   display: none;
+  padding: 0;
+  padding-top: 70px;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  background-color: #b21a23;
+  background-color: #11171b;
+  border-left: 2px #1c242b solid;
+  box-shadow: 0 2px 10px rgb(17, 23, 27, 0.25);
   height: 100vh;
   gap: 16px;
-  width: clamp(200px, 50%, 264px);
+  width: clamp(200px, 60%, 264px);
   z-index: 108;
-  transition: right 0.5s ease;
 }
 
-.menu-active {
-  right: 0;
+.sub-menu {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-top: 2px #1c242b solid;
 }
 
 .menu-link {
   cursor: pointer;
   text-decoration: none;
-  padding: 12px;
+  padding: 24px;
   font-size: 16px;
+}
+
+.menu-link {
+  border-bottom: 2px solid #1c242b;
+  transition: background-color 0.15s ease;
+}
+
+.menu-link span {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.menu-link:hover {
+  background-color: #1c242b;
+}
+
+.menu-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 2px solid #1c242b;
+}
+
+.profile-pic {
+  border-radius: 99px;
+  border: 2px solid #1c242b;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.9rem;
+}
+
+.profile-info span {
+  font-size: 0.8rem;
+  opacity: 0.5;
 }
 
 .menu-link-active {
   font-weight: bold;
+  background-color: #1c242b;
 }
 
 @media screen and (max-width: 1366px) {
   .nav-row {
     padding: 0 6%;
+  }
+}
+
+@media screen and (max-width: 1048px) {
+  .link-text {
+    display: none;
+  }
+  
+  .link-icon {
+    display: block;
+  }
+  
+  .nav-li {
+    gap: 24px;
   }
 }
 

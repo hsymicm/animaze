@@ -16,11 +16,13 @@ export default function App() {
       border: '2px solid #2f3b48',
       backgroundColor: '#1c242b',
       borderRadius: '8px',
+      boxShadow: '0 2px 10px rgba(47, 59, 72, 0.5)',
       color: '#e5e5e5',
     },
     success: {
       style: {
         border: '2px solid #19b33d',
+        boxShadow: '0 2px 10px rgba(25, 179, 61, 0.5)',
       },
       iconTheme: {
         primary: '#19b33d',
@@ -30,6 +32,7 @@ export default function App() {
     error: {
       style: {
         border: '2px solid #b31924',
+        boxShadow: '0 2px 10px rgba(179, 25, 36, 0.5)',
       },
       iconTheme: {
         primary: '#b31924',
@@ -43,7 +46,7 @@ export default function App() {
       <div>
         <Toaster
           containerStyle={{
-            top: 32,
+            top: 92,
           }}
           toastOptions={toastStyle}
         />

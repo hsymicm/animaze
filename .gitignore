@@ -6,3 +6,4 @@ dist-ssr
 .replit
 replit.nix
 .env
+data.json

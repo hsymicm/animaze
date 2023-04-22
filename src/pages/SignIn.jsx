@@ -1,6 +1,6 @@
 import '@/assets/styles/Auth.css';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
@@ -11,6 +11,10 @@ import Button from '@/components/Button';
 
 function SignIn() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (auth.currentUser) navigate('/');
+  }, []);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -41,6 +45,8 @@ function SignIn() {
           id: statusSignUp,
         }
       );
+
+      navigate('/');
     } catch (err) {
       const code = err.code.split('/');
 
@@ -72,6 +78,7 @@ function SignIn() {
             placeholder="example@aniwatch.com"
             type="text"
             id="email"
+            required
           />
         </label>
         <label htmlFor="password" className="input-label">
@@ -81,6 +88,7 @@ function SignIn() {
             value={password}
             type="password"
             id="password"
+            required
           />
         </label>
         <div style={{ display: 'flex', justifyContent: 'end' }}>
@@ -97,7 +105,7 @@ function SignIn() {
           width="100%"
         />
       </form>
-      <p className="input-label-secondary">
+      <p style={{ textAlign: 'center' }} className="input-label-secondary">
         {"Don't have an account? "}
         <span
           style={{ cursor: loading ? 'not-allowed' : '' }}

@@ -20,7 +20,6 @@
 .auth-card {
     padding: 24px;
     max-width: 320px;
-    width: 80vw;
     height: min-content;
     background-color: #11171b;
     border: 2px solid #1c242b;
@@ -75,11 +74,12 @@
 .input-label input:-webkit-autofill:hover,
 .input-label input:-webkit-autofill:focus,
 .input-label input:-webkit-autofill:active {
-    transition: background-color 9999s ease-in-out 0s;
+    border: 2px solid #2f3b48;
+    box-shadow: 0 0 0px 1000px #1c242b inset;
     -webkit-box-shadow: 0 0 0px 1000px #1c242b inset;
     -webkit-text-fill-color: #e5e5e5;
-    border: 2px solid #2f3b48;
     color: #e5e5e5;
+    transition: background-color 9999s ease-in-out 0s;
 }
 
 .input-label-secondary {
@@ -90,4 +90,10 @@
 .input-label-secondary span {
     font-weight: bold;
     cursor: pointer;
+}
+
+@media screen and (max-width: 640px) {
+    .fullscreen-container {
+        padding: 6vw;
+    }
 }

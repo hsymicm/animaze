@@ -141,22 +141,13 @@ export default function Add({ handleClose, data, id, status, isUpdate }) {
             defaultVal={data?.notes}
           />
         </div>
-        <div
-          style={{ justifyContent: isUpdate ? 'space-between' : 'end' }}
-          className="modal-btn"
-        >
-          {isUpdate && (
-            <Button
-              onClick={() => handleDelete(id, status)}
-              className="btn btn-secondary"
-              label="Delete"
-            />
-          )}
+        <div className="modal-btn">
           <div className="right-btn">
             <Button
-              onClick={handleClose}
+              onClick={isUpdate ? () => handleDelete(id, status) : handleClose}
               className="btn btn-secondary"
-              label="Cancel"
+              label={isUpdate ? 'Delete' : 'Cancel'}
+              width="128px"
             />
             <Button
               onClick={() => {
@@ -165,6 +156,7 @@ export default function Add({ handleClose, data, id, status, isUpdate }) {
               }}
               className="btn btn-primary"
               label="Save"
+              width="128px"
             />
           </div>
         </div>

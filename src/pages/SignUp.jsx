@@ -1,17 +1,22 @@
 import '@/assets/styles/Auth.css';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { getDoc, doc, writeBatch } from 'firebase/firestore';
+import { ref, getDownloadURL } from 'firebase/storage';
 import toast from 'react-hot-toast';
-import { auth, db } from '@/modules/FIREBASE_CONFIG';
+import { auth, db, storage } from '@/modules/FIREBASE_CONFIG';
 import { caption } from '@/modules/STRING';
 
 import Button from '@/components/Button';
 
 function SignUp() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (auth.currentUser) navigate('/');
+  }, []);
 
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -55,19 +60,34 @@ function SignUp() {
 
       const createdAt = Date.now();
       const updatedAt = createdAt;
+      const url = await getDownloadURL(
+        ref(storage, 'default/default_profile.jpg')
+      );
 
-      // Add new user to USERS collection
+      // Add new user to USERS and USERNAMES collection
       const userId = userCredential.user.uid;
       const batch = writeBatch(db);
       const usernameRef = doc(db, 'usernames', username);
       const userRef = doc(db, 'users', userId);
+      const watchListRef = doc(db, 'watchlists', userId);
       batch.set(userRef, {
         username,
         email,
+        profilePicture: url,
         createdAt,
         updatedAt,
       });
       batch.set(usernameRef, { uid: userId });
+      batch.set(watchListRef, {
+        isPublic: true,
+        watchList: {
+          watching: [],
+          completed: [],
+          planning: [],
+        },
+        createdAt,
+        updatedAt,
+      });
 
       await batch.commit();
 
@@ -78,6 +98,8 @@ function SignUp() {
       toast.success('User created', {
         id: statusSignUp,
       });
+
+      navigate('/');
     } catch (err) {
       const code = err.code.split('/');
 
@@ -145,7 +167,7 @@ function SignUp() {
           width="100%"
         />
       </form>
-      <p className="input-label-secondary">
+      <p style={{ textAlign: 'center' }} className="input-label-secondary">
         {'Already have an account? '}
         <span
           style={{ cursor: loading ? 'not-allowed' : '' }}
