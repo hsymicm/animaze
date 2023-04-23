@@ -16,17 +16,19 @@ import Modal from '@/components/Modals/Modal';
 import Empty from '@/components/Empty';
 import SearchBox from '@/components/SearchBox';
 import Aside from '@/components/Aside';
+import { useAuthState } from '@/modules/AUTH_CONTEXT';
+import { getWatchList } from '@/modules/SHOWS_STORE';
 
 // MODULE IMPORT
-import {
-  filterBySearch,
-  filterByStatus,
-  filterByType,
-  filterByGenre,
-  sortBy,
-  reverseObj,
-} from '@/modules/FILTER_BY';
-import { getWatchlist, template } from '@/modules/SHOWS';
+// import {
+//   filterBySearch,
+//   filterByStatus,
+//   filterByType,
+//   filterByGenre,
+//   sortBy,
+//   reverseObj,
+// } from '@/modules/FILTER_BY';
+import { template } from '@/modules/SHOWS';
 import Order from '@/assets/data/Order';
 import FilterModal from '@/components/Modals/FilterModal';
 
@@ -35,7 +37,7 @@ export default function Watchlist() {
   const [filterOpen, setFilterOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [objUpdate, setObjUpdate] = useState(null);
-  const [shows, setShows] = useState(getWatchlist());
+  const [shows, setShows] = useState({});
   const [width, setWindowWidth] = useState(window.innerWidth);
   const [FILTER, SET_FILTER] = useState({
     query: '',
@@ -55,32 +57,35 @@ export default function Watchlist() {
     setIsOpen(true);
   };
 
-  const handleShows = () => {
-    let result = getWatchlist();
-    result = filterByStatus(result, FILTER.status);
-    result = filterByType(result, FILTER.type);
-    result = filterByGenre(result, FILTER.genre);
-    result = filterBySearch(result, FILTER.query, true);
-    result = sortBy(result, FILTER.sort_by);
-    result = reverseObj(result, !FILTER.asc);
-    return result;
-  };
+  const { user } = useAuthState();
 
+  // const handleShows = () => {
+  //   let result = getWatchlist();
+  //   result = filterByStatus(result, FILTER.status);
+  //   result = filterByType(result, FILTER.type);
+  //   result = filterByGenre(result, FILTER.genre);
+  //   result = filterBySearch(result, FILTER.query, true);
+  //   result = sortBy(result, FILTER.sort_by);
+  //   result = reverseObj(result, !FILTER.asc);
+  //   return result;
+  // };
+
+  // setShows(handleShows);
   const updateDimensions = () => {
     const windowWidth = window.innerWidth;
     setWindowWidth(windowWidth);
   };
 
   // ON MOUNTED
-  useEffect(() => {
-    const handler = () => {
-      setShows(handleShows);
-    };
-    window.addEventListener('storage', handler);
-    return () => {
-      window.removeEventListener('storage', handler);
-    };
-  });
+  // useEffect(() => {
+  //   const handler = () => {
+  //     setShows(handleShows);
+  //   };
+  //   window.addEventListener('storage', handler);
+  //   return () => {
+  //     window.removeEventListener('storage', handler);
+  //   };
+  // });
 
   // ON WINDOW RESIZE
   useEffect(() => {
@@ -91,8 +96,13 @@ export default function Watchlist() {
 
   // ON FILTER CHANGE
   useEffect(() => {
-    setShows(handleShows);
-  }, [FILTER]);
+    const fetchWatchList = async () => {
+      const show = await getWatchList(user.uid);
+      console.log(show);
+      return show;
+    };
+    setShows(fetchWatchList);
+  }, []);
 
   return (
     <>
