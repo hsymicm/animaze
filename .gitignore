@@ -8,3 +8,4 @@ dist-ssr
 replit.nix
 .env
 data.json
+.firebase
