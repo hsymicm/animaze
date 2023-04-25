@@ -86,12 +86,11 @@ export default function TableItem({
               className="cover"
               style={{
                 opacity: !isHover ? 1 : 0,
-                backgroundColor: getColor(item.cover.color, 0.25),
+                backgroundColor: getColor(item.cover.color, 1, 0.25, 0.25),
               }}
               src={item.cover?.url}
               width={48}
               height={48}
-              alt=""
             />
           </div>
         </td>

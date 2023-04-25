@@ -43,22 +43,23 @@ export default function Home({ onEmit }) {
           className="header-title text-white"
         >
           <motion.h1 key="title" variants={item}>
-            The Next-Generation Anime Platform
+            Experience Blazing Fast Anime Platform
           </motion.h1>
           <motion.p key="sub-title" variants={item}>
-            Discover and track your favorite anime shows with AniWatch!
+            Browse and organize your favorite anime shows fast and easy with
+            AniMaze!
           </motion.p>
           <motion.div key="buttons" variants={item} className="header-btn">
             <Button
-              label="Add Anime"
+              label="Search Anime"
               className="btn btn-primary"
-              width="160px"
+              width="180px"
               onClick={onEmit}
             />
             <Button
               label="Watchlist"
               className="btn btn-border"
-              width="160px"
+              width="180px"
               onClick={() => {
                 navigate('/watchlist');
               }}

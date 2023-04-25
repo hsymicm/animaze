@@ -1,20 +1,17 @@
 import '@/assets/styles/Auth.css';
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { signInWithEmailAndPassword } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import toast from 'react-hot-toast';
-import { auth, db } from '@/modules/FIREBASE_CONFIG';
-import { caption } from '@/modules/STRING';
+import { useAuth } from '@/contexts/AuthContext';
+import { db } from '@/modules/FIREBASE_CONFIG';
+import { caption } from '@/modules/STRING_PROCESS';
 import Button from '@/components/Button';
 
 function SignIn() {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (auth.currentUser) navigate('/');
-  }, []);
+  const { userSignIn } = useAuth();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -28,11 +25,7 @@ function SignIn() {
     const statusSignUp = toast.loading('Loading...');
 
     try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      const userCredential = await userSignIn(email, password);
 
       const username = await getDoc(doc(db, 'users', userCredential.user.uid));
 
@@ -40,7 +33,7 @@ function SignIn() {
       setPassword('');
 
       toast.success(
-        `Welcome, ${username.exists ? username.data().username : 'user'}`,
+        `Welcome, ${username.exists() ? username.data().displayName : 'user'}`,
         {
           id: statusSignUp,
         }

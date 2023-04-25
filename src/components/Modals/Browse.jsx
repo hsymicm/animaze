@@ -10,6 +10,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Tooltip } from 'react-tooltip';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import SearchBox from '@/components/SearchBox';
 import Empty from '@/components/Empty';
 
@@ -73,7 +74,7 @@ export default function Browse({ getData }) {
               >
                 <div className="item-title">
                   <div className="item-image">
-                    <img
+                    <LazyLoadImage
                       style={{
                         backgroundColor: getColor(
                           res.cover.color,
@@ -83,9 +84,6 @@ export default function Browse({ getData }) {
                         ),
                       }}
                       src={res.cover.url}
-                      alt={`${
-                        res.title.english ? res.title.english : res.title.romaji
-                      } cover`}
                     />
                   </div>
                   <p>

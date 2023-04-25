@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen as editIcon } from '@fortawesome/free-solid-svg-icons';
 import { Tooltip } from 'react-tooltip';
 import getColor from '@/modules/HEX_CONVERT';
-import { truncate } from '@/modules/STRING';
+import { truncate } from '@/modules/STRING_PROCESS';
 import '@/assets/styles/Grid.css';
 
 export default function GridItem({ id, item, status, handleEdit }) {
@@ -60,7 +60,7 @@ export default function GridItem({ id, item, status, handleEdit }) {
         </div>
       </div>
       <div className="cover">
-        <LazyLoadImage src={item.cover?.url} alt="" />
+        <LazyLoadImage src={item.cover?.url} />
       </div>
     </div>
   );

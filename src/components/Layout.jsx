@@ -18,28 +18,30 @@ import { useEffect, useState } from 'react';
 import { Tooltip } from 'react-tooltip';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-import { doc, getDoc } from 'firebase/firestore';
-import { signOut } from 'firebase/auth';
-
+import { doc, onSnapshot } from 'firebase/firestore';
 import Button from '@/components/Button';
 import Backdrop from '@/components/Modals/Backdrop';
 
-import { useAuthState } from '@/modules/AUTH_CONTEXT';
+import { useAuth } from '@/contexts/AuthContext';
 import { db } from '@/modules/FIREBASE_CONFIG';
 
 export default function Layout({ onEmit, menu, setMenu }) {
-  const { user, isAuthenticated } = useAuthState();
+  const { currentUser, userSignOut } = useAuth();
 
   const [profile, setProfile] = useState();
 
   useEffect(() => {
-    const getProfile = async () => {
-      const obj = await getDoc(doc(db, 'users', user.uid));
-      setProfile(obj.data());
-    };
-
-    if (user?.auth) getProfile();
-  }, [user?.auth]);
+    if (currentUser) {
+      const profileRef = doc(db, 'users', currentUser.uid);
+      const unsubscribe = onSnapshot(profileRef, (snapshot) => {
+        if (snapshot.exists()) {
+          setProfile(snapshot.data());
+        }
+      });
+      return unsubscribe;
+    }
+    return () => {};
+  }, [currentUser]);
 
   const navigate = useNavigate();
   return (
@@ -53,7 +55,8 @@ export default function Layout({ onEmit, menu, setMenu }) {
             }}
             className="pointer text-white"
           >
-            Ani<span className="text-red">Watch</span>
+            <span>Ani</span>
+            <span className="text-red">Maze</span>
           </h2>
           <ul className="nav-li text-white">
             <NavLink
@@ -108,18 +111,18 @@ export default function Layout({ onEmit, menu, setMenu }) {
                 />
               </div>
             </NavLink>
-            {!isAuthenticated && (
+            {!currentUser && (
               <Button
                 onClick={() => navigate('/signin')}
                 className="btn btn-primary"
                 label="Sign In"
               />
             )}
-            {isAuthenticated && (
+            {currentUser && (
               <img
                 style={{ cursor: 'pointer' }}
+                onClick={() => navigate('/profile')}
                 src={profile?.profilePicture}
-                alt="profile"
                 className="profile-pic"
                 width={42}
                 height={42}
@@ -150,7 +153,17 @@ export default function Layout({ onEmit, menu, setMenu }) {
               className="menu glb-container"
             >
               <div className="sub-menu">
-                {isAuthenticated && (
+                <div
+                  className="text-white menu-link"
+                  style={{
+                    height: '72px',
+                    cursor: 'default',
+                    pointerEvents: 'none',
+                  }}
+                >
+                  Menu
+                </div>
+                {currentUser && (
                   <div
                     style={{ padding: '32px 20px' }}
                     className="text-white menu-profile"
@@ -163,7 +176,7 @@ export default function Layout({ onEmit, menu, setMenu }) {
                       height={64}
                     />
                     <div className="profile-info">
-                      {profile?.username}
+                      {profile.displayName || profile.username}
                       <span>Verified</span>
                     </div>
                   </div>
@@ -208,7 +221,7 @@ export default function Layout({ onEmit, menu, setMenu }) {
                     Watchlist
                   </span>
                 </NavLink>
-                {!isAuthenticated && (
+                {!currentUser && (
                   <NavLink
                     to="/signin"
                     onClick={() => {
@@ -227,11 +240,18 @@ export default function Layout({ onEmit, menu, setMenu }) {
                   </NavLink>
                 )}
               </div>
-              {isAuthenticated && (
+              {currentUser && (
                 <div className="sub-menu">
                   <NavLink
-                    onClick={() => setMenu(false)}
-                    className="menu-link text-white"
+                    to="/profile"
+                    onClick={() => {
+                      setMenu(false);
+                    }}
+                    className={({ isActive }) => {
+                      return `menu-link text-white ${
+                        isActive ? 'menu-link-active' : ''
+                      }`;
+                    }}
                   >
                     <span>
                       <FontAwesomeIcon icon={faUser} />
@@ -241,7 +261,8 @@ export default function Layout({ onEmit, menu, setMenu }) {
                   <div
                     onClick={() => {
                       setMenu(false);
-                      signOut(user.auth);
+                      navigate('/');
+                      userSignOut();
                       toast("You've been Signed out", {
                         duration: 2000,
                       });

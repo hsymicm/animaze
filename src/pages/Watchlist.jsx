@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 // CSS IMPORT
 import '@/assets/styles/Style.css';
 import '@/assets/styles/Watchlist.css';
@@ -16,29 +17,35 @@ import Modal from '@/components/Modals/Modal';
 import Empty from '@/components/Empty';
 import SearchBox from '@/components/SearchBox';
 import Aside from '@/components/Aside';
-import { useAuthState } from '@/modules/AUTH_CONTEXT';
-import { getWatchList } from '@/modules/SHOWS_STORE';
+import { useAuth } from '@/contexts/AuthContext';
+import { listenWatchList } from '@/modules/SHOWS_STORE';
 
 // MODULE IMPORT
-// import {
-//   filterBySearch,
-//   filterByStatus,
-//   filterByType,
-//   filterByGenre,
-//   sortBy,
-//   reverseObj,
-// } from '@/modules/FILTER_BY';
+import {
+  filterBySearch,
+  filterByStatus,
+  filterByType,
+  filterByGenre,
+  sortBy,
+  reverseObj,
+} from '@/modules/FILTER_BY';
 import { template } from '@/modules/SHOWS';
 import Order from '@/assets/data/Order';
 import FilterModal from '@/components/Modals/FilterModal';
 
 export default function Watchlist() {
-  const [isList, setIsList] = useState(true);
   const [filterOpen, setFilterOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+
+  const [isList, setIsList] = useState(true);
+
   const [objUpdate, setObjUpdate] = useState(null);
-  const [shows, setShows] = useState({});
+
   const [width, setWindowWidth] = useState(window.innerWidth);
+
+  const [shows, setShows] = useState({});
+  const [filtered, setFiltered] = useState({});
+  const [loading, setLoading] = useState(true);
   const [FILTER, SET_FILTER] = useState({
     query: '',
     status: 'All',
@@ -47,6 +54,8 @@ export default function Watchlist() {
     sort_by: '',
     asc: true,
   });
+
+  const { currentUser } = useAuth();
 
   const handleEdit = (status, id, obj) => {
     setObjUpdate({
@@ -57,35 +66,21 @@ export default function Watchlist() {
     setIsOpen(true);
   };
 
-  const { user } = useAuthState();
+  const filterShows = (obj, callback) => {
+    let result = { ...obj };
+    result = filterByStatus(result, FILTER.status);
+    result = filterByType(result, FILTER.type);
+    result = filterByGenre(result, FILTER.genre);
+    result = filterBySearch(result, FILTER.query, true);
+    result = sortBy(result, FILTER.sort_by);
+    result = reverseObj(result, !FILTER.asc);
+    callback(result);
+  };
 
-  // const handleShows = () => {
-  //   let result = getWatchlist();
-  //   result = filterByStatus(result, FILTER.status);
-  //   result = filterByType(result, FILTER.type);
-  //   result = filterByGenre(result, FILTER.genre);
-  //   result = filterBySearch(result, FILTER.query, true);
-  //   result = sortBy(result, FILTER.sort_by);
-  //   result = reverseObj(result, !FILTER.asc);
-  //   return result;
-  // };
-
-  // setShows(handleShows);
   const updateDimensions = () => {
     const windowWidth = window.innerWidth;
     setWindowWidth(windowWidth);
   };
-
-  // ON MOUNTED
-  // useEffect(() => {
-  //   const handler = () => {
-  //     setShows(handleShows);
-  //   };
-  //   window.addEventListener('storage', handler);
-  //   return () => {
-  //     window.removeEventListener('storage', handler);
-  //   };
-  // });
 
   // ON WINDOW RESIZE
   useEffect(() => {
@@ -94,15 +89,27 @@ export default function Watchlist() {
     return () => window.removeEventListener('resize', updateDimensions);
   }, []);
 
+  // LISTEN QUERY
+  useEffect(() => {
+    let unsubscribe;
+    if (currentUser) {
+      unsubscribe = listenWatchList(
+        currentUser,
+        setShows,
+        setFiltered,
+        setLoading
+      );
+    } else {
+      unsubscribe = setLoading(false);
+    }
+
+    return unsubscribe;
+  }, [currentUser]);
+
   // ON FILTER CHANGE
   useEffect(() => {
-    const fetchWatchList = async () => {
-      const show = await getWatchList(user.uid);
-      console.log(show);
-      return show;
-    };
-    setShows(fetchWatchList);
-  }, []);
+    filterShows(shows, setFiltered);
+  }, [FILTER]);
 
   return (
     <>
@@ -192,33 +199,78 @@ export default function Watchlist() {
               render={({ content }) => <span>{content}</span>}
             />
           </div>
-          {Object.entries(shows).map(([key, value]) =>
-            value.length !== 0 ? (
-              <div key={key} className="table-container">
-                {!isList && (
-                  <GridShow
-                    status={key}
-                    shows={value}
-                    handleEdit={(status, index, obj) => {
-                      handleEdit(status, index, obj);
-                    }}
-                  />
-                )}
-                {isList && (
-                  <TableShow
-                    status={key}
-                    shows={value}
-                    windowWidth={width}
-                    handleEdit={(status, id, obj) => {
-                      handleEdit(status, id, obj);
-                    }}
-                  />
-                )}
-              </div>
-            ) : null
+          {loading && currentUser && (
+            <div className="watchlist-skeleton">
+              <div className="status-skeleton skeleton-bg" />
+              <table className="skeleton-bg">
+                <thead>
+                  <tr>
+                    <th width={84} />
+                    <th>
+                      <div className="title-skeleton skeleton-fg" />
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div className="cover-skeleton skeleton-fg" />
+                    </td>
+                    <td>
+                      <div className="show-skeleton skeleton-fg" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div className="cover-skeleton skeleton-fg" />
+                    </td>
+                    <td>
+                      <div className="show-skeleton skeleton-fg" />
+                    </td>
+                  </tr>
+                  <tr key="skeleton">
+                    <td>
+                      <div className="cover-skeleton skeleton-fg" />
+                    </td>
+                    <td>
+                      <div className="show-skeleton skeleton-fg" />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           )}
-          {Object.keys(shows).every((key) => shows[key].length === 0) && (
-            <Empty />
+          {!loading && (
+            <>
+              {Object.entries(filtered).map(([key, value]) =>
+                value.length !== 0 ? (
+                  <div key={key} className="table-container">
+                    {!isList && (
+                      <GridShow
+                        status={key}
+                        shows={value}
+                        handleEdit={(status, index, obj) => {
+                          handleEdit(status, index, obj);
+                        }}
+                      />
+                    )}
+                    {isList && (
+                      <TableShow
+                        status={key}
+                        shows={value}
+                        windowWidth={width}
+                        handleEdit={(status, id, obj) => {
+                          handleEdit(status, id, obj);
+                        }}
+                      />
+                    )}
+                  </div>
+                ) : null
+              )}
+              {Object.keys(filtered).every(
+                (key) => filtered[key].length === 0
+              ) && <Empty />}
+            </>
           )}
         </div>
       </motion.main>

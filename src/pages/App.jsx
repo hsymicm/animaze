@@ -6,7 +6,6 @@ import Layout from '@/components/Layout';
 import Router from '@/routes/Router';
 import Footer from '@/components/Footer';
 import Modal from '@/components/Modals/Modal';
-import { AuthProvider } from '../modules/AUTH_CONTEXT';
 
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -52,9 +51,7 @@ export default function App() {
           toastOptions={toastStyle}
         />
       </div>
-      <AuthProvider>
-        <Layout menu={menu} setMenu={setMenu} onEmit={() => setIsOpen(true)} />
-      </AuthProvider>
+      <Layout menu={menu} setMenu={setMenu} onEmit={() => setIsOpen(true)} />
       <AnimatePresence>
         {isOpen && (
           <Modal
@@ -63,9 +60,7 @@ export default function App() {
           />
         )}
       </AnimatePresence>
-      <AuthProvider>
-        <Router onEmit={() => setIsOpen(true)} />
-      </AuthProvider>
+      <Router onEmit={() => setIsOpen(true)} />
       <Footer setMenu={setMenu} />
     </>
   );

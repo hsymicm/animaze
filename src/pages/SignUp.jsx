@@ -1,22 +1,19 @@
 import '@/assets/styles/Auth.css';
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { getDoc, doc, writeBatch } from 'firebase/firestore';
 import { ref, getDownloadURL } from 'firebase/storage';
 import toast from 'react-hot-toast';
-import { auth, db, storage } from '@/modules/FIREBASE_CONFIG';
-import { caption } from '@/modules/STRING';
+import { db, storage } from '@/modules/FIREBASE_CONFIG';
+import { useAuth } from '@/contexts/AuthContext';
+import { caption } from '@/modules/STRING_PROCESS';
 
 import Button from '@/components/Button';
 
 function SignUp() {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (auth.currentUser) navigate('/');
-  }, []);
+  const { userSignUp } = useAuth();
 
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -52,11 +49,7 @@ function SignUp() {
       }
 
       // Create user auth
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      const userCredential = await userSignUp(email, password);
 
       const createdAt = Date.now();
       const updatedAt = createdAt;
@@ -72,6 +65,8 @@ function SignUp() {
       const watchListRef = doc(db, 'watchlists', userId);
       batch.set(userRef, {
         username,
+        displayName: username,
+        description: '',
         email,
         profilePicture: url,
         createdAt,
@@ -99,7 +94,7 @@ function SignUp() {
         id: statusSignUp,
       });
 
-      navigate('/');
+      navigate('/signin');
     } catch (err) {
       const code = err.code.split('/');
 

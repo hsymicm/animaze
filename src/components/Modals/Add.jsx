@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Tooltip } from 'react-tooltip';
+import toast from 'react-hot-toast';
 import ComboBox from '@/components/ComboBox';
 import Button from '@/components/Button';
 import Incremental from '@/components/Incremental';
@@ -17,7 +18,12 @@ import TextArea from '@/components/TextArea';
 
 // IMPORT MODULE
 import getColor from '@/modules/HEX_CONVERT';
-import { addWatchlist, delWatchlist, updateWatchlist } from '@/modules/SHOWS';
+import {
+  addWatchList,
+  delWatchList,
+  updateWatchList,
+} from '@/modules/SHOWS_STORE';
+import { useAuth } from '@/contexts/AuthContext';
 
 const STATUS_OPTIONS = ['Watching', 'Completed', 'Planning'];
 const gradient =
@@ -25,6 +31,7 @@ const gradient =
 
 export default function Add({ handleClose, data, id, status, isUpdate }) {
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
 
   const [Status, setStatus] = useState(status || null);
   const [detail, setDetail] = useState(
@@ -39,22 +46,61 @@ export default function Add({ handleClose, data, id, status, isUpdate }) {
   );
 
   const handleSave = (details, saveStatus = null) => {
-    if (!saveStatus) return;
-    addWatchlist(details, saveStatus);
-    handleClose();
-    navigate('/watchlist');
+    if (!saveStatus || !currentUser) return;
+    const statusSave = toast.loading('Loading...');
+    try {
+      addWatchList(details, saveStatus, currentUser);
+      toast.success('Data has been added', {
+        id: statusSave,
+      });
+      handleClose();
+      navigate('/watchlist');
+    } catch (err) {
+      console.log(err);
+      toast.success('Error, data cannot be added', {
+        id: statusSave,
+      });
+    }
   };
 
   const handleDelete = (deleteId, deleteStatus) => {
     if (!deleteId) return;
-    delWatchlist(deleteId, deleteStatus);
-    handleClose();
+    const statusDelete = toast.loading('Loading...');
+    try {
+      delWatchList(deleteId, deleteStatus, currentUser);
+      toast.success('Data has been deleted', {
+        id: statusDelete,
+      });
+      handleClose();
+    } catch (err) {
+      console.log(err);
+      toast.success('Error, data cannot be deleted', {
+        id: statusDelete,
+      });
+    }
   };
 
   const handleUpdate = (updateId, currentStatus, updatedStatus, show) => {
     if (!updateId) return;
-    updateWatchlist(updateId, currentStatus, updatedStatus, show);
-    handleClose();
+    const statusUpdate = toast.loading('Loading...');
+    try {
+      updateWatchList(
+        updateId,
+        currentStatus,
+        updatedStatus,
+        show,
+        currentUser
+      );
+      toast.success('Data has been updated', {
+        id: statusUpdate,
+      });
+      handleClose();
+    } catch (err) {
+      console.log(err);
+      toast.success('Error, data cannot be updated', {
+        id: statusUpdate,
+      });
+    }
   };
 
   return (

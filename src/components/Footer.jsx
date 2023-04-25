@@ -15,7 +15,7 @@ export default function Footer({ setMenu }) {
             }}
             className="text-white pointer"
           >
-            AniWatch
+            AniMaze
           </h3>
           <div className="spacer" />
           <ul className="footer-ul text-white">
