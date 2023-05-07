@@ -35,7 +35,7 @@ A Single Page Application built with React and Firebase for responsive navigatio
 | **Frontend**     | **Backend Services**    | **Build Tools** |
 |------------------|-------------------------|-----------------|
 | ReactJS          | Firebase Authentication | Vite            |
-| React Router Dom | Firebase Firestore      | Eslint          |
+| React Router Dom | Firebase Firestore      | ESLint          |
 | React Hot Toast  | Firebase Storage        | Prettier        |
 | React Tooltip    | Firebase Hosting        |                 |
 | Hamburger React  |                         |                 |
@@ -47,7 +47,7 @@ A Single Page Application built with React and Firebase for responsive navigatio
 ## 💻 Recommended IDE Setup
 
 - [VSCode](https://code.visualstudio.com/)
-
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
 ## ⚙️ Customize configuration
 
