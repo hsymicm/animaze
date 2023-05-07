@@ -4,7 +4,7 @@ import TableItem from '@/components/TableItem';
 import '@/assets/styles/Table.css';
 import handleExpand from '@/modules/EXTRAS';
 
-export default function TableShow({ status, shows, handleEdit, windowWidth }) {
+export default function TableShow({ status, shows, handleEdit, windowSize }) {
   const [expand, setExpand] = useState(false);
 
   const limit = 5;
@@ -17,7 +17,7 @@ export default function TableShow({ status, shows, handleEdit, windowWidth }) {
           <tr>
             <th />
             <th className="table-title">Title</th>
-            {windowWidth > 640 && (
+            {!windowSize.isMobile && (
               <>
                 <th className="table-detail">Score</th>
                 <th className="table-detail">Progress</th>
@@ -34,7 +34,7 @@ export default function TableShow({ status, shows, handleEdit, windowWidth }) {
               handleEdit={handleEdit}
               status={status}
               item={item}
-              windowWidth={windowWidth}
+              windowSize={windowSize}
             />
           ))}
           {shows.length > limit + 2 && (
