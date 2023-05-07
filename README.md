@@ -1,6 +1,5 @@
-# ⛩️ AniMaze ⛩️
-Development build for an anime watchlist with CRUD feature and made with React.
-
+# ⛩️ AniWatch ⛩️
+Anime watchlist with CRUD feature and made with ReactJS.
 
 ## 🌐 Website Demo
 ### Home Page
