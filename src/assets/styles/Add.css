@@ -71,13 +71,16 @@
   box-shadow: 0 2px 10px rgba(31, 31, 31, 0.25);
 }
 
-.delete-btn:hover {
-  background-color: #ff2533;
+@media (hover: hover) and (pointer: fine) {
+  .delete-btn:hover {
+    background-color: #ff2533;
+  }
+  
+  .delete-btn:active {
+    background-color: #8e151d;
+  }
 }
 
-.delete-btn:active {
-  background-color: #8e151d;
-}
 
 .right-btn {
   display: flex;

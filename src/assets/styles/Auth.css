@@ -60,7 +60,6 @@
     opacity: 0.5;
 }
 
-.input-label input:hover,
 .input-label input:focus,
 .input-label input:active {
     border: 2px solid #2f3b48;
@@ -71,7 +70,6 @@
 }
 
 .input-label input:-webkit-autofill,
-.input-label input:-webkit-autofill:hover,
 .input-label input:-webkit-autofill:focus,
 .input-label input:-webkit-autofill:active {
     border: 2px solid #2f3b48;
@@ -90,6 +88,21 @@
 .input-label-secondary span {
     font-weight: bold;
     cursor: pointer;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .input-label input:hover {
+        border: 2px solid #2f3b48;
+    }
+
+    .input-label input:-webkit-autofill:hover {
+        border: 2px solid #2f3b48;
+        box-shadow: 0 0 0px 1000px #1c242b inset;
+        -webkit-box-shadow: 0 0 0px 1000px #1c242b inset;
+        -webkit-text-fill-color: #e5e5e5;
+        color: #e5e5e5;
+        transition: background-color 9999s ease-in-out 0s;
+    }
 }
 
 @media screen and (max-width: 640px) {

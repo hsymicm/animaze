@@ -50,10 +50,12 @@ nav {
   box-shadow: 0 0 5px transparent;
 }
 
-.nav-li .link:hover::before {
-  height: 4px;
-  background-color: #b21a23;
-  box-shadow: 0 2px 10px rgba(173, 27, 53, 0.25);
+@media (hover: hover) and (pointer: fine) {
+  .nav-li .link:hover::before {
+    height: 4px;
+    background-color: #b21a23;
+    box-shadow: 0 2px 10px rgba(173, 27, 53, 0.25);
+  }
 }
 
 .nav-li .link-active::before {
@@ -89,7 +91,7 @@ nav {
   position: fixed;
   top: 0;
   right: 0;
-  display: none;
+  display: flex;
   padding: 0;
   flex-direction: column;
   justify-content: space-between;
@@ -128,8 +130,10 @@ nav {
   gap: 18px;
 }
 
-.menu-link:hover {
-  background-color: #1c242b;
+@media (hover: hover) and (pointer: fine) {
+  .menu-link:hover {
+    background-color: #1c242b;
+  }
 }
 
 .menu-profile {
@@ -190,8 +194,5 @@ nav {
   .nav-drop {
     display: flex;
     align-items: center;
-  }
-  .menu {
-    display: flex;
   }
 }

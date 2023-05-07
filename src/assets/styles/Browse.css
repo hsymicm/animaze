@@ -76,9 +76,10 @@
     background-color: #2c3a46;
   }
 }
-
-.search-item:hover {
-  background-color: #242f38;
+@media (hover: hover) and (pointer: fine) {
+  .search-item:hover {
+    background-color: #242f38;
+  }
 }
 
 .search-item:active {

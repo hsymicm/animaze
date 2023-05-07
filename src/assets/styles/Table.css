@@ -73,9 +73,11 @@
   transition: background-color 0.15s ease;
 }
 
-.table-show .item:hover {
-  background-color: #b21a23;
-  cursor: pointer;
+@media (hover: hover) and (pointer: fine) {
+  .table-show .item:hover {
+    background-color: #b21a23;
+    cursor: pointer;
+  }
 }
 
 .table-show td .pop-out {
@@ -112,5 +114,8 @@
 @media screen and (max-width: 960px) {
   .table-show td .pop-out {
     display: none;
+  }
+  .table-show .table-detail {
+    width: 86px;
   }
 }

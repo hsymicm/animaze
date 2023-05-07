@@ -22,10 +22,6 @@
   font-weight: 500;
 }
 
-.option-selected:hover {
-  background-color: #ff2533;
-}
-
 .overflow-box {
   background-color: #e5e5e5;
   border-radius: 8px;
@@ -57,10 +53,16 @@
   transition: all 0.1s ease;
 }
 
-.combo ul li:hover {
-  background-color: #b21a23;
-  color: #e5e5e5;
-  font-weight: 500;
+@media (hover: hover) and (pointer: fine) {
+  .combo ul li:hover {
+    background-color: #b21a23;
+    color: #e5e5e5;
+    font-weight: 500;
+  }
+  
+  .option-selected:hover {
+    background-color: #ff2533;
+  }
 }
 
 .combo ul .active {

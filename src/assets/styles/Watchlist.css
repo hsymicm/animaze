@@ -50,16 +50,18 @@
   border-bottom-right-radius: 8px;
 }
 
-.view:hover {
-  background-color: #d21e2a;
-  box-shadow: 0 2px 10px rgba(173, 27, 53, 0.25);
+@media (hover: hover) and (pointer: fine) {
+  .view:hover {
+    background-color: #d21e2a;
+    box-shadow: 0 2px 10px rgba(173, 27, 53, 0.25);
+  }
 }
 
 .view:active {
   background-color: #8e151d;
 }
 
-.view.active {
+.view.view-active {
   background-color: #b21a23;
   box-shadow: 0 2px 10px rgba(173, 27, 53, 0.25);
   z-index: 1;

@@ -36,6 +36,8 @@
   transform: scale(1);
 }
 
-.control-icon:hover {
-  transform: scale(1.4);
+@media (hover: hover) and (pointer: fine) {
+  .control-icon:hover {
+    transform: scale(1.4);
+  }
 }

@@ -15,8 +15,10 @@
   cursor: pointer;
 }
 
-.list > li:hover {
-  background-color: #1c242b;
+@media (hover: hover) and (pointer: fine) {
+  .list > li:hover {
+    background-color: #1c242b;
+  }
 }
 
 .list > .active {
