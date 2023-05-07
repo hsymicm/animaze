@@ -1,0 +1,112 @@
+.fullscreen-container {
+    width: 100vw;
+    min-height: calc(100vh - 72px);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../img/header2.jpg');
+    background-position: center;
+    background-size: cover;
+    color: #e5e5e5;
+}
+
+.auth-card {
+    padding: 24px;
+    max-width: 320px;
+    height: min-content;
+    background-color: #11171b;
+    border: 2px solid #1c242b;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(31, 31, 31, 0.25);
+}
+
+.auth-title {
+    margin-top: 4px;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.input-label {
+    display: block;
+    margin-bottom: 16px;
+}
+
+.input-label:last-of-type {
+    margin-bottom: 8px;
+}
+
+.input-label input {
+    color: #e5e5e5;
+    margin-top: 8px;
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #1c242b;
+    border-radius: 8px;
+    background-color: #1c242b;
+    outline: none;
+    transition: border 0.15s ease, box-shadow 0.15s ease;
+    caret-color: #e5e5e5;
+}
+
+.input-label input::placeholder {
+    color: #e5e5e5;
+    opacity: 0.5;
+}
+
+.input-label input:focus,
+.input-label input:active {
+    border: 2px solid #2f3b48;
+}
+
+.input-label input:focus {
+    box-shadow: 0 2px 10px rgba(47, 59, 72, 0.5);
+}
+
+.input-label input:-webkit-autofill,
+.input-label input:-webkit-autofill:focus,
+.input-label input:-webkit-autofill:active {
+    border: 2px solid #2f3b48;
+    box-shadow: 0 0 0px 1000px #1c242b inset;
+    -webkit-box-shadow: 0 0 0px 1000px #1c242b inset;
+    -webkit-text-fill-color: #e5e5e5;
+    color: #e5e5e5;
+    transition: background-color 9999s ease-in-out 0s;
+}
+
+.input-label-secondary {
+    margin: 0;
+    font-size: 0.8rem;
+}
+
+.input-label-secondary span {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .input-label input:hover {
+        border: 2px solid #2f3b48;
+    }
+
+    .input-label input:-webkit-autofill:hover {
+        border: 2px solid #2f3b48;
+        box-shadow: 0 0 0px 1000px #1c242b inset;
+        -webkit-box-shadow: 0 0 0px 1000px #1c242b inset;
+        -webkit-text-fill-color: #e5e5e5;
+        color: #e5e5e5;
+        transition: background-color 9999s ease-in-out 0s;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .fullscreen-container {
+        padding: 6vw;
+    }
+}

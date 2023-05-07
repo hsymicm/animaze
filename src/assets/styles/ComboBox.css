@@ -1,75 +1,82 @@
 .combo-box {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 16px;
-    background-color: #1f1f1f;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  background-color: #1c242b;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.combo-box .clear {
+  padding: 0 4px;
+  margin-right: -4px;
 }
 
 .option-selected {
-    transition: all 0.1s ease-in;
-    background-color: #ad1b35;
-    box-shadow: 0 2px 10px rgba(173, 27, 53, 0.25);
-    font-weight: 500;
-}
-
-.option-selected:hover {
-    background-color: #d12343;
+  transition: all 0.1s ease-in;
+  background-color: #b21a23;
+  box-shadow: 0 2px 10px rgba(173, 27, 53, 0.25);
+  font-weight: 500;
 }
 
 .overflow-box {
-    background-color: #e5e5e5;
-    border-radius: 8px;
-    padding: 12px 8px;
+  background-color: #e5e5e5;
+  border-radius: 8px;
+  padding: 12px 8px;
 }
 
-.combo-box > img {
-    width: 16px;
-    transition: all 0.3s ease;
-}
 .combo {
-    position: absolute;
-    width: 100%;
-    top: calc(100% + 8px);
-    left: 0;
-    z-index: 1;
+  position: absolute;
+  width: 100%;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 1;
+  opacity: 0;
 }
 .combo ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    max-height: 168px;
-    overflow: auto;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  max-height: 156px;
+  overflow: auto;
 }
 
 .combo ul li {
-    margin: 0;
-    padding: 8px 14px;
-    color: #121212;
-    border-radius: 8px;
+  margin: 0;
+  padding: 8px 14px;
+  color: #11171b;
+  border-radius: 8px;
+  font-weight: normal;
+  transition: all 0.1s ease;
 }
 
-.combo ul li:hover {
-    background-color: #ad1b35;
+@media (hover: hover) and (pointer: fine) {
+  .combo ul li:hover {
+    background-color: #b21a23;
     color: #e5e5e5;
     font-weight: 500;
+  }
+  
+  .option-selected:hover {
+    background-color: #ff2533;
+  }
 }
 
 .combo ul .active {
-    background-color: #ad1b35;
-    color: #e5e5e5;
-    font-weight: 500;
+  background-color: #b21a23;
+  color: #e5e5e5;
+  font-weight: 500;
 }
 
 .arrow-top {
-    pointer-events: none;
-    margin: 0 auto;
-    width: 0;
-    height: 0;
-    border-bottom: 8px solid #e5e5e5;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
+  pointer-events: none;
+  margin: 0 auto;
+  width: 0;
+  height: 0;
+  border-bottom: 8px solid #e5e5e5;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
 }

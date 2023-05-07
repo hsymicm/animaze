@@ -1,47 +1,48 @@
 export const template = {
-    "Watching" : [],
-    "Completed" : [],
-    "Planning" : []
-}
-
-const setInitial = () => {
-    setStorage('watchlist', template)
-    return getStorage('watchlist')
-}
+  Watching: [],
+  Completed: [],
+  Planning: [],
+};
 
 const setStorage = (key, value) => {
-    localStorage.setItem(key, JSON.stringify(value))
-    window.dispatchEvent(new Event("storage"))
-}
+  localStorage.setItem(key, JSON.stringify(value));
+  window.dispatchEvent(new Event('storage'));
+};
 
 const getStorage = (key) => {
-    return JSON.parse(localStorage.getItem(key))
-}
+  return JSON.parse(localStorage.getItem(key));
+};
+
+const setInitial = () => {
+  setStorage('watchlist', template);
+  return getStorage('watchlist');
+};
 
 export const getWatchlist = () => {
-    const shows = getStorage('watchlist')
-    return shows ? shows : setInitial()
-}
+  const shows = getStorage('watchlist');
+  return shows || setInitial();
+};
 
 export const addWatchlist = (show, status) => {
-    const shows = getWatchlist()
-    shows[status].unshift(show)
-    setStorage('watchlist', shows)
-}
+  const shows = getWatchlist();
+  shows[status].unshift(show);
+  setStorage('watchlist', shows);
+};
 
-export const delWatchlist = (index, status) => {
-    const shows = getWatchlist()
-    shows[status].splice(index, 1)
-    setStorage('watchlist', shows)
-}
+export const delWatchlist = (id, status) => {
+  const shows = getWatchlist();
+  shows[status] = shows[status].filter((s) => s.id !== id);
+  setStorage('watchlist', shows);
+};
 
-export const updateWatchlist = (index, status, updatedStatus, show) => {
-    const shows = getWatchlist()
-    shows[status].splice(index, 1)
-    if(status === updatedStatus) {
-        shows[updatedStatus].splice(index, 0, show)
-    } else {
-        shows[updatedStatus].unshift(show)
-    }
-    setStorage('watchlist', shows)
-}
+export const updateWatchlist = (id, status, updatedStatus, show) => {
+  const shows = getWatchlist();
+  if (status === updatedStatus) {
+    const index = shows[status].findIndex((s) => s.id === id);
+    shows[updatedStatus][index] = show;
+  } else {
+    shows[status] = shows[status].filter((s) => s.id !== id);
+    shows[updatedStatus].unshift(show);
+  }
+  setStorage('watchlist', shows);
+};

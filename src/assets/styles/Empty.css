@@ -1,0 +1,14 @@
+.empty-placeholder {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #e5e5e5;
+  text-align: center;
+}
+
+.empty-placeholder img {
+  max-width: 180px;
+  width: 80%;
+}

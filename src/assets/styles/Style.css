@@ -1,51 +1,60 @@
 body {
-    background-color: #121212;
-    font-family: 'Poppins', sans-serif;
-    font-size: 15px;
-    padding: 0;
-    margin: 0;
+  background-color: #11171b;
+  font-size: 15px;
+  padding: 0;
+  margin: 0;
+  overflow-y: scroll !important;
 }
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
 .glb-container {
-    padding: 0 18%;
+  padding: 0 18%;
 }
 
 main {
-    margin-top: 32px;
-    margin-bottom: 128px;
-    min-height: calc(100vh - 80px);
+  margin-top: 32px;
+  margin-bottom: 128px;
+  min-height: calc(100vh - 80px);
 }
 
 .split-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .text-white {
-    color: #e5e5e5
+  color: #e5e5e5;
 }
 
 .text-red {
-    color: #AD1B35;
+  color: #b21a23;
 }
 
 .pointer {
-    cursor: pointer;
+  cursor: pointer;
+}
+
+.tooltip {
+  background-color: #29323a;
+  color: #e5e5e5;
+  opacity: 1;
+  border-radius: 8px;
+  z-index: 1000;
+  animation: tooltip 0.15s ease;
+}
+
+@keyframes tooltip {
+  from {opacity: 0;}
+  to {opacity: 1;}
 }
 
 @media screen and (max-width: 1366px) {
-    .glb-container {
-        padding: 0 12%;
-    }
-}
-
-@media screen and (max-width: 960px) {
-    .glb-container {
-        padding: 0 6%;
-    }
+  .glb-container {
+    padding: 0 6%;
+  }
 }

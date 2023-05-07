@@ -1,12 +1,13 @@
 {
   "name": "aniwatch",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "type": "module",
   "description": "React with Vite Build",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint src"
   },
   "keywords": [],
   "author": "",
@@ -14,14 +15,33 @@
   "devDependencies": {
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
-    "@vitejs/plugin-react": "^2.2.0",
-    "vite": "^3.2.3"
+    "@vitejs/plugin-react": "^4.0.0",
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "prettier": "^2.8.7",
+    "vite": "^4.0.0"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "firebase": "^9.19.1",
+    "framer-motion": "^10.9.2",
+    "fuzzysort": "^2.0.4",
     "hamburger-react": "^2.5.0",
+    "nprogress": "^0.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.0",
     "react-lazy-load-image-component": "^1.5.6",
-    "react-router-dom": "^6.4.5"
+    "react-router-dom": "^6.4.5",
+    "react-tooltip": "^5.10.4"
   }
 }
