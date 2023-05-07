@@ -2,14 +2,18 @@ import '@/assets/styles/Style.css';
 import { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { Toaster } from 'react-hot-toast';
+import { Tooltip } from 'react-tooltip';
 import Layout from '@/components/Layout';
 import Router from '@/routes/Router';
 import Footer from '@/components/Footer';
 import Modal from '@/components/Modals/Modal';
+import { useMobile } from '@/contexts/MobileContext';
 
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [menu, setMenu] = useState(false);
+
+  const { isMobile } = useMobile();
 
   const toastStyle = {
     style: {
@@ -43,14 +47,19 @@ export default function App() {
 
   return (
     <>
-      <div>
-        <Toaster
-          containerStyle={{
-            top: 92,
-          }}
-          toastOptions={toastStyle}
+      <Toaster
+        containerStyle={{
+          top: 92,
+        }}
+        toastOptions={toastStyle}
+      />
+      {!isMobile && (
+        <Tooltip
+          id="tooltip"
+          className="tooltip"
+          render={({ content }) => <span>{content}</span>}
         />
-      </div>
+      )}
       <Layout menu={menu} setMenu={setMenu} onEmit={() => setIsOpen(true)} />
       <AnimatePresence>
         {isOpen && (
