@@ -1,5 +1,7 @@
-# ⛩️ AniWatch ⛩️
-Anime watchlist with CRUD feature and made with ReactJS.
+# ⛩️ AniMaze - Blazing Fast Anime Platform  ⛩️
+A Single Page Application built with React and Firebase for responsive navigation and real-time database integration.
+<br/><br/>
+![Thumbnail](https://i.imgur.com/v7N1Wv8.png)
 
 ## 🌐 Website Demo
 ### Home Page
