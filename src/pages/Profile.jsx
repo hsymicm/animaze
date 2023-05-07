@@ -20,7 +20,7 @@ function Profile() {
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
 
-  const { currentUser, userSignOut } = useAuth();
+  const { currentUser, userSignOut, userVerify } = useAuth();
   const navigate = useNavigate();
 
   const handleFirestoreUpload = async (e) => {
@@ -98,6 +98,20 @@ function Profile() {
     });
     setSelectedFile(null);
     setSelectedFilePath('');
+  };
+
+  const verifyEmail = async () => {
+    const verifyToast = toast.loading('Loading...');
+    try {
+      await userVerify();
+      toast.success('Verification email sent', {
+        id: verifyToast,
+      });
+    } catch (error) {
+      toast.error('Error sending email', {
+        id: verifyToast,
+      });
+    }
   };
 
   useEffect(() => {
@@ -237,6 +251,7 @@ function Profile() {
                     onChange={handleClientUpload}
                     id="file-upload"
                     type="file"
+                    hidden
                     accept="image/png, image/jpeg, image/jpg"
                   />
                 </label>
@@ -244,23 +259,33 @@ function Profile() {
               </div>
               <div className="profile-desc">
                 {profile.displayName || profile.username}
-                <span>Verified</span>
+                <span>
+                  {currentUser.emailVerified ? 'Verified' : 'Not Verified'}
+                </span>
               </div>
             </div>
-            <Button
-              disabled={uploading}
-              onClick={() => {
-                navigate('/');
-                userSignOut();
-                toast("You've been Signed out", {
-                  duration: 2000,
-                });
-              }}
-              style={{ marginTop: '12px' }}
-              label="Sign Out"
-              width="100%"
-              className="btn btn-secondary"
-            />
+            <div className="profile-btn" style={{ marginTop: '12px' }}>
+              {!currentUser.emailVerified && (
+                <Button
+                  disabled={uploading}
+                  onClick={verifyEmail}
+                  label="Verify Email"
+                  className="btn btn-primary"
+                />
+              )}
+              <Button
+                disabled={uploading}
+                onClick={() => {
+                  navigate('/');
+                  userSignOut();
+                  toast("You've been Signed out", {
+                    duration: 2000,
+                  });
+                }}
+                label="Sign Out"
+                className="btn btn-secondary"
+              />
+            </div>
           </div>
           <div className="details-container">
             <h3
@@ -293,7 +318,8 @@ function Profile() {
                   }
                   type="text"
                   id="display-name"
-                  placeholder="ichorvfx"
+                  placeholder={profile.username}
+                  autoComplete="off"
                 />
               </label>
               <p style={{ fontSize: '0.7rem', opacity: 0.5, margin: '8px 0' }}>
@@ -307,6 +333,7 @@ function Profile() {
                   style={{ cursor: 'not-allowed', opacity: 0.5 }}
                   type="text"
                   id="username"
+                  autoComplete="off"
                 />
               </label>
               <label htmlFor="email" className="details-input-label">
@@ -317,6 +344,7 @@ function Profile() {
                   style={{ cursor: 'not-allowed', opacity: 0.5 }}
                   type="text"
                   id="email"
+                  autoComplete="off"
                 />
               </label>
               <label htmlFor="description" className="details-input-label">
@@ -340,6 +368,7 @@ function Profile() {
                   type="text"
                   id="description"
                   placeholder="Express your self here!"
+                  autoComplete="off"
                 />
               </label>
             </div>
