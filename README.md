@@ -37,7 +37,8 @@ A Single Page Application built with React and Firebase for responsive navigatio
 | ReactJS          | Firebase Authentication | Vite            |
 | React Router Dom | Firebase Firestore      | Eslint          |
 | React Hot Toast  | Firebase Storage        | Prettier        |
-| Hamburger React  | Firebase Hosting        |                 |
+| React Tooltip    | Firebase Hosting        |                 |
+| Hamburger React  |                         |                 |
 | Framer Motion    |                         |                 |
 | Fuzzy Sort       |                         |                 |
 | nProgress        |                         |                 |
