@@ -43,13 +43,14 @@ function SignIn() {
     } catch (err) {
       const code = err.code.split('/');
 
-      if (code[0] !== 'auth') {
-        console.log(err.message);
-      } else {
-        toast.error(caption(code[1].replaceAll('-', ' ')), {
+      toast.error(
+        code[0] !== 'auth'
+          ? 'Error, try again later'
+          : caption(code[1].replaceAll('-', ' ')),
+        {
           id: statusSignUp,
-        });
-      }
+        }
+      );
     }
 
     setLoading(false);
@@ -85,7 +86,11 @@ function SignIn() {
           />
         </label>
         <div style={{ display: 'flex', justifyContent: 'end' }}>
-          <p style={{ cursor: 'pointer' }} className="input-label-secondary">
+          <p
+            onClick={() => navigate('/resetpassword')}
+            style={{ cursor: 'pointer' }}
+            className="input-label-secondary"
+          >
             Forgot Password?
           </p>
         </div>

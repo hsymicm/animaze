@@ -94,17 +94,18 @@ function SignUp() {
         id: statusSignUp,
       });
 
-      navigate('/signin');
+      navigate('/');
     } catch (err) {
       const code = err.code.split('/');
 
-      if (code[0] !== 'auth') {
-        console.log(err);
-      } else {
-        toast.error(caption(code[1].replaceAll('-', ' ')), {
+      toast.error(
+        code[0] !== 'auth'
+          ? 'Error, try again later'
+          : caption(code[1].replaceAll('-', ' ')),
+        {
           id: statusSignUp,
-        });
-      }
+        }
+      );
     }
 
     setLoading(false);
