@@ -9,7 +9,6 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Tooltip } from 'react-tooltip';
 import toast from 'react-hot-toast';
 import ComboBox from '@/components/ComboBox';
 import Button from '@/components/Button';
@@ -33,6 +32,7 @@ export default function Add({ handleClose, data, id, status, isUpdate }) {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
 
+  const [loading, setLoading] = useState(false);
   const [Status, setStatus] = useState(status || null);
   const [detail, setDetail] = useState(
     isUpdate
@@ -45,62 +45,82 @@ export default function Add({ handleClose, data, id, status, isUpdate }) {
         }
   );
 
-  const handleSave = (details, saveStatus = null) => {
-    if (!saveStatus || !currentUser) return;
+  const functionHandler = async (func, toastMsg) => {
+    const { success, error } = toastMsg;
+
     const statusSave = toast.loading('Loading...');
-    try {
-      addWatchList(details, saveStatus, currentUser);
-      toast.success('Data has been added', {
+
+    if (!currentUser) {
+      toast.error('You must be logged in', {
         id: statusSave,
       });
-      handleClose();
-      navigate('/watchlist');
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      await func();
+      toast.success(success, {
+        id: statusSave,
+      });
     } catch (err) {
       console.log(err);
-      toast.success('Error, data cannot be added', {
+      toast.error(error, {
         id: statusSave,
       });
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleDelete = (deleteId, deleteStatus) => {
+  const handleSave = async (details, saveStatus = null) => {
+    if (!saveStatus) return;
+    await functionHandler(
+      async () => {
+        await addWatchList(details, saveStatus, currentUser);
+        handleClose();
+        navigate('/watchlist');
+      },
+      {
+        success: 'Data has been added',
+        error: 'Error, data cannot be added',
+      }
+    );
+  };
+
+  const handleDelete = async (deleteId, deleteStatus) => {
     if (!deleteId) return;
-    const statusDelete = toast.loading('Loading...');
-    try {
-      delWatchList(deleteId, deleteStatus, currentUser);
-      toast.success('Data has been deleted', {
-        id: statusDelete,
-      });
-      handleClose();
-    } catch (err) {
-      console.log(err);
-      toast.success('Error, data cannot be deleted', {
-        id: statusDelete,
-      });
-    }
+    await functionHandler(
+      async () => {
+        await delWatchList(deleteId, deleteStatus, currentUser);
+        handleClose();
+      },
+      {
+        success: 'Data has been deleted',
+        error: 'Error, data cannot be deleted',
+      }
+    );
   };
 
-  const handleUpdate = (updateId, currentStatus, updatedStatus, show) => {
+  const handleUpdate = async (updateId, currentStatus, updatedStatus, show) => {
     if (!updateId) return;
-    const statusUpdate = toast.loading('Loading...');
-    try {
-      updateWatchList(
-        updateId,
-        currentStatus,
-        updatedStatus,
-        show,
-        currentUser
-      );
-      toast.success('Data has been updated', {
-        id: statusUpdate,
-      });
-      handleClose();
-    } catch (err) {
-      console.log(err);
-      toast.success('Error, data cannot be updated', {
-        id: statusUpdate,
-      });
-    }
+    await functionHandler(
+      async () => {
+        await updateWatchList(
+          updateId,
+          currentStatus,
+          updatedStatus,
+          show,
+          currentUser
+        );
+        handleClose();
+      },
+      {
+        success: 'Data has been updated',
+        error: 'Error, data cannot be updated',
+      }
+    );
   };
 
   return (
@@ -136,7 +156,7 @@ export default function Add({ handleClose, data, id, status, isUpdate }) {
             {data.title.english ? data.title.english : data.title.romaji}
           </div>
         </div>
-        <div data-tooltip-id="add-close" data-tooltip-content="Close Window">
+        <div data-tooltip-id="tooltip" data-tooltip-content="Close Window">
           <FontAwesomeIcon
             style={{ cursor: 'pointer' }}
             onClick={handleClose}
@@ -144,7 +164,6 @@ export default function Add({ handleClose, data, id, status, isUpdate }) {
             size="xl"
           />
         </div>
-        <Tooltip id="add-close" className="tooltip" />
       </div>
       <div className="modal-padding modal-content">
         <div className="modal-row">
@@ -190,12 +209,14 @@ export default function Add({ handleClose, data, id, status, isUpdate }) {
         <div className="modal-btn">
           <div className="right-btn">
             <Button
+              disabled={loading}
               onClick={isUpdate ? () => handleDelete(id, status) : handleClose}
               className="btn btn-secondary"
               label={isUpdate ? 'Delete' : 'Cancel'}
               width="128px"
             />
             <Button
+              disabled={loading}
               onClick={() => {
                 if (isUpdate) handleUpdate(id, status, Status, detail);
                 else handleSave(detail, Status);

@@ -9,7 +9,6 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 // IMPORT COMPONENTS
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Tooltip } from 'react-tooltip';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import SearchBox from '@/components/SearchBox';
 import Empty from '@/components/Empty';
@@ -91,7 +90,7 @@ export default function Browse({ getData }) {
                   </p>
                 </div>
                 <div
-                  data-tooltip-id={res.id}
+                  data-tooltip-id="tooltip"
                   data-tooltip-content="Choose Anime"
                 >
                   <FontAwesomeIcon
@@ -100,7 +99,6 @@ export default function Browse({ getData }) {
                     size="lg"
                   />
                 </div>
-                <Tooltip id={res.id} className="tooltip" />
               </div>
             ) : null
           )}

@@ -1,4 +1,3 @@
-import { Tooltip } from 'react-tooltip';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -23,7 +22,7 @@ export default function FilterModal({ handleClose, SET_FILTER, FILTER, obj }) {
         <div className="filter-header">
           <h3 style={{ margin: 0 }}>Options</h3>
           <div
-            data-tooltip-id="filter-close"
+            data-tooltip-id="tooltip"
             data-tooltip-content="Close Filter Window"
           >
             <FontAwesomeIcon
@@ -33,7 +32,6 @@ export default function FilterModal({ handleClose, SET_FILTER, FILTER, obj }) {
               size="xl"
             />
           </div>
-          <Tooltip id="filter-close" className="tooltip" />
         </div>
         <Aside
           SET_FILTER={SET_FILTER}

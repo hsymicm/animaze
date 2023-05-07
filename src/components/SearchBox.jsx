@@ -3,7 +3,6 @@ import '@/assets/styles/Style.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
-import { Tooltip } from 'react-tooltip';
 import Button from '@/components/Button';
 
 export default function SearchBox({
@@ -48,7 +47,7 @@ export default function SearchBox({
         />
         {value.length > 0 && (
           <div
-            data-tooltip-id="clear-search"
+            data-tooltip-id="tooltip"
             data-tooltip-content="Clear Current Search"
             className="clear"
             onClick={() => {
@@ -59,7 +58,6 @@ export default function SearchBox({
             <FontAwesomeIcon icon={faXmark} />
           </div>
         )}
-        <Tooltip id="clear-search" className="tooltip" />
       </div>
       {withButton && (
         <Button

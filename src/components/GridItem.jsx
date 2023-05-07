@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen as editIcon } from '@fortawesome/free-solid-svg-icons';
-import { Tooltip } from 'react-tooltip';
 import getColor from '@/modules/HEX_CONVERT';
 import { truncate } from '@/modules/STRING_PROCESS';
 import '@/assets/styles/Grid.css';
@@ -27,7 +26,7 @@ export default function GridItem({ id, item, status, handleEdit }) {
       key={id}
     >
       <div
-        data-tooltip-id={id}
+        data-tooltip-id="tooltip"
         data-tooltip-content="Edit Show"
         onClick={() => handleEdit(status, id, item)}
         className="edit"
@@ -42,7 +41,6 @@ export default function GridItem({ id, item, status, handleEdit }) {
           fixedWidth
         />
       </div>
-      <Tooltip id={id} className="tooltip" />
       <div className="info">
         <div>
           {truncate(
