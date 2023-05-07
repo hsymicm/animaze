@@ -3,20 +3,43 @@ Anime watchlist with CRUD feature and made with ReactJS.
 
 ## 🌐 Website Demo
 ### Home Page
-![Home Page](https://i.imgur.com/UrugRMP.png)
+![Home Page](https://i.imgur.com/O4k3vbY.png)
 
 ### Watchlist Table Viewmode
-![Watchlist Table View](https://i.imgur.com/DUOUCaD.png)
+![Watchlist Table View](https://i.imgur.com/l93qLMs.png)
 
 ### Watchlist Grid Viewmode
-![Watchlist Grid View](https://i.imgur.com/NPzDuRo.png)
+![Watchlist Grid View](https://i.imgur.com/BD0SDMl.png)
 
 ### Details Window
-![Details Window](https://i.imgur.com/urggTBs.png)
+![Details Window](https://i.imgur.com/Y3OTclx.png)
 
-### Add Window
-![Add Window](https://i.imgur.com/LzzyPdb.png)
+### Search Window
+![Search Window](https://i.imgur.com/6C6VwGa.png)
 
+### Profile Window
+![Profile Window](https://i.imgur.com/iMnmhAC.png)
+
+### Sign In Window
+![SignIn Window](https://i.imgur.com/1Cz0nmK.png)
+
+### Sign Up Window
+![SignUp Window](https://i.imgur.com/3hN8twc.png)
+
+### Reset Password Window
+![Reset Password Window](https://i.imgur.com/hflVBef.png)
+
+## 💡 Technologies Used
+| **Frontend**     | **Backend Services**    | **Build Tools** |
+|------------------|-------------------------|-----------------|
+| ReactJS          | Firebase Authentication | Vite            |
+| React Router Dom | Firebase Firestore      | Eslint          |
+| React Hot Toast  | Firebase Storage        | Prettier        |
+| Hamburger React  | Firebase Hosting        |                 |
+| Framer Motion    |                         |                 |
+| Fuzzy Sort       |                         |                 |
+| nProgress        |                         |                 |
+| Firebase SDK     |                         |                 |
 
 ## 💻 Recommended IDE Setup
 
