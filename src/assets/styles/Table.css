@@ -4,6 +4,7 @@
   border-radius: 8px;
   width: 100%;
   border-collapse: collapse;
+  margin-bottom: 48px;
 }
 
 .table-show th, td {
