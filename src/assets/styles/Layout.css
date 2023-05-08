@@ -148,6 +148,11 @@ nav {
   border: 2px solid #1c242b;
   object-fit: cover;
   object-position: center;
+  transition: all 0.15s ease;
+}
+
+.profile-pic:hover {
+  border: 2px solid #b21a23;
 }
 
 .profile-info {
