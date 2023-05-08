@@ -124,12 +124,12 @@ export default function Layout({ onEmit, menu, setMenu }) {
             )}
             {currentUser && (
               <img
-                style={{ cursor: 'pointer' }}
+                style={{ cursor: 'pointer', marginLeft: '-8px' }}
                 onClick={() => navigate('/profile')}
                 src={profile?.profilePicture}
                 className="profile-pic"
-                width={42}
-                height={42}
+                width={54}
+                height={54}
               />
             )}
           </ul>

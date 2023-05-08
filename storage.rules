@@ -1,0 +1,24 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+  	match /default/default_profile.jpg {
+    	allow read: if request.auth != null;
+    }
+    
+    match /users/{userId}/profile-picture/{fileName} {
+    	allow read, write: if isValidUser(userId) && isProfilePicture(fileName);
+    }
+    
+    function isValidUser(userId) {
+      return request.auth.uid == userId;
+    }
+
+    function isProfilePicture(fileName) {
+      return fileName.matches('^profile-picture-[a-zA-Z0-9]+\\.jpg$');
+    }
+    
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
