@@ -46,6 +46,7 @@ export default function GridShow({ status, shows, handleEdit }) {
         <Button
           onClick={() => setExpand(!expand)}
           style={{
+            marginTop: '-24px',
             marginBottom: '24px',
           }}
           width="100%"
