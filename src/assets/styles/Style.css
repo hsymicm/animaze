@@ -48,6 +48,20 @@ main {
   animation: tooltip 0.15s ease;
 }
 
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+
+input[type="search"]::-ms-clear {
+  display: none;
+}
+
+input[type="search"]::-moz-focus-inner {
+  border: none;
+}
+
 @keyframes tooltip {
   from {opacity: 0;}
   to {opacity: 1;}

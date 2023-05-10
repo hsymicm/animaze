@@ -2,7 +2,7 @@ import '@/assets/styles/SearchBox.css';
 import '@/assets/styles/Style.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Button from '@/components/Button';
 
 export default function SearchBox({
@@ -16,10 +16,18 @@ export default function SearchBox({
 }) {
   const [value, setValue] = useState(defaultVal || '');
 
+  const searchRef = useRef(null);
+
+  useEffect(() => {
+    if (autoFocus) searchRef.current.focus();
+  }, []);
+
   const handlePress = (e) => {
     if (e.key === 'Enter') {
+      e.preventDefault();
       search(value);
       setValue('');
+      searchRef.current.blur();
     }
   };
 
@@ -36,13 +44,12 @@ export default function SearchBox({
           <FontAwesomeIcon icon={faMagnifyingGlass} width={18} />
         )}
         <input
-          // eslint-disable-next-line jsx-a11y/no-autofocus
-          autoFocus={autoFocus}
+          ref={searchRef}
           value={value}
           onChange={handleChange}
           onKeyPress={handlePress}
-          type="text"
-          style={{ paddingRight: value.length > 0 ? '26px' : 0 }}
+          type="search"
+          style={{ paddingRight: value.length > 0 ? '30px' : 0 }}
           placeholder={placeholder}
         />
         {value.length > 0 && (
@@ -53,6 +60,7 @@ export default function SearchBox({
             onClick={() => {
               setValue('');
               search('');
+              searchRef.current.blur();
             }}
           >
             <FontAwesomeIcon icon={faXmark} />
@@ -64,6 +72,7 @@ export default function SearchBox({
           onClick={() => {
             search(value);
             setValue('');
+            searchRef.current.blur();
           }}
           style={{ borderRadius: '0 8px 8px 0' }}
           label="Search"
