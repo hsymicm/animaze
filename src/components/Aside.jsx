@@ -2,13 +2,13 @@ import Filters from '@/components/Filters';
 import Lists from '@/components/Lists';
 
 export default function Aside({ SET_FILTER, FILTER, obj }) {
-  const { template, Order } = obj;
+  const { Shows, Order } = obj;
 
   return (
     <>
       <Lists
         setLists={(val) => SET_FILTER({ ...FILTER, status: val })}
-        lists={['All', ...Object.keys(template)]}
+        lists={['All', ...Object.keys(Shows)]}
         defaultVal={FILTER.status}
         label="Status"
       />

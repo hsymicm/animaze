@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 // CSS IMPORT
 import '@/assets/styles/Style.css';
@@ -29,7 +30,7 @@ import {
   sortBy,
   reverseObj,
 } from '@/modules/FILTER_BY';
-import { template } from '@/modules/SHOWS';
+import Shows from '@/assets/data/Shows';
 import Order from '@/assets/data/Order';
 import FilterModal from '@/components/Modals/FilterModal';
 
@@ -47,9 +48,9 @@ export default function Watchlist() {
   const [FILTER, SET_FILTER] = useState({
     query: '',
     status: 'All',
-    type: '',
-    genre: '',
-    sort_by: '',
+    type: null,
+    genre: null,
+    sort_by: null,
     asc: true,
   });
 
@@ -65,15 +66,44 @@ export default function Watchlist() {
     setIsOpen(true);
   };
 
-  const filterShows = (obj, callback) => {
-    let result = { ...obj };
-    result = filterByStatus(result, FILTER.status);
-    result = filterByType(result, FILTER.type);
-    result = filterByGenre(result, FILTER.genre);
-    result = filterBySearch(result, FILTER.query, true);
-    result = sortBy(result, FILTER.sort_by);
-    result = reverseObj(result, !FILTER.asc);
-    callback(result);
+  const filterShows = (obj) => {
+    if (!obj || Object.keys(obj).length === 0) {
+      return obj;
+    }
+
+    let result = {
+      Watching: [...obj.Watching],
+      Completed: [...obj.Completed],
+      Planning: [...obj.Planning],
+    };
+
+    const { status, type, genre, query, sort_by, asc } = FILTER;
+
+    if (status !== 'All') {
+      result = filterByStatus(result, status);
+    }
+
+    if (type) {
+      result = filterByType(result, type);
+    }
+
+    if (genre) {
+      result = filterByGenre(result, genre);
+    }
+
+    if (sort_by) {
+      result = sortBy(result, sort_by);
+    }
+
+    if (!asc) {
+      result = reverseObj(result, !asc);
+    }
+
+    if (query) {
+      result = filterBySearch(result, query, true);
+    }
+
+    return result;
   };
 
   // LISTEN QUERY
@@ -83,6 +113,7 @@ export default function Watchlist() {
       unsubscribe = listenWatchList(
         currentUser,
         setShows,
+        filterShows,
         setFiltered,
         setLoading
       );
@@ -95,7 +126,7 @@ export default function Watchlist() {
 
   // ON FILTER CHANGE
   useEffect(() => {
-    filterShows(shows, setFiltered);
+    setFiltered(filterShows(shows));
   }, [FILTER]);
 
   return (
@@ -112,7 +143,7 @@ export default function Watchlist() {
           <FilterModal
             SET_FILTER={SET_FILTER}
             FILTER={FILTER}
-            obj={{ template, Order }}
+            obj={{ Shows, Order }}
             handleClose={() => setFilterOpen(false)}
           />
         )}
@@ -133,7 +164,7 @@ export default function Watchlist() {
             <Aside
               SET_FILTER={SET_FILTER}
               FILTER={FILTER}
-              obj={{ template, Order }}
+              obj={{ Shows, Order }}
             />
           </div>
         )}
