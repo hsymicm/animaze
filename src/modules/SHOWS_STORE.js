@@ -4,8 +4,9 @@ import { db } from '@/modules/FIREBASE_CONFIG';
 
 export const listenWatchList = (
   currentUser,
-  callback,
-  filterCallback,
+  setShowsCallback,
+  filterShows,
+  setFilteredCallback,
   loadingCallback
 ) => {
   const showRef = doc(db, 'watchlists', currentUser.uid);
@@ -16,8 +17,8 @@ export const listenWatchList = (
       Completed: fieldValue.completed,
       Planning: fieldValue.planning,
     };
-    callback(newObj);
-    filterCallback(newObj);
+    setShowsCallback(newObj);
+    setFilteredCallback(filterShows({ ...newObj }));
     loadingCallback(false);
   });
 
