@@ -8,7 +8,7 @@ import '@/assets/styles/Modal.css';
 import '@/assets/styles/Style.css';
 
 export default function FilterModal({ handleClose, SET_FILTER, FILTER, obj }) {
-  const { template, Order } = obj;
+  const { Shows, Order } = obj;
   return (
     <Backdrop onClick={handleClose}>
       <motion.div
@@ -33,11 +33,7 @@ export default function FilterModal({ handleClose, SET_FILTER, FILTER, obj }) {
             />
           </div>
         </div>
-        <Aside
-          SET_FILTER={SET_FILTER}
-          FILTER={FILTER}
-          obj={{ template, Order }}
-        />
+        <Aside SET_FILTER={SET_FILTER} FILTER={FILTER} obj={{ Shows, Order }} />
       </motion.div>
     </Backdrop>
   );
