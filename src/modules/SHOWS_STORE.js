@@ -47,8 +47,17 @@ const setWatchList = async (shows, objRef) => {
 export const addWatchList = async (show, status, currentUser) => {
   status = status.toLowerCase();
   const { shows, objRef } = await getWatchList(currentUser);
-  shows[status].unshift(show);
-  await setWatchList(shows, objRef);
+
+  const exists = Object.keys(shows).some((key) => {
+    return shows[key].find((obj) => obj.id === show.id);
+  });
+
+  if (!exists) {
+    shows[status].unshift(show);
+    await setWatchList(shows, objRef);
+  } else {
+    throw new Error('Data already exists');
+  }
 };
 
 export const delWatchList = async (id, status, currentUser) => {
