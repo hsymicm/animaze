@@ -27,17 +27,15 @@ function SignIn() {
     try {
       const userCredential = await userSignIn(email, password);
 
-      const username = await getDoc(doc(db, 'users', userCredential.user.uid));
+      const user = await getDoc(doc(db, 'users', userCredential.user.uid));
+      const { displayName, username } = user.data();
 
       setEmail('');
       setPassword('');
 
-      toast.success(
-        `Welcome, ${username.exists() ? username.data().displayName : 'user'}`,
-        {
-          id: statusSignUp,
-        }
-      );
+      toast.success(`Welcome, ${displayName || username}`, {
+        id: statusSignUp,
+      });
 
       navigate('/');
     } catch (err) {

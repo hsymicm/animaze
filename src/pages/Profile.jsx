@@ -36,6 +36,12 @@ function Profile() {
 
     try {
       const updatedAt = Date.now();
+
+      // Check if displayName is valid, if not return to original value
+      if (!updatedProfile.displayName) {
+        updatedProfile.displayName = profile.username;
+      }
+
       const updateObj = Object.keys(updatedProfile)
         .filter((key) => updatedProfile[key] !== profile[key])
         .reduce((v, k) => Object.assign(v, { [k]: updatedProfile[k] }), {
