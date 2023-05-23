@@ -5,11 +5,11 @@ import { db } from '@/modules/FIREBASE_CONFIG';
 export const listenWatchList = (currentUser, setShowsCallback) => {
   const showRef = doc(db, 'watchlists', currentUser.uid);
   const unsubscribe = onSnapshot(showRef, (snapshot) => {
-    const fieldValue = snapshot.get('watchList');
+    const { watching, completed, planning } = snapshot.get('watchList');
     const newObj = {
-      Watching: [...fieldValue.watching],
-      Completed: [...fieldValue.completed],
-      Planning: [...fieldValue.planning],
+      Watching: watching,
+      Completed: completed,
+      Planning: planning,
     };
     setShowsCallback(newObj);
   });
