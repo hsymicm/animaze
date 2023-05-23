@@ -27,16 +27,16 @@ function SignUp() {
     setLoading(true);
     const statusSignUp = toast.loading('Loading...');
 
-    try {
-      // Check username
-      if (!username) {
-        toast.error('Invalid username', {
-          id: statusSignUp,
-        });
-        setLoading(false);
-        return;
-      }
+    // Check username
+    if (!username) {
+      toast.error('Invalid username', {
+        id: statusSignUp,
+      });
+      setLoading(false);
+      return;
+    }
 
+    try {
       const usernameCheckRef = doc(db, 'usernames', username);
       const usernameDoc = await getDoc(usernameCheckRef);
 
@@ -49,7 +49,7 @@ function SignUp() {
       }
 
       // Create user auth
-      const userCredential = await userSignUp(email, password);
+      const { user } = await userSignUp(email, password);
 
       const createdAt = Date.now();
       const updatedAt = createdAt;
@@ -58,7 +58,7 @@ function SignUp() {
       );
 
       // Add new user to USERS and USERNAMES collection
-      const userId = userCredential.user.uid;
+      const userId = user.uid;
       const batch = writeBatch(db);
       const usernameRef = doc(db, 'usernames', username);
       const userRef = doc(db, 'users', userId);
