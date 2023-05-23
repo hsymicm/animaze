@@ -44,7 +44,6 @@ export default function Watchlist() {
 
   const [shows, setShows] = useState({});
   const [filtered, setFiltered] = useState({});
-  const [loading, setLoading] = useState(true);
   const [FILTER, SET_FILTER] = useState({
     query: '',
     status: 'All',
@@ -66,7 +65,7 @@ export default function Watchlist() {
     setIsOpen(true);
   };
 
-  const filterShows = (obj) => {
+  const filterShows = (obj, filter) => {
     if (!obj || Object.keys(obj).length === 0) {
       return obj;
     }
@@ -77,7 +76,7 @@ export default function Watchlist() {
       Planning: [...obj.Planning],
     };
 
-    const { status, type, genre, query, sort_by, asc } = FILTER;
+    const { status, type, genre, query, sort_by, asc } = filter;
 
     if (status !== 'All') {
       result = filterByStatus(result, status);
@@ -108,26 +107,14 @@ export default function Watchlist() {
 
   // LISTEN QUERY
   useEffect(() => {
-    let unsubscribe;
-    if (currentUser) {
-      unsubscribe = listenWatchList(
-        currentUser,
-        setShows,
-        filterShows,
-        setFiltered,
-        setLoading
-      );
-    } else {
-      unsubscribe = setLoading(false);
-    }
-
+    const unsubscribe = listenWatchList(currentUser, setShows);
     return unsubscribe;
   }, [currentUser]);
 
   // ON FILTER CHANGE
   useEffect(() => {
-    setFiltered(filterShows(shows));
-  }, [FILTER]);
+    setFiltered(filterShows(shows, FILTER));
+  }, [FILTER, shows]);
 
   return (
     <>
@@ -210,7 +197,7 @@ export default function Watchlist() {
             </div>
           </div>
           <AnimatePresence>
-            {loading && currentUser && (
+            {Object.keys(filtered).length === 0 && currentUser && (
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -256,7 +243,7 @@ export default function Watchlist() {
                 </table>
               </motion.div>
             )}
-            {!loading && (
+            {Object.keys(filtered).length !== 0 && (
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

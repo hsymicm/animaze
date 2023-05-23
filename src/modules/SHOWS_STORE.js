@@ -2,24 +2,16 @@
 import { doc, onSnapshot, setDoc, getDoc } from 'firebase/firestore';
 import { db } from '@/modules/FIREBASE_CONFIG';
 
-export const listenWatchList = (
-  currentUser,
-  setShowsCallback,
-  filterShows,
-  setFilteredCallback,
-  loadingCallback
-) => {
+export const listenWatchList = (currentUser, setShowsCallback) => {
   const showRef = doc(db, 'watchlists', currentUser.uid);
   const unsubscribe = onSnapshot(showRef, (snapshot) => {
     const fieldValue = snapshot.get('watchList');
     const newObj = {
-      Watching: fieldValue.watching,
-      Completed: fieldValue.completed,
-      Planning: fieldValue.planning,
+      Watching: [...fieldValue.watching],
+      Completed: [...fieldValue.completed],
+      Planning: [...fieldValue.planning],
     };
     setShowsCallback(newObj);
-    setFilteredCallback(filterShows({ ...newObj }));
-    loadingCallback(false);
   });
 
   return unsubscribe;
