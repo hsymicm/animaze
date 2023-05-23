@@ -107,13 +107,15 @@ export default function Add({ handleClose, data, id, status, isUpdate }) {
     if (!updateId) return;
     await functionHandler(
       async () => {
-        await updateWatchList(
-          updateId,
-          currentStatus,
-          updatedStatus,
-          show,
-          currentUser
-        );
+        if (show !== data) {
+          await updateWatchList(
+            updateId,
+            currentStatus,
+            updatedStatus,
+            show,
+            currentUser
+          );
+        }
         handleClose();
       },
       {
