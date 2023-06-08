@@ -58,7 +58,7 @@ function ResetPassword() {
           <input
             onChange={(e) => setEmail(e.target.value)}
             value={email}
-            placeholder="example@aniwatch.com"
+            placeholder="example@animaze.site"
             type="text"
             id="email"
             required
